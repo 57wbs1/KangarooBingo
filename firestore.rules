@@ -1,11 +1,14 @@
 rules_version = '2';
 // Kangaroo Bingo.
-//   players/{uid}  one card per anonymous player; public to signed-in viewers (the leaderboard).
-//   judges/{uid}   created by entering the judge code; the code itself lives in secret/judge,
-//                  which no client can read: rules compare against it server-side.
+//   players/{uid}  one PRIVATE card per anonymous player: only its owner and judges can read it,
+//                  so nobody can copy the crowd's answers (the judge's cross-check relies on that).
+//   board/{uid}    the PUBLIC leaderboard row for that card. Written in the same batch as the card;
+//                  rules check it matches the card exactly (getAfter), so it can't be faked.
+//   judges/{uid}   created by entering the judge code; the code lives in secret/judge, which no
+//                  client can read: rules compare against it server-side.
 //   config/game    { open: bool }: judges open/close claims.
-// The claim time is the server's: a claim must write claimedAt == request.time, and only
-// a judge can approve/reject, without touching claimedAt.
+// BINGO = all 24 squares filled. The claim time is the server's: a claim must write
+// claimedAt == request.time, and only a judge can approve/reject, without touching claimedAt.
 service cloud.firestore {
   match /databases/{db}/documents {
     function signedIn() { return request.auth != null; }
@@ -23,11 +26,26 @@ service cloud.firestore {
         && d.syn is string && d.syn.size() <= 20
         && d.layout is list && d.layout.size() == 24
         && d.marks is map && d.marks.size() <= 24
-        && d.filled is int && d.lines is int;
+        && d.filled is int && d.filled == d.marks.size()
+        && d.lines is int;
+    }
+    function fullCard(d) {
+      return d.marks.size() == 24
+        && d.marks.keys().hasAll(['0','1','2','3','4','5','6','7','8','9','10','11',
+                                  '12','13','14','15','16','17','18','19','20','21','22','23']);
     }
     function ownerStatusOk(d) {
       return (d.status == 'playing' && d.claimedAt == null)
-        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen() && d.lines > 0);
+        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen() && fullCard(d));
+    }
+    // The public row must equal the card as it stands after this write.
+    function mirrors(uid) {
+      let p = getAfter(/databases/$(db)/documents/players/$(uid)).data;
+      let r = request.resource.data;
+      return r.keys().hasOnly(['name','syn','filled','status','claimedAt','accused'])
+        && r.name == p.name && r.syn == p.syn && r.filled == p.filled
+        && r.status == p.status && r.claimedAt == p.claimedAt
+        && r.accused is list && r.accused.size() <= 24;
     }
 
     match /config/game {
@@ -46,8 +64,14 @@ service cloud.firestore {
         && request.resource.data.code == get(/databases/$(db)/documents/secret/judge).data.code;
     }
 
-    match /players/{uid} {
+    match /board/{uid} {
       allow read: if signedIn();
+      allow create, update: if signedIn() && (request.auth.uid == uid || isJudge()) && mirrors(uid);
+      allow delete: if isJudge();
+    }
+
+    match /players/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isJudge());
 
       allow create: if signedIn() && request.auth.uid == uid
         && validPlayer(request.resource.data)

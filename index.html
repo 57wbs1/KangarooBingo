@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<!-- Layout: header, tab switch (MY CARD / LEADERBOARD), then the active pane. Card pane = enlist form or the
-     shuffled 5×5 card + claim block. Board pane = live standings. A bottom sheet edits one square. -->
-<div class="wrap">
+<!-- Layout: one page. Header, tab switch (MY CARD / LEADERBOARD / JUDGE once unlocked), the active pane,
+     and a footer with Judge login. Bottom sheets edit one square and take the judge code. -->
+<div class="wrap" id="main">
   <div class="strip"><div>RESTRICTED (NOT REALLY)</div><div>FORM DI-01 · JOINT FORMAL DINING-IN</div></div>
   <div>
     <h1>DINING-IN <span>BINGO</span></h1>
@@ -24,6 +24,7 @@
   <div class="tabs" role="tablist">
     <button class="tab" role="tab" id="tabCard" aria-selected="true" aria-controls="paneCard">MY CARD</button>
     <button class="tab" role="tab" id="tabBoard" aria-selected="false" aria-controls="paneBoard"><span class="live" aria-hidden="true"></span>LEADERBOARD</button>
+    <button class="tab" role="tab" id="tabJudge" aria-selected="false" aria-controls="paneJudge" hidden>JUDGE <span id="judgeCount"></span></button>
   </div>
 
   <div id="boot" class="boot">Reporting to the mess…</div>
@@ -33,10 +34,10 @@
     <div class="wrap">
       <form id="enlist" class="submit" hidden>
         <div class="label">REPORT FOR DUTY</div>
-        <div class="note">Enter your name and syndicate to get your card. Every card is shuffled, so your neighbour's lines are not yours.</div>
+        <div class="note">Enter your name and syndicate to get your card. Every card is shuffled, so your neighbour's card is not yours.</div>
         <div class="fields">
-          <div class="field"><label for="pname">YOUR NAME</label><input type="text" id="pname" autocomplete="name" maxlength="40" required></div>
-          <div class="field"><label for="psyn">SYNDICATE</label><input type="text" id="psyn" inputmode="numeric" maxlength="20" placeholder="e.g. 7" required></div>
+          <div class="field"><label for="pname">YOUR NAME</label><input type="text" id="pname" autocomplete="name" maxlength="40" placeholder="e.g. Paul Soliano" required></div>
+          <div class="field"><label for="psyn">SYNDICATE</label><input type="text" id="psyn" inputmode="numeric" maxlength="20" placeholder="e.g. 69" required></div>
         </div>
         <button class="btn red" type="submit" id="enlistBtn">Issue my card</button>
       </form>
@@ -53,7 +54,7 @@
         </div>
 
         <div class="status">
-          <div id="count">0 / 24 filed · 0 lines</div>
+          <div id="count">0 / 24 filed</div>
           <div id="bingo" hidden></div>
         </div>
 
@@ -64,9 +65,12 @@
         <div class="orders">
           <div class="label">STANDING ORDERS</div>
           <div class="order"><b>01</b><div>Write the name of the person you observe for each square.</div></div>
-          <div class="order"><b>02</b><div>Fastest to get a bingo gets a prize.</div></div>
-          <div class="order"><b>03</b><div>Top 5 get points added to their syndicate games points.</div></div>
-          <div class="order"><b>04</b><div>Complete a line and tap CLAIM BINGO. The server stamps the time. That time is final, and Huiting vets your card.</div></div>
+          <div class="order"><b>02</b><div>BINGO means ALL 24 squares filled. No lines, no shortcuts.</div></div>
+          <div class="order"><b>03</b><div>One prize: a bottle, to the first full card that passes vetting.</div></div>
+          <div class="order"><b>04</b><div>Top 5 get points added to their syndicate games points.</div></div>
+          <div class="order"><b>05</b><div>Charge one person at most 3 times on your card.</div></div>
+          <div class="order"><b>06</b><div>Every charge is cross-checked against everyone else's cards, and Huiting spot-checks in person. A fake card is disqualified.</div></div>
+          <div class="order"><b>07</b><div>Tap CLAIM BINGO when your card is full. The server stamps the time, and that time is final.</div></div>
         </div>
       </div>
     </div>
@@ -77,9 +81,47 @@
     <div class="board" id="board"></div>
   </div>
 
+  <!-- JUDGE -->
+  <div id="paneJudge" role="tabpanel" aria-labelledby="tabJudge" hidden>
+    <div class="wrap">
+      <div class="status"><div id="jSummary"></div><div id="jOpen"></div></div>
+      <div class="tabs seg" role="tablist" aria-label="Judge sections">
+        <button class="tab" type="button" data-seg="queue" aria-selected="true">QUEUE <span id="segQ"></span></button>
+        <button class="tab" type="button" data-seg="evidence" aria-selected="false">EVIDENCE</button>
+        <button class="tab" type="button" data-seg="decided" aria-selected="false">DECIDED</button>
+        <button class="tab" type="button" data-seg="controls" aria-selected="false">CONTROLS</button>
+      </div>
+
+      <section class="panel" data-pane="queue">
+        <div class="note">Oldest claim first. Each square shows how many <b>other</b> players charged the same person with the same offence. <b>UNBACKED</b> means nobody else saw it. Verify the 3 <b>CHECK</b> squares in person, then approve or reject. The submit time stays as stamped.</div>
+        <div id="queue" class="wrap"></div>
+      </section>
+
+      <section class="panel" data-pane="evidence" hidden>
+        <div class="note">What the crowd saw. For each offence, who was charged and on how many cards. Search a name to see every charge against them.</div>
+        <label for="evq">SEARCH A NAME</label>
+        <input type="text" id="evq" placeholder="e.g. Paul Soliano" autocomplete="off">
+        <div id="evidence" class="ev"></div>
+      </section>
+
+      <section class="panel" data-pane="decided" hidden>
+        <div id="decided"></div>
+      </section>
+
+      <section class="panel" data-pane="controls" hidden>
+        <div class="btns"><button class="btn" id="toggleOpen" type="button">Close claims</button></div>
+        <div class="note">Closing claims stops new CLAIM BINGO taps. Claims already in the queue stay.</div>
+        <div class="btns"><button class="btn red" id="resetGame" type="button">Reset game: delete every card</button></div>
+        <div class="note">Use after a test run. Every player gets a fresh card on their next visit. Cannot be undone.</div>
+      </section>
+    </div>
+  </div>
+
   <div class="foot">
     <div>ALL VERDICTS FINAL · NO APPEALS</div>
-    <a class="linkbtn" href="board.html">Projector view</a>
+    <div class="btns">
+      <button class="btn ghost sm" id="judgeBtn" type="button">Judge login</button>
+    </div>
   </div>
 </div>
 
@@ -97,49 +139,65 @@
     </div>
   </form>
 </div>
+<div class="sheet" id="judgeSheet" hidden role="dialog" aria-modal="true" aria-labelledby="judgeSheetT">
+  <form class="in" id="judgeForm">
+    <div class="off" id="judgeSheetT">Judge login</div>
+    <div class="note">For Huiting and the organisers. This device stays logged in afterwards.</div>
+    <label for="jcode">JUDGE CODE</label>
+    <input type="password" id="jcode" autocomplete="off" required>
+    <div class="btns">
+      <button class="btn red" type="submit">Log in</button>
+      <button class="btn ghost" id="judgeCancel" type="button">Cancel</button>
+    </div>
+  </form>
+</div>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
 
 <script type="module">
-import { db, signIn, doc, collection, setDoc, updateDoc, onSnapshot, serverTimestamp } from "./js/fb.js";
-import { SQUARES, gridOf, accusedAt, winningLines, filledCount, shuffledLayout, standings,
-         renderBoard, fmtTime, pad, el, TOP } from "./js/game.js";
+import { db, signIn, doc, collection, getDoc, getDocs, setDoc, onSnapshot, serverTimestamp, writeBatch } from "./js/fb.js";
+import { SQUARES, TOTAL, MAX_PER_NAME, gridOf, accusedAt, winningLines, filledCount, isFull, shuffledLayout,
+         standings, renderBoard, fmtTime, pad, el, TOP, publicRow, chargesOn, corroboration, spotChecks,
+         miniCard, herd, normName, toDate } from "./js/game.js";
 
 const $ = id => document.getElementById(id);
 let tt;
 function toast(msg, ms = 2600) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, ms); }
 const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
 
-// ---- tabs ----
+// ---------------- state ----------------
+let booted = false, uid = null, meRef = null, boardRef = null;
+let me = null, mePending = false;
+let rows = [];          // public leaderboard rows (board/*)
+let cards = [];         // full private cards (players/*), judges only
+let game = { open: true };
+let isJudge = false;
+
+// ---------------- tabs ----------------
+const TABS = { card: ["tabCard", "paneCard"], board: ["tabBoard", "paneBoard"], judge: ["tabJudge", "paneJudge"] };
+let tab = "card";
 function showTab(which) {
-  const board = which === "board";
-  $("tabCard").setAttribute("aria-selected", String(!board));
-  $("tabBoard").setAttribute("aria-selected", String(board));
-  $("paneCard").hidden = board || !booted;
-  $("paneBoard").hidden = !board || !booted;
-  try { history.replaceState(null, "", board ? "#board" : location.pathname); } catch (e) {}
+  if (which === "judge" && !isJudge) which = "card";
+  tab = which;
+  for (const [k, [t, p]] of Object.entries(TABS)) {
+    $(t).setAttribute("aria-selected", String(k === which));
+    $(p).hidden = !booted || k !== which;
+  }
 }
-let tab = location.hash === "#board" ? "board" : "card";
-$("tabCard").onclick = () => { tab = "card"; showTab(tab); };
-$("tabBoard").onclick = () => { tab = "board"; showTab(tab); };
+$("tabCard").onclick = () => showTab("card");
+$("tabBoard").onclick = () => showTab("board");
+$("tabJudge").onclick = () => showTab("judge");
 
-// ---- state ----
-let booted = false, uid = null, meRef = null;
-let me = null, mePending = false, players = [], game = { open: true };
-
-try {
-  const user = await signIn();
-  uid = user.uid;
-} catch (e) {
-  $("boot").textContent = "Could not reach the server. Check your signal and reload.";
-  throw e;
-}
+// ---------------- boot ----------------
+try { uid = (await signIn()).uid; }
+catch (e) { $("boot").textContent = "Could not reach the server. Check your signal and reload."; throw e; }
 meRef = doc(db, "players", uid);
+boardRef = doc(db, "board", uid);
 
 onSnapshot(meRef, { includeMetadataChanges: true }, snap => {
   const before = me && me.status;
   me = snap.exists() ? snap.data() : null;
   mePending = snap.metadata.hasPendingWrites;
-  if (!booted) { booted = true; $("boot").hidden = true; showTab(tab); }
+  if (!booted) { booted = true; $("boot").hidden = true; route(); }
   if (before && me && before !== me.status && !mePending) {
     if (me.status === "approved") { toast("APPROVED. Check the leaderboard.", 4000); buzz([80, 60, 200]); }
     if (me.status === "rejected") { toast("Claim rejected. See the note below.", 4000); buzz(300); }
@@ -147,28 +205,49 @@ onSnapshot(meRef, { includeMetadataChanges: true }, snap => {
   renderCard();
 }, err => { $("boot").textContent = "Server refused the connection. Reload to try again."; console.error(err); });
 
-onSnapshot(collection(db, "players"), snap => {
-  players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  renderBoard($("board"), players, { meUid: uid });
+onSnapshot(collection(db, "board"), snap => {
+  rows = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderBoard($("board"), rows, { meUid: uid });
   if (me) renderClaim();
 });
 
 onSnapshot(doc(db, "config", "game"), snap => {
   game = snap.exists() ? snap.data() : { open: true };
   if (me) renderClaim();
+  if (isJudge) renderJudge();
 });
 
-// ---- enlist / edit ----
+try { if ((await getDoc(doc(db, "judges", uid))).exists()) becomeJudge(); } catch (e) {}
+
+function route() {
+  const h = location.hash;
+  if (h === "#judge") { if (isJudge) return showTab("judge"); openJudgeSheet(); }
+  showTab(h === "#board" ? "board" : tab);
+}
+
+// ---------------- writes (card + its public row, always together) ----------------
+function commit(patch) {
+  const next = { ...me, ...patch };
+  if (!patch.status && me.status === "rejected") { next.status = "playing"; next.claimedAt = null; }
+  const b = writeBatch(db);
+  const pPatch = { ...patch, updatedAt: serverTimestamp() };
+  if (next.status !== me.status) { pPatch.status = next.status; pPatch.claimedAt = next.claimedAt; }
+  b.update(meRef, pPatch);
+  b.set(boardRef, publicRow(next));
+  return b.commit();
+}
+
 $("enlist").addEventListener("submit", async e => {
   e.preventDefault();
   const name = $("pname").value.trim(), syn = $("psyn").value.trim();
   if (!name || !syn) return toast("Name and syndicate, please");
   $("enlistBtn").disabled = true;
+  const card = { name, syn, layout: shuffledLayout(), marks: {}, filled: 0, lines: 0, status: "playing", claimedAt: null };
   try {
-    await setDoc(meRef, {
-      name, syn, layout: shuffledLayout(), marks: {}, filled: 0, lines: 0,
-      status: "playing", claimedAt: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp()
-    });
+    const b = writeBatch(db);
+    b.set(meRef, { ...card, createdAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    b.set(boardRef, publicRow(card));
+    await b.commit();
   } catch (err) { console.error(err); toast("Could not issue your card. Try again."); }
   $("enlistBtn").disabled = false;
 });
@@ -184,60 +263,49 @@ $("saveMe").onclick = () => {
   const name = $("ename").value.trim(), syn = $("esyn").value.trim();
   if (!name) return toast("Name can't be blank");
   $("meEdit").hidden = true;
-  write({ name, syn });
+  commit({ name, syn }).catch(err => { console.error(err); toast("Change refused by the server"); });
 };
 
-// Owner writes. Any edit after a rejection puts the card back in play (a new claim gets a new time).
-function write(fields) {
-  const patch = { ...fields, updatedAt: serverTimestamp() };
-  if (me.status === "rejected") { patch.status = "playing"; patch.claimedAt = null; }
-  updateDoc(meRef, patch).catch(err => { console.error(err); toast("Change refused by the server"); });
-}
-
-// ---- card ----
+// ---------------- card ----------------
 function renderCard() {
   $("enlist").hidden = !!me;
   $("play").hidden = !me;
   if (!me) return;
   $("meLine").textContent = me.name + " · SYN " + (me.syn || "—");
-  const layout = me.layout, marks = me.marks || {};
-  const g = gridOf(layout);
-  const wins = winningLines(layout, marks);
-  const winPos = new Set(wins.flat());
+  const marks = me.marks || {};
   const grid = $("grid");
   grid.className = "grid" + (editable() ? "" : " locked");
   grid.textContent = "";
   "BINGO".split("").forEach(ch => grid.append(el("div", { class: "head", "aria-hidden": "true" }, ch)));
-  g.forEach((sq, p) => {
+  gridOf(me.layout).forEach(sq => {
     if (sq === null) {
       grid.append(el("div", { class: "free" }, el("div", { class: "label" }, "FREE SPACE"), el("div", { class: "stamp" }, "CASE DISMISSED")));
       return;
     }
     const who = accusedAt(marks, sq);
     grid.append(el("button", {
-      type: "button",
-      class: "cell" + (who ? " filled" : "") + (winPos.has(p) ? " win" : ""),
+      type: "button", class: "cell" + (who ? " filled" : ""),
       "aria-label": "No. " + (sq + 1) + ": " + SQUARES[sq] + (who ? ". Accused: " + who : ". Empty"),
       onclick: () => openSheet(sq)
     }, el("div", { class: "no" }, "No. " + pad(sq + 1)), el("div", { class: "txt" }, SQUARES[sq]), el("div", { class: "who" }, who)));
   });
-  $("count").textContent = filledCount(marks) + " / 24 filed · " + wins.length + (wins.length === 1 ? " line" : " lines");
-  renderStamp(wins.length);
+  const n = filledCount(marks);
+  $("count").textContent = n + " / " + TOTAL + " filed" + (n < TOTAL ? " · " + (TOTAL - n) + " to go" : " · FULL");
+  renderStamp();
   renderClaim();
 }
 
 let lastStamp = "";
-function renderStamp(lines) {
+function renderStamp() {
   const b = $("bingo");
   let txt = "", cls = "stamp", small = "";
   if (me.status === "approved") { txt = "APPROVED"; cls += " ok"; small = "AT " + fmtTime(me.claimedAt); }
   else if (me.status === "claimed") { txt = "CLAIMED"; small = mePending ? "SENDING…" : "AT " + fmtTime(me.claimedAt); }
-  else if (lines) { txt = "BINGO"; cls += " ink"; small = "CLAIM IT BELOW"; }
+  else if (isFull(me.marks)) { txt = "BINGO"; cls += " ink"; small = "CLAIM IT BELOW"; }
   b.hidden = !txt;
   if (!txt) { lastStamp = ""; return; }
-  const key = txt;
-  b.className = cls + (key !== lastStamp ? " new" : "");
-  lastStamp = key;
+  b.className = cls + (txt !== lastStamp ? " new" : "");
+  lastStamp = txt;
   b.style.fontSize = "24px";
   b.textContent = txt;
   b.append(el("small", null, small));
@@ -245,15 +313,14 @@ function renderStamp(lines) {
 
 function renderClaim() {
   const box = $("claimBox");
-  box.className = "submit";
-  box.textContent = "";
-  const lines = winningLines(me.layout, me.marks || {}).length;
-  const row = standings(players).find(r => r.id === uid);
+  box.className = "submit"; box.textContent = "";
+  const full = isFull(me.marks);
+  const row = standings(rows).find(r => r.id === uid);
 
   if (me.status === "approved") {
     box.className = "submit ok";
     box.append(el("div", { class: "label" }, "VERDICT: APPROVED"),
-      el("div", { class: "big-time" }, row && row.rank ? "#" + row.rank + (row.rank <= TOP ? " · TOP " + TOP : "") : "Approved"),
+      el("div", { class: "big-time" }, row && row.rank ? "#" + row.rank + (row.rank === 1 ? " · THE BOTTLE" : row.rank <= TOP ? " · TOP " + TOP : "") : "Approved"),
       el("div", { class: "note" }, "Submitted at " + fmtTime(me.claimedAt) + " by server time."));
     return;
   }
@@ -262,7 +329,7 @@ function renderClaim() {
       el("div", { class: "big-time" }, mePending ? "--:--:--" : fmtTime(me.claimedAt)),
       el("div", { class: "note" }, mePending
         ? "Your claim is on its way. The time is stamped when it reaches the server. Keep this page open."
-        : "That is your official submit time. Your card is locked while Huiting vets it."));
+        : "That is your official submit time. Your card is locked while Huiting vets it. She may come and spot-check a few charges."));
     return;
   }
   if (me.status === "rejected") {
@@ -275,8 +342,9 @@ function renderClaim() {
     box.append(el("div", { class: "label" }, "CLAIMS CLOSED"), el("div", { class: "note" }, "The judge has closed claims."));
     return;
   }
-  if (!lines) {
-    if (me.status !== "rejected") box.append(el("div", { class: "label" }, "CLAIM"), el("div", { class: "note" }, "Complete a line (row, column or diagonal) to claim."));
+  if (!full) {
+    if (me.status !== "rejected") box.append(el("div", { class: "label" }, "CLAIM"),
+      el("div", { class: "note" }, "Fill all " + TOTAL + " squares to claim. " + (TOTAL - filledCount(me.marks)) + " to go."));
     return;
   }
   const btn = el("button", { class: "btn red huge", type: "button" }, "CLAIM BINGO");
@@ -285,18 +353,18 @@ function renderClaim() {
 }
 
 async function claim() {
-  if (!me || !editable()) return;
+  if (!me || !editable() || !isFull(me.marks)) return;
   buzz(60);
   try {
-    await updateDoc(meRef, { status: "claimed", claimedAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    await commit({ status: "claimed", claimedAt: serverTimestamp() });
     toast("Claim stamped. With Huiting for vetting.", 3500);
   } catch (err) {
     console.error(err);
-    toast(game.open === false ? "Claims are closed" : "Claim refused. Check your line and try again.");
+    toast(game.open === false ? "Claims are closed" : "Claim refused. Check your card and try again.");
   }
 }
 
-// ---- square sheet ----
+// ---------------- square sheet ----------------
 let current = null;
 function openSheet(sq) {
   if (!editable()) return toast(me.status === "approved" ? "Card approved. No more edits." : "Card is locked while under review");
@@ -304,25 +372,191 @@ function openSheet(sq) {
   $("sheetNo").textContent = "No. " + pad(sq + 1);
   $("sheetOff").textContent = SQUARES[sq];
   $("accused").value = accusedAt(me.marks, sq);
-  $("sheet").hidden = false; $("scrim").hidden = false;
+  openSheetEl("sheet");
   setTimeout(() => $("accused").focus(), 30);
 }
-function closeSheet() { $("sheet").hidden = true; $("scrim").hidden = true; current = null; }
+function openSheetEl(id) { $(id).hidden = false; $("scrim").hidden = false; }
+function closeSheets() { $("sheet").hidden = true; $("judgeSheet").hidden = true; $("scrim").hidden = true; current = null; }
 function setMark(val) {
   if (current === null) return;
+  if (val && chargesOn(me.marks, val, current) >= MAX_PER_NAME) {
+    return toast(val + " is already charged " + MAX_PER_NAME + " times on your card. Pick someone else.", 3500);
+  }
   const marks = { ...(me.marks || {}) };
   if (val) marks[current] = val; else delete marks[current];
-  const hadLine = winningLines(me.layout, me.marks || {}).length > 0;
-  const lines = winningLines(me.layout, marks).length;
-  closeSheet();
-  write({ marks, filled: filledCount(marks), lines });
-  if (!hadLine && lines) { toast("BINGO! Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
+  const wasFull = isFull(me.marks);
+  closeSheets();
+  commit({ marks, filled: filledCount(marks), lines: winningLines(me.layout, marks).length })
+    .catch(err => { console.error(err); toast("Change refused by the server"); });
+  if (!wasFull && isFull(marks)) { toast("BINGO! Card full. Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
 }
 $("sheetForm").addEventListener("submit", e => { e.preventDefault(); setMark($("accused").value.trim()); });
 $("clearBtn").onclick = () => setMark("");
-$("cancelBtn").onclick = closeSheet;
-$("scrim").onclick = closeSheet;
-document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("sheet").hidden) closeSheet(); });
+$("cancelBtn").onclick = closeSheets;
+$("scrim").onclick = closeSheets;
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheets(); });
+
+// ---------------- judge ----------------
+function openJudgeSheet() { $("jcode").value = ""; openSheetEl("judgeSheet"); setTimeout(() => $("jcode").focus(), 30); }
+$("judgeBtn").onclick = () => isJudge ? showTab("judge") : openJudgeSheet();
+$("judgeCancel").onclick = closeSheets;
+$("judgeForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  try {
+    await setDoc(doc(db, "judges", uid), { code: $("jcode").value.trim(), at: serverTimestamp() });
+    closeSheets(); becomeJudge(); showTab("judge"); toast("Judge mode on");
+  } catch (err) { toast("Wrong code"); }
+});
+
+let seen = null, seg = "queue";
+function becomeJudge() {
+  if (isJudge) return;
+  isJudge = true;
+  $("tabJudge").hidden = false;
+  $("judgeBtn").textContent = "Judge desk";
+  onSnapshot(collection(db, "players"), snap => {
+    cards = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const pend = new Set(cards.filter(p => p.status === "claimed").map(p => p.id));
+    if (seen && [...pend].some(id => !seen.has(id))) chime();
+    seen = pend;
+    renderJudge();
+  });
+}
+
+document.querySelectorAll("[data-seg]").forEach(b => b.onclick = () => {
+  seg = b.dataset.seg;
+  document.querySelectorAll("[data-seg]").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  document.querySelectorAll("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== seg);
+});
+$("evq").addEventListener("input", () => renderEvidence());
+
+function renderJudge() {
+  const pend = cards.filter(p => p.status === "claimed" && p.claimedAt).sort((a, b) => toDate(a.claimedAt) - toDate(b.claimedAt));
+  const ranked = standings(cards);
+  $("judgeCount").textContent = pend.length ? "(" + pend.length + ")" : "";
+  $("segQ").textContent = pend.length ? "(" + pend.length + ")" : "";
+  document.title = (pend.length ? "(" + pend.length + ") " : "") + "Dining-In Bingo";
+  $("jSummary").textContent = cards.length + " players · " + pend.length + " to vet · " + ranked.filter(r => r.rank).length + " approved";
+  $("jOpen").textContent = game.open === false ? "CLAIMS CLOSED" : "CLAIMS OPEN";
+  $("toggleOpen").textContent = game.open === false ? "Reopen claims" : "Close claims";
+
+  // queue
+  const q = $("queue"); q.textContent = "";
+  if (!pend.length) q.append(el("div", { class: "empty" }, "Queue empty. New claims appear here instantly, with a chime."));
+  pend.forEach((p, i) => {
+    const corr = corroboration(p, cards);
+    const backed = Object.values(corr).filter(Boolean).length;
+    const checks = spotChecks(p, corr);
+    q.append(el("div", { class: "claim" + (i === 0 ? " first" : "") },
+      el("div", { class: "hd" },
+        el("div", null, el("div", { class: "nm" }, p.name),
+          el("div", { class: "meta" }, "SYN " + (p.syn || "—") + " · " + (p.filled || 0) + "/" + TOTAL + " filed")),
+        el("div", { class: "tm" }, fmtTime(p.claimedAt, true))),
+      el("div", { class: "backed" + (backed >= TOTAL / 2 ? " good" : "") },
+        el("b", null, backed + " / " + TOTAL), " charges backed by at least one other card"),
+      el("div", { class: "checks" }, el("div", { class: "label" }, "SPOT-CHECK IN PERSON"),
+        el("ol", null, checks.map(sq => el("li", null,
+          el("b", null, accusedAt(p.marks, sq)), " · No. " + pad(sq + 1) + " " + SQUARES[sq] + " · ",
+          el("span", { class: corr[sq] ? "ok" : "no" }, corr[sq] ? "seen by +" + corr[sq] : "unbacked"))))),
+      miniCard(p.layout, p.marks || {}, corr, checks),
+      el("div", { class: "btns" },
+        el("button", { class: "btn green", type: "button", onclick: () => verdict(p, "approved") }, "Approve"),
+        el("button", { class: "btn red", type: "button", onclick: () => verdict(p, "rejected") }, "Reject"))));
+  });
+
+  // decided
+  const decided = cards.filter(p => p.status === "approved" || p.status === "rejected").sort((a, b) => toDate(a.claimedAt) - toDate(b.claimedAt));
+  const d = $("decided"); d.textContent = "";
+  if (!decided.length) d.append(el("div", { class: "empty" }, "Nothing decided yet."));
+  else d.append(el("div", { class: "decided" }, decided.map(p => {
+    const r = ranked.find(x => x.id === p.id);
+    return el("div", { class: "d" },
+      el("div", null, el("b", null, (r && r.rank ? "#" + r.rank + " " : "") + p.name), " · SYN " + (p.syn || "—"),
+        el("div", { class: "t" }, "Submitted " + fmtTime(p.claimedAt, true) + (p.note ? " · “" + p.note + "”" : ""))),
+      el("div", { class: "btns" },
+        el("span", { class: "chip " + (p.status === "approved" ? "ok" : "no") }, p.status.toUpperCase()),
+        el("button", { class: "linkbtn", type: "button", onclick: () => verdict(p, "claimed") }, "Undo")));
+  })));
+
+  renderEvidence();
+}
+
+function renderEvidence() {
+  const box = $("evidence"); box.textContent = "";
+  const qv = normName($("evq").value);
+  const h = herd(cards);
+  let any = false;
+  h.forEach(o => {
+    let names = o.names;
+    if (qv) names = names.filter(n => normName(n.name).includes(qv) || qv.split(" ").every(w => normName(n.name).includes(w)));
+    if (qv && !names.length) return;
+    any = true;
+    const max = Math.max(1, ...names.map(n => n.count));
+    box.append(el("div", { class: "evo" },
+      el("div", { class: "evh" }, el("b", null, "No. " + pad(o.sq + 1)), " " + o.q, el("span", null, o.cards + (o.cards === 1 ? " card" : " cards"))),
+      names.length
+        ? el("ol", { class: "mw" }, names.slice(0, qv ? 20 : 5).map(n => el("li", null,
+            el("span", { class: "who" }, n.name),
+            el("span", { class: "bar" }, el("i", { style: "width:" + Math.round(100 * n.count / max) + "%" })),
+            el("b", null, n.count))))
+        : el("div", { class: "fine" }, "Nobody charged yet.")));
+  });
+  if (!any) box.append(el("div", { class: "empty" }, qv ? "No charges against that name." : "No cards yet."));
+}
+
+async function verdict(p, status) {
+  let note = "";
+  if (status === "rejected") {
+    const r = prompt("Reason for rejecting " + p.name + " (the player sees this):", "");
+    if (r === null) return;
+    note = r.trim().slice(0, 200);
+  }
+  try {
+    const b = writeBatch(db);
+    b.update(doc(db, "players", p.id), { status, note, judgedAt: serverTimestamp(), judgedBy: uid });
+    b.set(doc(db, "board", p.id), publicRow({ ...p, status }));
+    await b.commit();
+    toast(status === "claimed" ? "Back in the queue" : p.name + " " + status);
+  } catch (err) {
+    console.error(err);
+    toast(status === "claimed" ? "Can't undo: the player has already edited their card" : "Refused by the server");
+  }
+}
+
+$("toggleOpen").onclick = async () => {
+  try { await setDoc(doc(db, "config", "game"), { open: game.open === false }); }
+  catch (e) { toast("Refused by the server"); }
+};
+
+let armed = false;
+$("resetGame").onclick = async () => {
+  if (!armed) { armed = true; $("resetGame").textContent = "Tap again to delete " + cards.length + " cards"; setTimeout(() => { armed = false; $("resetGame").textContent = "Reset game: delete every card"; }, 5000); return; }
+  armed = false;
+  const refs = [...(await getDocs(collection(db, "players"))).docs, ...(await getDocs(collection(db, "board"))).docs].map(d => d.ref);
+  for (let i = 0; i < refs.length; i += 400) {
+    const b = writeBatch(db);
+    refs.slice(i, i + 400).forEach(r => b.delete(r));
+    await b.commit();
+  }
+  $("resetGame").textContent = "Reset game: delete every card";
+  toast("Game reset");
+};
+
+// Two-tone chime on a new claim (works once the page has been tapped).
+let actx;
+document.addEventListener("pointerdown", () => { try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} }, { once: true });
+function chime() {
+  buzz([80, 50, 80]);
+  if (!actx) return;
+  [880, 1320].forEach((f, i) => {
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.frequency.value = f; o.connect(g); g.connect(actx.destination);
+    const t = actx.currentTime + i * 0.16;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.3, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    o.start(t); o.stop(t + 0.32);
+  });
+}
+
 </script>
 </body>
 </html>

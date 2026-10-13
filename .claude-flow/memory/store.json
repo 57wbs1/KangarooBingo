@@ -620,6 +620,2103 @@
       "lastAccessed": "2026-10-13T02:32:05.682Z",
       "accessCount": 0,
       "expiresAt": "2026-11-12T02:32:05.682Z"
+    },
+    "cmd-1791859623969": {
+      "key": "cmd-1791859623969",
+      "value": "{\"command\":\"for i in $(seq 1 15); do c=$(curl -s \\\"https://57wbs1.github.io/KangarooBingo/?t=$RANDOM\\\" | grep -c \\\"e.g. Caspar\\\"); [ \\\"$c\\\" = \\\"0\\\" ] && break; sleep 8; done; echo \\\"occurrences live: $c\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:47:03.969Z",
+      "lastAccessed": "2026-10-13T02:47:03.969Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:47:03.969Z"
+    },
+    "cmd-1791859891332": {
+      "key": "cmd-1791859891332",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:31.332Z",
+      "lastAccessed": "2026-10-13T02:51:31.332Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:31.332Z"
+    },
+    "cmd-1791859893054": {
+      "key": "cmd-1791859893054",
+      "value": "{\"command\":\"p='js/game.js'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:33.054Z",
+      "lastAccessed": "2026-10-13T02:51:33.054Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:33.054Z"
+    },
+    "cmd-1791859894574": {
+      "key": "cmd-1791859894574",
+      "value": "{\"command\":\"s=s.replace('''export const FREE = 12;   // centre of the 5×5 grid\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:34.574Z",
+      "lastAccessed": "2026-10-13T02:51:34.574Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:34.574Z"
+    },
+    "cmd-1791859896025": {
+      "key": "cmd-1791859896025",
+      "value": "{\"command\":\"export const TOP = 5;     // places that score syndicate points''','''export const FREE = 12;   // centre of the 5×5 grid\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:36.025Z",
+      "lastAccessed": "2026-10-13T02:51:36.025Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:36.025Z"
+    },
+    "cmd-1791859897569": {
+      "key": "cmd-1791859897569",
+      "value": "{\"command\":\"export const TOP = 5;     // places that score syndicate points\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:37.569Z",
+      "lastAccessed": "2026-10-13T02:51:37.569Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:37.569Z"
+    },
+    "cmd-1791859899110": {
+      "key": "cmd-1791859899110",
+      "value": "{\"command\":\"export const TOTAL = 24;  // BINGO = every square filled (one prize: first verified full card)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:39.110Z",
+      "lastAccessed": "2026-10-13T02:51:39.110Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:39.110Z"
+    },
+    "cmd-1791859900681": {
+      "key": "cmd-1791859900681",
+      "value": "{\"command\":\"export const MAX_PER_NAME = 3; // one person can be charged at most this many times on one card''')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:40.681Z",
+      "lastAccessed": "2026-10-13T02:51:40.681Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:40.681Z"
+    },
+    "cmd-1791859902253": {
+      "key": "cmd-1791859902253",
+      "value": "{\"command\":\"s=s.replace('''export function filledCount(marks) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:42.253Z",
+      "lastAccessed": "2026-10-13T02:51:42.253Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:42.253Z"
+    },
+    "cmd-1791859903882": {
+      "key": "cmd-1791859903882",
+      "value": "{\"command\":\"  return Object.values(marks || {}).filter(v => v && String(v).trim()).length;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:43.882Z",
+      "lastAccessed": "2026-10-13T02:51:43.882Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:43.882Z"
+    },
+    "cmd-1791859905441": {
+      "key": "cmd-1791859905441",
+      "value": "{\"command\":\"}''','''export function filledCount(marks) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:45.441Z",
+      "lastAccessed": "2026-10-13T02:51:45.441Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:45.441Z"
+    },
+    "cmd-1791859906962": {
+      "key": "cmd-1791859906962",
+      "value": "{\"command\":\"  return Object.values(marks || {}).filter(v => v && String(v).trim()).length;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:46.962Z",
+      "lastAccessed": "2026-10-13T02:51:46.962Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:46.962Z"
+    },
+    "cmd-1791859908538": {
+      "key": "cmd-1791859908538",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:48.538Z",
+      "lastAccessed": "2026-10-13T02:51:48.538Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:48.538Z"
+    },
+    "cmd-1791859910058": {
+      "key": "cmd-1791859910058",
+      "value": "{\"command\":\"export const isFull = marks => filledCount(marks) >= TOTAL;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:50.058Z",
+      "lastAccessed": "2026-10-13T02:51:50.058Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:50.058Z"
+    },
+    "cmd-1791859912865": {
+      "key": "cmd-1791859912865",
+      "value": "{\"command\":\"// ---- names ----\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:52.865Z",
+      "lastAccessed": "2026-10-13T02:51:52.865Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:52.865Z"
+    },
+    "cmd-1791859914337": {
+      "key": "cmd-1791859914337",
+      "value": "{\"command\":\"export const normName = s => String(s || \\\"\\\").trim().replace(/\\\\\\\\s+/g, \\\" \\\").toLowerCase();\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:54.337Z",
+      "lastAccessed": "2026-10-13T02:51:54.337Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:54.337Z"
+    },
+    "cmd-1791859915943": {
+      "key": "cmd-1791859915943",
+      "value": "{\"command\":\"// \\\"Paul\\\" matches \\\"Paul Soliano\\\": every word of the shorter name appears in the longer one.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:55.943Z",
+      "lastAccessed": "2026-10-13T02:51:55.943Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:55.943Z"
+    },
+    "cmd-1791859917454": {
+      "key": "cmd-1791859917454",
+      "value": "{\"command\":\"export function sameAccused(a, b) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:57.454Z",
+      "lastAccessed": "2026-10-13T02:51:57.454Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:57.454Z"
+    },
+    "cmd-1791859919082": {
+      "key": "cmd-1791859919082",
+      "value": "{\"command\":\"  const x = normName(a).split(\\\" \\\").filter(Boolean), y = normName(b).split(\\\" \\\").filter(Boolean);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:51:59.082Z",
+      "lastAccessed": "2026-10-13T02:51:59.082Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:51:59.082Z"
+    },
+    "cmd-1791859920692": {
+      "key": "cmd-1791859920692",
+      "value": "{\"command\":\"  if (!x.length || !y.length) return false;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:00.692Z",
+      "lastAccessed": "2026-10-13T02:52:00.692Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:00.692Z"
+    },
+    "cmd-1791859922313": {
+      "key": "cmd-1791859922313",
+      "value": "{\"command\":\"  const [s, l] = x.length <= y.length ? [x, y] : [y, x];\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:02.313Z",
+      "lastAccessed": "2026-10-13T02:52:02.313Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:02.313Z"
+    },
+    "cmd-1791859923896": {
+      "key": "cmd-1791859923896",
+      "value": "{\"command\":\"  return s.every(w => l.includes(w));\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:03.896Z",
+      "lastAccessed": "2026-10-13T02:52:03.896Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:03.896Z"
+    },
+    "cmd-1791859925347": {
+      "key": "cmd-1791859925347",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:05.347Z",
+      "lastAccessed": "2026-10-13T02:52:05.347Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:05.347Z"
+    },
+    "cmd-1791859926787": {
+      "key": "cmd-1791859926787",
+      "value": "{\"command\":\"// How many times this name already appears on the card, ignoring one square.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:06.787Z",
+      "lastAccessed": "2026-10-13T02:52:06.787Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:06.787Z"
+    },
+    "cmd-1791859928225": {
+      "key": "cmd-1791859928225",
+      "value": "{\"command\":\"export function chargesOn(marks, name, exceptSq) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:08.225Z",
+      "lastAccessed": "2026-10-13T02:52:08.225Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:08.225Z"
+    },
+    "cmd-1791859929648": {
+      "key": "cmd-1791859929648",
+      "value": "{\"command\":\"  return Object.entries(marks || {}).filter(([k, v]) => Number(k) !== exceptSq && v && sameAccused(v, name)).length;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:09.648Z",
+      "lastAccessed": "2026-10-13T02:52:09.648Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:09.648Z"
+    },
+    "cmd-1791859931099": {
+      "key": "cmd-1791859931099",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:11.099Z",
+      "lastAccessed": "2026-10-13T02:52:11.099Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:11.099Z"
+    },
+    "cmd-1791859933717": {
+      "key": "cmd-1791859933717",
+      "value": "{\"command\":\"// For each square on a card: how many OTHER players charged the same person with the same offence.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:13.717Z",
+      "lastAccessed": "2026-10-13T02:52:13.717Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:13.717Z"
+    },
+    "cmd-1791859935193": {
+      "key": "cmd-1791859935193",
+      "value": "{\"command\":\"export function corroboration(player, players) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:15.193Z",
+      "lastAccessed": "2026-10-13T02:52:15.193Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:15.193Z"
+    },
+    "cmd-1791859936677": {
+      "key": "cmd-1791859936677",
+      "value": "{\"command\":\"  const out = {};\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:16.677Z",
+      "lastAccessed": "2026-10-13T02:52:16.677Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:16.677Z"
+    },
+    "cmd-1791859938105": {
+      "key": "cmd-1791859938105",
+      "value": "{\"command\":\"  for (let sq = 0; sq < TOTAL; sq++) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:18.105Z",
+      "lastAccessed": "2026-10-13T02:52:18.105Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:18.105Z"
+    },
+    "cmd-1791859939535": {
+      "key": "cmd-1791859939535",
+      "value": "{\"command\":\"    const who = accusedAt(player.marks, sq);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:19.535Z",
+      "lastAccessed": "2026-10-13T02:52:19.535Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:19.535Z"
+    },
+    "cmd-1791859940993": {
+      "key": "cmd-1791859940993",
+      "value": "{\"command\":\"    out[sq] = !who ? 0 : players.filter(o => o.id !== player.id && sameAccused(accusedAt(o.marks, sq), who)).length;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:20.993Z",
+      "lastAccessed": "2026-10-13T02:52:20.993Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:20.993Z"
+    },
+    "cmd-1791859942415": {
+      "key": "cmd-1791859942415",
+      "value": "{\"command\":\"  }\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:22.415Z",
+      "lastAccessed": "2026-10-13T02:52:22.415Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:22.415Z"
+    },
+    "cmd-1791859943866": {
+      "key": "cmd-1791859943866",
+      "value": "{\"command\":\"  return out;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:23.866Z",
+      "lastAccessed": "2026-10-13T02:52:23.866Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:23.866Z"
+    },
+    "cmd-1791859945322": {
+      "key": "cmd-1791859945322",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:25.322Z",
+      "lastAccessed": "2026-10-13T02:52:25.322Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:25.322Z"
+    },
+    "cmd-1791859947968": {
+      "key": "cmd-1791859947968",
+      "value": "{\"command\":\"// Three squares for the judge to verify in person, uncorroborated ones first.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:27.968Z",
+      "lastAccessed": "2026-10-13T02:52:27.968Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:27.968Z"
+    },
+    "cmd-1791859949412": {
+      "key": "cmd-1791859949412",
+      "value": "{\"command\":\"// Seeded by the player id so the picks stay put while the judge looks.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:29.412Z",
+      "lastAccessed": "2026-10-13T02:52:29.412Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:29.412Z"
+    },
+    "cmd-1791859950865": {
+      "key": "cmd-1791859950865",
+      "value": "{\"command\":\"export function spotChecks(player, corr, n = 3) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:30.865Z",
+      "lastAccessed": "2026-10-13T02:52:30.865Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:30.865Z"
+    },
+    "cmd-1791859952298": {
+      "key": "cmd-1791859952298",
+      "value": "{\"command\":\"  let h = 2166136261;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:32.298Z",
+      "lastAccessed": "2026-10-13T02:52:32.298Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:32.298Z"
+    },
+    "cmd-1791859953777": {
+      "key": "cmd-1791859953777",
+      "value": "{\"command\":\"  for (const c of String(player.id)) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:33.777Z",
+      "lastAccessed": "2026-10-13T02:52:33.777Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:33.777Z"
+    },
+    "cmd-1791859955250": {
+      "key": "cmd-1791859955250",
+      "value": "{\"command\":\"  const rnd = () => (h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) / 4294967296;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:35.250Z",
+      "lastAccessed": "2026-10-13T02:52:35.250Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:35.250Z"
+    },
+    "cmd-1791859956696": {
+      "key": "cmd-1791859956696",
+      "value": "{\"command\":\"  return [...Array(TOTAL).keys()]\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:36.696Z",
+      "lastAccessed": "2026-10-13T02:52:36.696Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:36.696Z"
+    },
+    "cmd-1791859958159": {
+      "key": "cmd-1791859958159",
+      "value": "{\"command\":\"    .filter(sq => accusedAt(player.marks, sq))\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:38.159Z",
+      "lastAccessed": "2026-10-13T02:52:38.159Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:38.159Z"
+    },
+    "cmd-1791859959602": {
+      "key": "cmd-1791859959602",
+      "value": "{\"command\":\"    .map(sq => ({ sq, k: (corr[sq] ? 1 : 0) + rnd() }))\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:39.602Z",
+      "lastAccessed": "2026-10-13T02:52:39.602Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:39.602Z"
+    },
+    "cmd-1791859961022": {
+      "key": "cmd-1791859961022",
+      "value": "{\"command\":\"    .sort((a, b) => a.k - b.k).slice(0, n).map(x => x.sq);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:41.022Z",
+      "lastAccessed": "2026-10-13T02:52:41.022Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:41.022Z"
+    },
+    "cmd-1791859962459": {
+      "key": "cmd-1791859962459",
+      "value": "{\"command\":\"}''')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:42.459Z",
+      "lastAccessed": "2026-10-13T02:52:42.459Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:42.459Z"
+    },
+    "cmd-1791859963922": {
+      "key": "cmd-1791859963922",
+      "value": "{\"command\":\"# mini card with corroboration badges + spot checks\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:43.922Z",
+      "lastAccessed": "2026-10-13T02:52:43.922Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:43.922Z"
+    },
+    "cmd-1791859965371": {
+      "key": "cmd-1791859965371",
+      "value": "{\"command\":\"s=s.replace('''// Read-only mini card (judge view): winning lines outlined.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:45.371Z",
+      "lastAccessed": "2026-10-13T02:52:45.371Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:45.371Z"
+    },
+    "cmd-1791859966830": {
+      "key": "cmd-1791859966830",
+      "value": "{\"command\":\"export function miniCard(layout, marks) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:46.830Z",
+      "lastAccessed": "2026-10-13T02:52:46.830Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:46.830Z"
+    },
+    "cmd-1791859968301": {
+      "key": "cmd-1791859968301",
+      "value": "{\"command\":\"  const g = gridOf(layout);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:48.301Z",
+      "lastAccessed": "2026-10-13T02:52:48.301Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:48.301Z"
+    },
+    "cmd-1791859969745": {
+      "key": "cmd-1791859969745",
+      "value": "{\"command\":\"  const win = new Set(winningLines(layout, marks).flat());\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:49.745Z",
+      "lastAccessed": "2026-10-13T02:52:49.745Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:49.745Z"
+    },
+    "cmd-1791859971195": {
+      "key": "cmd-1791859971195",
+      "value": "{\"command\":\"  const grid = el(\\\"div\\\", { class: \\\"mini\\\" });\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:51.195Z",
+      "lastAccessed": "2026-10-13T02:52:51.195Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:51.195Z"
+    },
+    "cmd-1791859972652": {
+      "key": "cmd-1791859972652",
+      "value": "{\"command\":\"  g.forEach((sq, p) => {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:52.652Z",
+      "lastAccessed": "2026-10-13T02:52:52.652Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:52.652Z"
+    },
+    "cmd-1791859974091": {
+      "key": "cmd-1791859974091",
+      "value": "{\"command\":\"    if (sq === null) { grid.append(el(\\\"div\\\", { class: \\\"mc free\\\" }, \\\"FREE\\\")); return; }\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:54.091Z",
+      "lastAccessed": "2026-10-13T02:52:54.091Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:54.091Z"
+    },
+    "cmd-1791859975547": {
+      "key": "cmd-1791859975547",
+      "value": "{\"command\":\"    const who = accusedAt(marks, sq);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:55.547Z",
+      "lastAccessed": "2026-10-13T02:52:55.547Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:55.547Z"
+    },
+    "cmd-1791859977045": {
+      "key": "cmd-1791859977045",
+      "value": "{\"command\":\"    grid.append(el(\\\"div\\\", { class: \\\"mc\\\" + (who ? \\\" on\\\" : \\\"\\\") + (win.has(p) ? \\\" win\\\" : \\\"\\\") },\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:57.045Z",
+      "lastAccessed": "2026-10-13T02:52:57.045Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:57.045Z"
+    },
+    "cmd-1791859978480": {
+      "key": "cmd-1791859978480",
+      "value": "{\"command\":\"      el(\\\"div\\\", { class: \\\"q\\\" }, SQUARES[sq]),\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:58.480Z",
+      "lastAccessed": "2026-10-13T02:52:58.480Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:58.480Z"
+    },
+    "cmd-1791859979915": {
+      "key": "cmd-1791859979915",
+      "value": "{\"command\":\"      el(\\\"div\\\", { class: \\\"a\\\" }, who)));\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:52:59.915Z",
+      "lastAccessed": "2026-10-13T02:52:59.915Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:52:59.915Z"
+    },
+    "cmd-1791859981374": {
+      "key": "cmd-1791859981374",
+      "value": "{\"command\":\"  });\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:01.374Z",
+      "lastAccessed": "2026-10-13T02:53:01.374Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:01.374Z"
+    },
+    "cmd-1791859982840": {
+      "key": "cmd-1791859982840",
+      "value": "{\"command\":\"  return grid;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:02.840Z",
+      "lastAccessed": "2026-10-13T02:53:02.840Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:02.840Z"
+    },
+    "cmd-1791859984286": {
+      "key": "cmd-1791859984286",
+      "value": "{\"command\":\"}''','''// Read-only mini card (judge view): seen-by-others count per square, spot checks outlined.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:04.286Z",
+      "lastAccessed": "2026-10-13T02:53:04.286Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:04.286Z"
+    },
+    "cmd-1791859985728": {
+      "key": "cmd-1791859985728",
+      "value": "{\"command\":\"export function miniCard(layout, marks, corr = {}, checks = []) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:05.728Z",
+      "lastAccessed": "2026-10-13T02:53:05.728Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:05.728Z"
+    },
+    "cmd-1791859987152": {
+      "key": "cmd-1791859987152",
+      "value": "{\"command\":\"  const g = gridOf(layout);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:07.152Z",
+      "lastAccessed": "2026-10-13T02:53:07.152Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:07.152Z"
+    },
+    "cmd-1791859988588": {
+      "key": "cmd-1791859988588",
+      "value": "{\"command\":\"  const chk = new Set(checks);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:08.588Z",
+      "lastAccessed": "2026-10-13T02:53:08.588Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:08.588Z"
+    },
+    "cmd-1791859990090": {
+      "key": "cmd-1791859990090",
+      "value": "{\"command\":\"  const grid = el(\\\"div\\\", { class: \\\"mini\\\" });\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:10.090Z",
+      "lastAccessed": "2026-10-13T02:53:10.090Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:10.090Z"
+    },
+    "cmd-1791859991538": {
+      "key": "cmd-1791859991538",
+      "value": "{\"command\":\"  g.forEach(sq => {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:11.538Z",
+      "lastAccessed": "2026-10-13T02:53:11.538Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:11.538Z"
+    },
+    "cmd-1791859993013": {
+      "key": "cmd-1791859993013",
+      "value": "{\"command\":\"    if (sq === null) { grid.append(el(\\\"div\\\", { class: \\\"mc free\\\" }, \\\"FREE\\\")); return; }\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:13.013Z",
+      "lastAccessed": "2026-10-13T02:53:13.013Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:13.013Z"
+    },
+    "cmd-1791859994490": {
+      "key": "cmd-1791859994490",
+      "value": "{\"command\":\"    const who = accusedAt(marks, sq);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:14.490Z",
+      "lastAccessed": "2026-10-13T02:53:14.490Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:14.490Z"
+    },
+    "cmd-1791859995982": {
+      "key": "cmd-1791859995982",
+      "value": "{\"command\":\"    const n = corr[sq] || 0;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:15.982Z",
+      "lastAccessed": "2026-10-13T02:53:15.982Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:15.982Z"
+    },
+    "cmd-1791859997407": {
+      "key": "cmd-1791859997407",
+      "value": "{\"command\":\"    grid.append(el(\\\"div\\\", { class: \\\"mc\\\" + (who ? \\\" on\\\" : \\\"\\\") + (chk.has(sq) ? \\\" win\\\" : \\\"\\\") },\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:17.407Z",
+      "lastAccessed": "2026-10-13T02:53:17.407Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:17.407Z"
+    },
+    "cmd-1791859998857": {
+      "key": "cmd-1791859998857",
+      "value": "{\"command\":\"      el(\\\"div\\\", { class: \\\"q\\\" }, SQUARES[sq]),\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:18.857Z",
+      "lastAccessed": "2026-10-13T02:53:18.857Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:18.857Z"
+    },
+    "cmd-1791860000311": {
+      "key": "cmd-1791860000311",
+      "value": "{\"command\":\"      el(\\\"div\\\", { class: \\\"a\\\" }, who),\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:20.311Z",
+      "lastAccessed": "2026-10-13T02:53:20.311Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:20.311Z"
+    },
+    "cmd-1791860001750": {
+      "key": "cmd-1791860001750",
+      "value": "{\"command\":\"      who ? el(\\\"div\\\", { class: \\\"seen\\\" + (n ? \\\" yes\\\" : \\\"\\\") }, n ? \\\"SEEN BY +\\\" + n : \\\"UNBACKED\\\") : null,\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:21.750Z",
+      "lastAccessed": "2026-10-13T02:53:21.750Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:21.750Z"
+    },
+    "cmd-1791860003202": {
+      "key": "cmd-1791860003202",
+      "value": "{\"command\":\"      chk.has(sq) ? el(\\\"div\\\", { class: \\\"chk\\\" }, \\\"CHECK\\\") : null));\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:23.202Z",
+      "lastAccessed": "2026-10-13T02:53:23.202Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:23.202Z"
+    },
+    "cmd-1791860004664": {
+      "key": "cmd-1791860004664",
+      "value": "{\"command\":\"  });\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:24.664Z",
+      "lastAccessed": "2026-10-13T02:53:24.664Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:24.664Z"
+    },
+    "cmd-1791860006103": {
+      "key": "cmd-1791860006103",
+      "value": "{\"command\":\"  return grid;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:26.103Z",
+      "lastAccessed": "2026-10-13T02:53:26.103Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:26.103Z"
+    },
+    "cmd-1791860007553": {
+      "key": "cmd-1791860007553",
+      "value": "{\"command\":\"}''')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:27.553Z",
+      "lastAccessed": "2026-10-13T02:53:27.553Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:27.553Z"
+    },
+    "cmd-1791860009018": {
+      "key": "cmd-1791860009018",
+      "value": "{\"command\":\"s=s.replace('el(\\\"small\\\", null, r.rank ? (top ? \\\"TOP \\\" + TOP : \\\"APPROVED\\\") : \\\"VETTING\\\")','el(\\\"small\\\", null, r.rank === 1 ? \\\"WINS THE BOTTLE\\\" : r.rank ? (top ? \\\"TOP \\\" + TOP : \\\"APPROVED\\\") : \\\"VETTING\\\")')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:29.018Z",
+      "lastAccessed": "2026-10-13T02:53:29.018Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:29.018Z"
+    },
+    "cmd-1791860010463": {
+      "key": "cmd-1791860010463",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:30.463Z",
+      "lastAccessed": "2026-10-13T02:53:30.463Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:30.463Z"
+    },
+    "cmd-1791860013190": {
+      "key": "cmd-1791860013190",
+      "value": "{\"command\":\"p='css/app.css'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:53:33.190Z",
+      "lastAccessed": "2026-10-13T02:53:33.190Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:53:33.190Z"
+    },
+    "cmd-1791860070810": {
+      "key": "cmd-1791860070810",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && grep -n \\\"export function mostWanted\\\" -A 12 js/game.js && grep -n \\\"renderBoard\\\\|const filed\\\" js/game.js | head\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:30.810Z",
+      "lastAccessed": "2026-10-13T02:54:30.810Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:30.810Z"
+    },
+    "cmd-1791860080462": {
+      "key": "cmd-1791860080462",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:40.462Z",
+      "lastAccessed": "2026-10-13T02:54:40.462Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:40.462Z"
+    },
+    "cmd-1791860081926": {
+      "key": "cmd-1791860081926",
+      "value": "{\"command\":\"p='js/game.js'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:41.926Z",
+      "lastAccessed": "2026-10-13T02:54:41.926Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:41.926Z"
+    },
+    "cmd-1791860083389": {
+      "key": "cmd-1791860083389",
+      "value": "{\"command\":\"old=s[s.index('export function mostWanted'):s.index('// ---- tiny DOM helper')]\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:43.389Z",
+      "lastAccessed": "2026-10-13T02:54:43.389Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:43.389Z"
+    },
+    "cmd-1791860084821": {
+      "key": "cmd-1791860084821",
+      "value": "{\"command\":\"new='''export function mostWanted(players, n = 8) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:44.821Z",
+      "lastAccessed": "2026-10-13T02:54:44.821Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:44.821Z"
+    },
+    "cmd-1791860086246": {
+      "key": "cmd-1791860086246",
+      "value": "{\"command\":\"  const m = new Map();\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:46.246Z",
+      "lastAccessed": "2026-10-13T02:54:46.246Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:46.246Z"
+    },
+    "cmd-1791860087679": {
+      "key": "cmd-1791860087679",
+      "value": "{\"command\":\"  players.forEach(p => (p.accused || Object.values(p.marks || {})).forEach(v => {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:47.679Z",
+      "lastAccessed": "2026-10-13T02:54:47.679Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:47.679Z"
+    },
+    "cmd-1791860089104": {
+      "key": "cmd-1791860089104",
+      "value": "{\"command\":\"    const name = String(v || \\\"\\\").trim().replace(/\\\\\\\\s+/g, \\\" \\\");\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:49.104Z",
+      "lastAccessed": "2026-10-13T02:54:49.104Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:49.104Z"
+    },
+    "cmd-1791860090548": {
+      "key": "cmd-1791860090548",
+      "value": "{\"command\":\"    if (!name) return;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:50.548Z",
+      "lastAccessed": "2026-10-13T02:54:50.548Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:50.548Z"
+    },
+    "cmd-1791860092043": {
+      "key": "cmd-1791860092043",
+      "value": "{\"command\":\"    const k = name.toLowerCase();\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:52.043Z",
+      "lastAccessed": "2026-10-13T02:54:52.043Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:52.043Z"
+    },
+    "cmd-1791860093532": {
+      "key": "cmd-1791860093532",
+      "value": "{\"command\":\"    const e = m.get(k) || { name, count: 0 };\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:53.532Z",
+      "lastAccessed": "2026-10-13T02:54:53.532Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:53.532Z"
+    },
+    "cmd-1791860094968": {
+      "key": "cmd-1791860094968",
+      "value": "{\"command\":\"    e.count++; m.set(k, e);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:54.968Z",
+      "lastAccessed": "2026-10-13T02:54:54.968Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:54.968Z"
+    },
+    "cmd-1791860096431": {
+      "key": "cmd-1791860096431",
+      "value": "{\"command\":\"  }));\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:56.431Z",
+      "lastAccessed": "2026-10-13T02:54:56.431Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:56.431Z"
+    },
+    "cmd-1791860097870": {
+      "key": "cmd-1791860097870",
+      "value": "{\"command\":\"  return [...m.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).slice(0, n);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:57.870Z",
+      "lastAccessed": "2026-10-13T02:54:57.870Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:57.870Z"
+    },
+    "cmd-1791860099302": {
+      "key": "cmd-1791860099302",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:54:59.302Z",
+      "lastAccessed": "2026-10-13T02:54:59.302Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:54:59.302Z"
+    },
+    "cmd-1791860101967": {
+      "key": "cmd-1791860101967",
+      "value": "{\"command\":\"// Herd view (judge only): for each offence, who the crowd charged and on how many cards.\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:01.967Z",
+      "lastAccessed": "2026-10-13T02:55:01.967Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:01.967Z"
+    },
+    "cmd-1791860103430": {
+      "key": "cmd-1791860103430",
+      "value": "{\"command\":\"export function herd(players) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:03.430Z",
+      "lastAccessed": "2026-10-13T02:55:03.430Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:03.430Z"
+    },
+    "cmd-1791860104882": {
+      "key": "cmd-1791860104882",
+      "value": "{\"command\":\"  return SQUARES.map((q, sq) => {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:04.882Z",
+      "lastAccessed": "2026-10-13T02:55:04.882Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:04.882Z"
+    },
+    "cmd-1791860106349": {
+      "key": "cmd-1791860106349",
+      "value": "{\"command\":\"    const m = new Map(); let cards = 0;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:06.349Z",
+      "lastAccessed": "2026-10-13T02:55:06.349Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:06.349Z"
+    },
+    "cmd-1791860107757": {
+      "key": "cmd-1791860107757",
+      "value": "{\"command\":\"    players.forEach(p => {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:07.757Z",
+      "lastAccessed": "2026-10-13T02:55:07.757Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:07.757Z"
+    },
+    "cmd-1791860109170": {
+      "key": "cmd-1791860109170",
+      "value": "{\"command\":\"      const who = accusedAt(p.marks, sq); if (!who) return;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:09.170Z",
+      "lastAccessed": "2026-10-13T02:55:09.170Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:09.170Z"
+    },
+    "cmd-1791860110610": {
+      "key": "cmd-1791860110610",
+      "value": "{\"command\":\"      cards++;\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:10.610Z",
+      "lastAccessed": "2026-10-13T02:55:10.610Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:10.610Z"
+    },
+    "cmd-1791860112017": {
+      "key": "cmd-1791860112017",
+      "value": "{\"command\":\"      const k = normName(who);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:12.017Z",
+      "lastAccessed": "2026-10-13T02:55:12.017Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:12.017Z"
+    },
+    "cmd-1791860113451": {
+      "key": "cmd-1791860113451",
+      "value": "{\"command\":\"      const e = m.get(k) || { name: who.replace(/\\\\\\\\s+/g, \\\" \\\"), count: 0 };\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:13.451Z",
+      "lastAccessed": "2026-10-13T02:55:13.451Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:13.451Z"
+    },
+    "cmd-1791860114881": {
+      "key": "cmd-1791860114881",
+      "value": "{\"command\":\"      e.count++; m.set(k, e);\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:14.881Z",
+      "lastAccessed": "2026-10-13T02:55:14.881Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:14.881Z"
+    },
+    "cmd-1791860116309": {
+      "key": "cmd-1791860116309",
+      "value": "{\"command\":\"    });\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:16.309Z",
+      "lastAccessed": "2026-10-13T02:55:16.309Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:16.309Z"
+    },
+    "cmd-1791860117774": {
+      "key": "cmd-1791860117774",
+      "value": "{\"command\":\"    return { sq, q, cards, names: [...m.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)) };\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:17.774Z",
+      "lastAccessed": "2026-10-13T02:55:17.774Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:17.774Z"
+    },
+    "cmd-1791860119335": {
+      "key": "cmd-1791860119335",
+      "value": "{\"command\":\"  });\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:19.335Z",
+      "lastAccessed": "2026-10-13T02:55:19.335Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:19.335Z"
+    },
+    "cmd-1791860120792": {
+      "key": "cmd-1791860120792",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:20.792Z",
+      "lastAccessed": "2026-10-13T02:55:20.792Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:20.792Z"
+    },
+    "cmd-1791860123425": {
+      "key": "cmd-1791860123425",
+      "value": "{\"command\":\"// The public leaderboard row mirrored from a private card (server rules check it matches).\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:23.425Z",
+      "lastAccessed": "2026-10-13T02:55:23.425Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:23.425Z"
+    },
+    "cmd-1791860124909": {
+      "key": "cmd-1791860124909",
+      "value": "{\"command\":\"export function publicRow(p) {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:24.909Z",
+      "lastAccessed": "2026-10-13T02:55:24.909Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:24.909Z"
+    },
+    "cmd-1791860126343": {
+      "key": "cmd-1791860126343",
+      "value": "{\"command\":\"  return {\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:26.343Z",
+      "lastAccessed": "2026-10-13T02:55:26.343Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:26.343Z"
+    },
+    "cmd-1791860127769": {
+      "key": "cmd-1791860127769",
+      "value": "{\"command\":\"    name: p.name, syn: p.syn, filled: p.filled || 0, status: p.status, claimedAt: p.claimedAt ?? null,\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:27.769Z",
+      "lastAccessed": "2026-10-13T02:55:27.769Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:27.769Z"
+    },
+    "cmd-1791860129193": {
+      "key": "cmd-1791860129193",
+      "value": "{\"command\":\"    accused: Object.values(p.marks || {}).map(v => String(v).trim()).filter(Boolean).slice(0, TOTAL)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:29.193Z",
+      "lastAccessed": "2026-10-13T02:55:29.193Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:29.193Z"
+    },
+    "cmd-1791860130640": {
+      "key": "cmd-1791860130640",
+      "value": "{\"command\":\"  };\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:30.640Z",
+      "lastAccessed": "2026-10-13T02:55:30.640Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:30.640Z"
+    },
+    "cmd-1791860132062": {
+      "key": "cmd-1791860132062",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:32.062Z",
+      "lastAccessed": "2026-10-13T02:55:32.062Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:32.062Z"
+    },
+    "cmd-1791860134706": {
+      "key": "cmd-1791860134706",
+      "value": "{\"command\":\"'''\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:34.706Z",
+      "lastAccessed": "2026-10-13T02:55:34.706Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:34.706Z"
+    },
+    "cmd-1791860136156": {
+      "key": "cmd-1791860136156",
+      "value": "{\"command\":\"s=s.replace(old,new)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:36.156Z",
+      "lastAccessed": "2026-10-13T02:55:36.156Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:36.156Z"
+    },
+    "cmd-1791860137584": {
+      "key": "cmd-1791860137584",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:37.584Z",
+      "lastAccessed": "2026-10-13T02:55:37.584Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:37.584Z"
+    },
+    "cmd-1791860139053": {
+      "key": "cmd-1791860139053",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:39.053Z",
+      "lastAccessed": "2026-10-13T02:55:39.053Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:39.053Z"
+    },
+    "cmd-1791860140537": {
+      "key": "cmd-1791860140537",
+      "value": "{\"command\":\"grep -n \\\"^export\\\" js/game.js\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:55:40.537Z",
+      "lastAccessed": "2026-10-13T02:55:40.537Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:55:40.537Z"
+    },
+    "cmd-1791860285900": {
+      "key": "cmd-1791860285900",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:05.900Z",
+      "lastAccessed": "2026-10-13T02:58:05.900Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:05.900Z"
+    },
+    "cmd-1791860287451": {
+      "key": "cmd-1791860287451",
+      "value": "{\"command\":\"p='css/app.css'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:07.451Z",
+      "lastAccessed": "2026-10-13T02:58:07.451Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:07.451Z"
+    },
+    "cmd-1791860288844": {
+      "key": "cmd-1791860288844",
+      "value": "{\"command\":\"s=s.replace('.tabs{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink)}',\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:08.844Z",
+      "lastAccessed": "2026-10-13T02:58:08.844Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:08.844Z"
+    },
+    "cmd-1791860290277": {
+      "key": "cmd-1791860290277",
+      "value": "{\"command\":\" '.tabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);border:2px solid var(--ink)}\\\\n.tabs.seg .tab{font-size:11px;min-height:44px;letter-spacing:.04em}')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:10.277Z",
+      "lastAccessed": "2026-10-13T02:58:10.277Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:10.277Z"
+    },
+    "cmd-1791860291699": {
+      "key": "cmd-1791860291699",
+      "value": "{\"command\":\"s=s.replace('.btn.huge{','.btn.sm{font-size:12px;padding:8px 12px;min-height:44px}\\\\n.btn.huge{')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:11.699Z",
+      "lastAccessed": "2026-10-13T02:58:11.699Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:11.699Z"
+    },
+    "cmd-1791860293127": {
+      "key": "cmd-1791860293127",
+      "value": "{\"command\":\"s+='''\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:13.127Z",
+      "lastAccessed": "2026-10-13T02:58:13.127Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:13.127Z"
+    },
+    "cmd-1791860294578": {
+      "key": "cmd-1791860294578",
+      "value": "{\"command\":\"/* judge desk */\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:14.578Z",
+      "lastAccessed": "2026-10-13T02:58:14.578Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:14.578Z"
+    },
+    "cmd-1791860295987": {
+      "key": "cmd-1791860295987",
+      "value": "{\"command\":\".claim{border:2px solid var(--ink);background:var(--card);padding:12px;display:flex;flex-direction:column;gap:10px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:15.987Z",
+      "lastAccessed": "2026-10-13T02:58:15.987Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:15.987Z"
+    },
+    "cmd-1791860297420": {
+      "key": "cmd-1791860297420",
+      "value": "{\"command\":\".claim.first{border-color:var(--stamp);box-shadow:4px 4px 0 var(--stamp)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:17.420Z",
+      "lastAccessed": "2026-10-13T02:58:17.420Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:17.420Z"
+    },
+    "cmd-1791860298825": {
+      "key": "cmd-1791860298825",
+      "value": "{\"command\":\".claim .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:18.825Z",
+      "lastAccessed": "2026-10-13T02:58:18.825Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:18.825Z"
+    },
+    "cmd-1791860300283": {
+      "key": "cmd-1791860300283",
+      "value": "{\"command\":\".claim .nm{font-size:20px;font-weight:600}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:20.283Z",
+      "lastAccessed": "2026-10-13T02:58:20.283Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:20.283Z"
+    },
+    "cmd-1791860301753": {
+      "key": "cmd-1791860301753",
+      "value": "{\"command\":\".claim .tm{font-family:var(--mono);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:21.753Z",
+      "lastAccessed": "2026-10-13T02:58:21.753Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:21.753Z"
+    },
+    "cmd-1791860303181": {
+      "key": "cmd-1791860303181",
+      "value": "{\"command\":\".claim .meta{font-family:var(--mono);font-size:12px;color:var(--muted)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:23.181Z",
+      "lastAccessed": "2026-10-13T02:58:23.181Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:23.181Z"
+    },
+    "cmd-1791860304622": {
+      "key": "cmd-1791860304622",
+      "value": "{\"command\":\".backed{font-size:14px;border-left:0;padding:6px 8px;background:var(--filled)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:24.622Z",
+      "lastAccessed": "2026-10-13T02:58:24.622Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:24.622Z"
+    },
+    "cmd-1791860306032": {
+      "key": "cmd-1791860306032",
+      "value": "{\"command\":\".backed.good{background:var(--okbg)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:26.032Z",
+      "lastAccessed": "2026-10-13T02:58:26.032Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:26.032Z"
+    },
+    "cmd-1791860307434": {
+      "key": "cmd-1791860307434",
+      "value": "{\"command\":\".backed b{font-family:var(--mono);font-size:16px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:27.434Z",
+      "lastAccessed": "2026-10-13T02:58:27.434Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:27.434Z"
+    },
+    "cmd-1791860308861": {
+      "key": "cmd-1791860308861",
+      "value": "{\"command\":\".checks ol{margin:4px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:28.861Z",
+      "lastAccessed": "2026-10-13T02:58:28.861Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:28.861Z"
+    },
+    "cmd-1791860310289": {
+      "key": "cmd-1791860310289",
+      "value": "{\"command\":\".checks .ok{color:var(--ok);font-family:var(--mono);font-size:12px;font-weight:700}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:30.289Z",
+      "lastAccessed": "2026-10-13T02:58:30.289Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:30.289Z"
+    },
+    "cmd-1791860311726": {
+      "key": "cmd-1791860311726",
+      "value": "{\"command\":\".checks .no{color:var(--stamp);font-family:var(--mono);font-size:12px;font-weight:700}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:31.726Z",
+      "lastAccessed": "2026-10-13T02:58:31.726Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:31.726Z"
+    },
+    "cmd-1791860313139": {
+      "key": "cmd-1791860313139",
+      "value": "{\"command\":\".decided{display:flex;flex-direction:column;gap:1.5px;background:var(--line);border:2px solid var(--ink)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:33.139Z",
+      "lastAccessed": "2026-10-13T02:58:33.139Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:33.139Z"
+    },
+    "cmd-1791860314614": {
+      "key": "cmd-1791860314614",
+      "value": "{\"command\":\".decided .d{background:var(--card);padding:8px 10px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;align-items:center}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:34.614Z",
+      "lastAccessed": "2026-10-13T02:58:34.614Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:34.614Z"
+    },
+    "cmd-1791860316019": {
+      "key": "cmd-1791860316019",
+      "value": "{\"command\":\".decided .d .t{font-family:var(--mono);font-size:12px;color:var(--muted)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:36.019Z",
+      "lastAccessed": "2026-10-13T02:58:36.019Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:36.019Z"
+    },
+    "cmd-1791860317474": {
+      "key": "cmd-1791860317474",
+      "value": "{\"command\":\".chip{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 6px;border:2px solid}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:37.474Z",
+      "lastAccessed": "2026-10-13T02:58:37.474Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:37.474Z"
+    },
+    "cmd-1791860318869": {
+      "key": "cmd-1791860318869",
+      "value": "{\"command\":\".chip.ok{color:var(--ok);border-color:var(--ok)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:38.869Z",
+      "lastAccessed": "2026-10-13T02:58:38.869Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:38.869Z"
+    },
+    "cmd-1791860320284": {
+      "key": "cmd-1791860320284",
+      "value": "{\"command\":\".chip.no{color:var(--stamp);border-color:var(--stamp)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:40.284Z",
+      "lastAccessed": "2026-10-13T02:58:40.284Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:40.284Z"
+    },
+    "cmd-1791860321695": {
+      "key": "cmd-1791860321695",
+      "value": "{\"command\":\".ev{display:flex;flex-direction:column;gap:12px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:41.695Z",
+      "lastAccessed": "2026-10-13T02:58:41.695Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:41.695Z"
+    },
+    "cmd-1791860323113": {
+      "key": "cmd-1791860323113",
+      "value": "{\"command\":\".evo{border:1.5px solid var(--ink);background:var(--card);padding:10px;display:flex;flex-direction:column;gap:8px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:43.113Z",
+      "lastAccessed": "2026-10-13T02:58:43.113Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:43.113Z"
+    },
+    "cmd-1791860324641": {
+      "key": "cmd-1791860324641",
+      "value": "{\"command\":\".evh{font-size:14px;font-weight:600;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:44.641Z",
+      "lastAccessed": "2026-10-13T02:58:44.641Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:44.641Z"
+    },
+    "cmd-1791860326082": {
+      "key": "cmd-1791860326082",
+      "value": "{\"command\":\".evh b{font-family:var(--mono);color:var(--stamp);font-size:12px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:46.082Z",
+      "lastAccessed": "2026-10-13T02:58:46.082Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:46.082Z"
+    },
+    "cmd-1791860327502": {
+      "key": "cmd-1791860327502",
+      "value": "{\"command\":\".evh span{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:47.502Z",
+      "lastAccessed": "2026-10-13T02:58:47.502Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:47.502Z"
+    },
+    "cmd-1791860330100": {
+      "key": "cmd-1791860330100",
+      "value": "{\"command\":\"/* projector mode: title + join QR on the left rail, big live board on the right */\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:50.100Z",
+      "lastAccessed": "2026-10-13T02:58:50.100Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:50.100Z"
+    },
+    "cmd-1791860331535": {
+      "key": "cmd-1791860331535",
+      "value": "{\"command\":\"body.projecting{padding-block:24px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:51.535Z",
+      "lastAccessed": "2026-10-13T02:58:51.535Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:51.535Z"
+    },
+    "cmd-1791860332972": {
+      "key": "cmd-1791860332972",
+      "value": "{\"command\":\".proj{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:40px;align-items:start}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:52.972Z",
+      "lastAccessed": "2026-10-13T02:58:52.972Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:52.972Z"
+    },
+    "cmd-1791860334408": {
+      "key": "cmd-1791860334408",
+      "value": "{\"command\":\".proj[hidden]{display:none!important}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:54.408Z",
+      "lastAccessed": "2026-10-13T02:58:54.408Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:54.408Z"
+    },
+    "cmd-1791860335829": {
+      "key": "cmd-1791860335829",
+      "value": "{\"command\":\".proj .rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:24px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:55.829Z",
+      "lastAccessed": "2026-10-13T02:58:55.829Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:55.829Z"
+    },
+    "cmd-1791860337279": {
+      "key": "cmd-1791860337279",
+      "value": "{\"command\":\".proj .rail h1{font-size:clamp(52px,5.2vw,76px)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:57.279Z",
+      "lastAccessed": "2026-10-13T02:58:57.279Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:57.279Z"
+    },
+    "cmd-1791860338698": {
+      "key": "cmd-1791860338698",
+      "value": "{\"command\":\".proj .rail h1 .nw{white-space:nowrap;font-weight:inherit}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:58:58.698Z",
+      "lastAccessed": "2026-10-13T02:58:58.698Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:58:58.698Z"
+    },
+    "cmd-1791860340140": {
+      "key": "cmd-1791860340140",
+      "value": "{\"command\":\".proj .qr{background:#fff;border:3px solid var(--ink);padding:14px;display:flex;flex-direction:column;gap:10px;align-items:center}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:00.140Z",
+      "lastAccessed": "2026-10-13T02:59:00.140Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:00.140Z"
+    },
+    "cmd-1791860341611": {
+      "key": "cmd-1791860341611",
+      "value": "{\"command\":\".proj #qr img,.proj #qr canvas{width:220px!important;height:220px!important;image-rendering:pixelated}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:01.611Z",
+      "lastAccessed": "2026-10-13T02:59:01.611Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:01.611Z"
+    },
+    "cmd-1791860343043": {
+      "key": "cmd-1791860343043",
+      "value": "{\"command\":\".proj .qr .url{font-family:var(--mono);font-weight:700;font-size:14px;text-align:center;overflow-wrap:anywhere}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:03.043Z",
+      "lastAccessed": "2026-10-13T02:59:03.043Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:03.043Z"
+    },
+    "cmd-1791860344508": {
+      "key": "cmd-1791860344508",
+      "value": "{\"command\":\".proj .clock{font-family:var(--mono);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:04.508Z",
+      "lastAccessed": "2026-10-13T02:59:04.508Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:04.508Z"
+    },
+    "cmd-1791860345988": {
+      "key": "cmd-1791860345988",
+      "value": "{\"command\":\".board-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:05.988Z",
+      "lastAccessed": "2026-10-13T02:59:05.988Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:05.988Z"
+    },
+    "cmd-1791860347414": {
+      "key": "cmd-1791860347414",
+      "value": "{\"command\":\".board-grid .stats{grid-column:1/-1;font-size:16px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:07.414Z",
+      "lastAccessed": "2026-10-13T02:59:07.414Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:07.414Z"
+    },
+    "cmd-1791860348814": {
+      "key": "cmd-1791860348814",
+      "value": "{\"command\":\".board-grid .stats b{font-size:24px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:08.814Z",
+      "lastAccessed": "2026-10-13T02:59:08.814Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:08.814Z"
+    },
+    "cmd-1791860350283": {
+      "key": "cmd-1791860350283",
+      "value": "{\"command\":\".board-grid > section:first-of-type{grid-row:span 2}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:10.283Z",
+      "lastAccessed": "2026-10-13T02:59:10.283Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:10.283Z"
+    },
+    "cmd-1791860351700": {
+      "key": "cmd-1791860351700",
+      "value": "{\"command\":\".board-grid .label{font-size:14px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:11.700Z",
+      "lastAccessed": "2026-10-13T02:59:11.700Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:11.700Z"
+    },
+    "cmd-1791860353289": {
+      "key": "cmd-1791860353289",
+      "value": "{\"command\":\".lb.big .row{padding:12px 16px;grid-template-columns:64px minmax(0,1fr) auto}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:13.289Z",
+      "lastAccessed": "2026-10-13T02:59:13.289Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:13.289Z"
+    },
+    "cmd-1791860354713": {
+      "key": "cmd-1791860354713",
+      "value": "{\"command\":\".lb.big .rk{font-size:44px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:14.713Z",
+      "lastAccessed": "2026-10-13T02:59:14.713Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:14.713Z"
+    },
+    "cmd-1791860356145": {
+      "key": "cmd-1791860356145",
+      "value": "{\"command\":\".lb.big .n{font-size:26px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:16.145Z",
+      "lastAccessed": "2026-10-13T02:59:16.145Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:16.145Z"
+    },
+    "cmd-1791860357672": {
+      "key": "cmd-1791860357672",
+      "value": "{\"command\":\".lb.big .s{font-size:14px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:17.672Z",
+      "lastAccessed": "2026-10-13T02:59:17.672Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:17.672Z"
+    },
+    "cmd-1791860359245": {
+      "key": "cmd-1791860359245",
+      "value": "{\"command\":\".lb.big .tm{font-size:22px}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:19.245Z",
+      "lastAccessed": "2026-10-13T02:59:19.245Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:19.245Z"
+    },
+    "cmd-1791860360712": {
+      "key": "cmd-1791860360712",
+      "value": "{\"command\":\"@media (max-width:900px){.proj,.board-grid{grid-template-columns:minmax(0,1fr)}.proj .rail{position:static}.board-grid > section:first-of-type{grid-row:auto}}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:20.712Z",
+      "lastAccessed": "2026-10-13T02:59:20.712Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:20.712Z"
+    },
+    "cmd-1791860362306": {
+      "key": "cmd-1791860362306",
+      "value": "{\"command\":\"'''\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:22.306Z",
+      "lastAccessed": "2026-10-13T02:59:22.306Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:22.306Z"
+    },
+    "cmd-1791860363821": {
+      "key": "cmd-1791860363821",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:23.821Z",
+      "lastAccessed": "2026-10-13T02:59:23.821Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:23.821Z"
+    },
+    "cmd-1791860365426": {
+      "key": "cmd-1791860365426",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:25.426Z",
+      "lastAccessed": "2026-10-13T02:59:25.426Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:25.426Z"
+    },
+    "cmd-1791860367036": {
+      "key": "cmd-1791860367036",
+      "value": "{\"command\":\"for f in board:projector judge:judge; do n=${f%%:*}; h=${f##*:}; cat > $n.html <<EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:27.036Z",
+      "lastAccessed": "2026-10-13T02:59:27.036Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:27.036Z"
+    },
+    "cmd-1791860368570": {
+      "key": "cmd-1791860368570",
+      "value": "{\"command\":\"<!doctype html><html lang=\\\"en\\\"><head><meta charset=\\\"utf-8\\\"><title>Dining-In Bingo</title><meta http-equiv=\\\"refresh\\\" content=\\\"0; url=./#$h\\\"><script>location.replace(\\\"./#$h\\\")</script></head><body><a href=\\\"./#$h\\\">Dining-In Bingo</a></body></html>\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:28.570Z",
+      "lastAccessed": "2026-10-13T02:59:28.570Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:28.570Z"
+    },
+    "cmd-1791860381376": {
+      "key": "cmd-1791860381376",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:41.376Z",
+      "lastAccessed": "2026-10-13T02:59:41.376Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:41.376Z"
+    },
+    "cmd-1791860383063": {
+      "key": "cmd-1791860383063",
+      "value": "{\"command\":\"import re\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:43.063Z",
+      "lastAccessed": "2026-10-13T02:59:43.063Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:43.063Z"
+    },
+    "cmd-1791860384480": {
+      "key": "cmd-1791860384480",
+      "value": "{\"command\":\"p='index.html'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:44.480Z",
+      "lastAccessed": "2026-10-13T02:59:44.480Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:44.480Z"
+    },
+    "cmd-1791860385889": {
+      "key": "cmd-1791860385889",
+      "value": "{\"command\":\"# markup\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:45.889Z",
+      "lastAccessed": "2026-10-13T02:59:45.889Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:45.889Z"
+    },
+    "cmd-1791860387336": {
+      "key": "cmd-1791860387336",
+      "value": "{\"command\":\"a=s.index('<!-- PROJECTOR MODE -->'); b=s.index('<div class=\\\"scrim\\\"'); s=s[:a]+s[b:]\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:47.336Z",
+      "lastAccessed": "2026-10-13T02:59:47.336Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:47.336Z"
+    },
+    "cmd-1791860388786": {
+      "key": "cmd-1791860388786",
+      "value": "{\"command\":\"s=s.replace('      <button class=\\\"btn ghost sm\\\" id=\\\"projBtn\\\" type=\\\"button\\\">Projector mode</button>\\\\n','')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:48.786Z",
+      "lastAccessed": "2026-10-13T02:59:48.786Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:48.786Z"
+    },
+    "cmd-1791860390249": {
+      "key": "cmd-1791860390249",
+      "value": "{\"command\":\"s=s.replace('''<!-- Layout: one page. Header, tab switch (MY CARD / LEADERBOARD / JUDGE once unlocked), the active pane,\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:50.249Z",
+      "lastAccessed": "2026-10-13T02:59:50.249Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:50.249Z"
+    },
+    "cmd-1791860391757": {
+      "key": "cmd-1791860391757",
+      "value": "{\"command\":\"     and a footer with Projector mode + Judge login. Projector mode swaps the whole page for a big\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:51.757Z",
+      "lastAccessed": "2026-10-13T02:59:51.757Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:51.757Z"
+    },
+    "cmd-1791860393185": {
+      "key": "cmd-1791860393185",
+      "value": "{\"command\":\"     leaderboard with a join QR. Bottom sheets edit one square and take the judge code. -->''','''<!-- Layout: one page. Header, tab switch (MY CARD / LEADERBOARD / JUDGE once unlocked), the active pane,\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:53.185Z",
+      "lastAccessed": "2026-10-13T02:59:53.185Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:53.185Z"
+    },
+    "cmd-1791860394665": {
+      "key": "cmd-1791860394665",
+      "value": "{\"command\":\"     and a footer with Judge login. Bottom sheets edit one square and take the judge code. -->''')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:54.665Z",
+      "lastAccessed": "2026-10-13T02:59:54.665Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:54.665Z"
+    },
+    "cmd-1791860396114": {
+      "key": "cmd-1791860396114",
+      "value": "{\"command\":\"# js\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:56.114Z",
+      "lastAccessed": "2026-10-13T02:59:56.114Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:56.114Z"
+    },
+    "cmd-1791860397549": {
+      "key": "cmd-1791860397549",
+      "value": "{\"command\":\"a=s.index('// ---------------- projector mode ----------------'); b=s.index('</script>\\\\n</body>')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:57.549Z",
+      "lastAccessed": "2026-10-13T02:59:57.549Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:57.549Z"
+    },
+    "cmd-1791860398988": {
+      "key": "cmd-1791860398988",
+      "value": "{\"command\":\"s=s[:a]+s[b:]\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:59:58.988Z",
+      "lastAccessed": "2026-10-13T02:59:58.988Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:59:58.988Z"
+    },
+    "cmd-1791860400410": {
+      "key": "cmd-1791860400410",
+      "value": "{\"command\":\"s=s.replace('''  if (!$(\\\"proj\\\").hidden) renderBoard($(\\\"projBoard\\\"), rows, { big: true });\\\\n''','')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:00.410Z",
+      "lastAccessed": "2026-10-13T03:00:00.410Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:00.410Z"
+    },
+    "cmd-1791860401854": {
+      "key": "cmd-1791860401854",
+      "value": "{\"command\":\"s=s.replace('''  if (h === \\\"#projector\\\") return enterProjector();\\\\n''','')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:01.854Z",
+      "lastAccessed": "2026-10-13T03:00:01.854Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:01.854Z"
+    },
+    "cmd-1791860403299": {
+      "key": "cmd-1791860403299",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:03.299Z",
+      "lastAccessed": "2026-10-13T03:00:03.299Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:03.299Z"
+    },
+    "cmd-1791860405988": {
+      "key": "cmd-1791860405988",
+      "value": "{\"command\":\"p='css/app.css'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:05.988Z",
+      "lastAccessed": "2026-10-13T03:00:05.988Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:05.988Z"
+    },
+    "cmd-1791860407431": {
+      "key": "cmd-1791860407431",
+      "value": "{\"command\":\"a=s.index('/* projector mode'); s=s[:a].rstrip()+'\\\\n'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:07.431Z",
+      "lastAccessed": "2026-10-13T03:00:07.431Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:07.431Z"
+    },
+    "cmd-1791860408824": {
+      "key": "cmd-1791860408824",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:08.824Z",
+      "lastAccessed": "2026-10-13T03:00:08.824Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:08.824Z"
+    },
+    "cmd-1791860410298": {
+      "key": "cmd-1791860410298",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:10.298Z",
+      "lastAccessed": "2026-10-13T03:00:10.298Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:10.298Z"
+    },
+    "cmd-1791860411737": {
+      "key": "cmd-1791860411737",
+      "value": "{\"command\":\"cat > board.html <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:11.737Z",
+      "lastAccessed": "2026-10-13T03:00:11.737Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:11.737Z"
+    },
+    "cmd-1791860413160": {
+      "key": "cmd-1791860413160",
+      "value": "{\"command\":\"<!doctype html><html lang=\\\"en\\\"><head><meta charset=\\\"utf-8\\\"><title>Dining-In Bingo</title><meta http-equiv=\\\"refresh\\\" content=\\\"0; url=./#board\\\"><script>location.replace(\\\"./#board\\\")</script></head><body><a href=\\\"./#board\\\">Dining-In Bingo</a></body></html>\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:13.160Z",
+      "lastAccessed": "2026-10-13T03:00:13.160Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:13.160Z"
+    },
+    "cmd-1791860414594": {
+      "key": "cmd-1791860414594",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:14.594Z",
+      "lastAccessed": "2026-10-13T03:00:14.594Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:14.594Z"
+    },
+    "cmd-1791860416011": {
+      "key": "cmd-1791860416011",
+      "value": "{\"command\":\"grep -n -i \\\"proj\\\\|qr\\\\|clock\\\" index.html css/app.css js/game.js | head\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:16.011Z",
+      "lastAccessed": "2026-10-13T03:00:16.011Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:16.011Z"
+    },
+    "cmd-1791860434813": {
+      "key": "cmd-1791860434813",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:34.813Z",
+      "lastAccessed": "2026-10-13T03:00:34.813Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:34.813Z"
+    },
+    "cmd-1791860436283": {
+      "key": "cmd-1791860436283",
+      "value": "{\"command\":\"p='js/game.js'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:36.283Z",
+      "lastAccessed": "2026-10-13T03:00:36.283Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:36.283Z"
+    },
+    "cmd-1791860450279": {
+      "key": "cmd-1791860450279",
+      "value": "{\"command\":\"TOKEN=$(gcloud auth print-access-token) python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:50.279Z",
+      "lastAccessed": "2026-10-13T03:00:50.279Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:50.279Z"
+    },
+    "cmd-1791860451781": {
+      "key": "cmd-1791860451781",
+      "value": "{\"command\":\"import os, json, urllib.request\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:51.781Z",
+      "lastAccessed": "2026-10-13T03:00:51.781Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:51.781Z"
+    },
+    "cmd-1791860453225": {
+      "key": "cmd-1791860453225",
+      "value": "{\"command\":\"T=os.environ['TOKEN']; B=\\\"https://firestore.googleapis.com/v1/projects/kangaroo-bingo/databases/(default)/documents\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:53.225Z",
+      "lastAccessed": "2026-10-13T03:00:53.225Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:53.225Z"
+    },
+    "cmd-1791860454693": {
+      "key": "cmd-1791860454693",
+      "value": "{\"command\":\"names=[\\\"Paul Soliano\\\",\\\"Jane Tan\\\",\\\"Ahmad Rizal\\\",\\\"Wei Ming\\\",\\\"Siti Noor\\\",\\\"Kumar Raj\\\",\\\"Lee Hock\\\",\\\"Grace Lim\\\"]\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:54.693Z",
+      "lastAccessed": "2026-10-13T03:00:54.693Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:54.693Z"
+    },
+    "cmd-1791860456141": {
+      "key": "cmd-1791860456141",
+      "value": "{\"command\":\"def sv(x): return {\\\"stringValue\\\":x}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:56.141Z",
+      "lastAccessed": "2026-10-13T03:00:56.141Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:56.141Z"
+    },
+    "cmd-1791860457561": {
+      "key": "cmd-1791860457561",
+      "value": "{\"command\":\"def put(path, fields):\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:57.561Z",
+      "lastAccessed": "2026-10-13T03:00:57.561Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:57.561Z"
+    },
+    "cmd-1791860458969": {
+      "key": "cmd-1791860458969",
+      "value": "{\"command\":\"    r=urllib.request.Request(f\\\"{B}/{path}\\\", data=json.dumps({\\\"fields\\\":fields}).encode(), method=\\\"PATCH\\\",\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:00:58.969Z",
+      "lastAccessed": "2026-10-13T03:00:58.969Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:00:58.969Z"
+    },
+    "cmd-1791860460459": {
+      "key": "cmd-1791860460459",
+      "value": "{\"command\":\"        headers={\\\"Authorization\\\":[redacted]\\\"Bearer {T}\\\",\\\"Content-Type\\\":\\\"application/json\\\"})\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:00.459Z",
+      "lastAccessed": "2026-10-13T03:01:00.459Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:00.459Z"
+    },
+    "cmd-1791860461894": {
+      "key": "cmd-1791860461894",
+      "value": "{\"command\":\"    urllib.request.urlopen(r).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:01.894Z",
+      "lastAccessed": "2026-10-13T03:01:01.894Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:01.894Z"
+    },
+    "cmd-1791860463327": {
+      "key": "cmd-1791860463327",
+      "value": "{\"command\":\"for i,(pid,upto) in enumerate([(\\\"seedA\\\",10),(\\\"seedB\\\",6),(\\\"seedC\\\",14)]):\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:03.327Z",
+      "lastAccessed": "2026-10-13T03:01:03.327Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:03.327Z"
+    },
+    "cmd-1791860464799": {
+      "key": "cmd-1791860464799",
+      "value": "{\"command\":\"    marks={str(k):sv(names[k%8]) for k in range(upto)}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:04.799Z",
+      "lastAccessed": "2026-10-13T03:01:04.799Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:04.799Z"
+    },
+    "cmd-1791860466248": {
+      "key": "cmd-1791860466248",
+      "value": "{\"command\":\"    if pid==\\\"seedC\\\": marks[\\\"13\\\"]=sv(\\\"Someone Else\\\")\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:06.248Z",
+      "lastAccessed": "2026-10-13T03:01:06.248Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:06.248Z"
+    },
+    "cmd-1791860467708": {
+      "key": "cmd-1791860467708",
+      "value": "{\"command\":\"    nm=f\\\"TEST Seed {i+1}\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:07.708Z",
+      "lastAccessed": "2026-10-13T03:01:07.708Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:07.708Z"
+    },
+    "cmd-1791860469138": {
+      "key": "cmd-1791860469138",
+      "value": "{\"command\":\"    put(f\\\"players/{pid}\\\",{\\\"name\\\":sv(nm),\\\"syn\\\":sv(str(i+1)),\\\"layout\\\":{\\\"arrayValue\\\":{\\\"values\\\":[{\\\"integerValue\\\":str(k)} for k in range(24)]}},\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:09.138Z",
+      "lastAccessed": "2026-10-13T03:01:09.138Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:09.138Z"
+    },
+    "cmd-1791860470618": {
+      "key": "cmd-1791860470618",
+      "value": "{\"command\":\"        \\\"marks\\\":{\\\"mapValue\\\":{\\\"fields\\\":marks}},\\\"filled\\\":{\\\"integerValue\\\":str(len(marks))},\\\"lines\\\":{\\\"integerValue\\\":\\\"0\\\"},\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:10.618Z",
+      "lastAccessed": "2026-10-13T03:01:10.618Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:10.618Z"
+    },
+    "cmd-1791860472072": {
+      "key": "cmd-1791860472072",
+      "value": "{\"command\":\"        \\\"status\\\":sv(\\\"playing\\\"),\\\"claimedAt\\\":{\\\"nullValue\\\":None}})\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:12.072Z",
+      "lastAccessed": "2026-10-13T03:01:12.072Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:12.072Z"
+    },
+    "cmd-1791860473504": {
+      "key": "cmd-1791860473504",
+      "value": "{\"command\":\"    put(f\\\"board/{pid}\\\",{\\\"name\\\":sv(nm),\\\"syn\\\":sv(str(i+1)),\\\"filled\\\":{\\\"integerValue\\\":str(len(marks))},\\\"status\\\":sv(\\\"playing\\\"),\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:13.504Z",
+      "lastAccessed": "2026-10-13T03:01:13.504Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:13.504Z"
+    },
+    "cmd-1791860474994": {
+      "key": "cmd-1791860474994",
+      "value": "{\"command\":\"        \\\"claimedAt\\\":{\\\"nullValue\\\":None},\\\"accused\\\":{\\\"arrayValue\\\":{\\\"values\\\":[v for v in marks.values()]}}})\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:14.994Z",
+      "lastAccessed": "2026-10-13T03:01:14.994Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:14.994Z"
+    },
+    "cmd-1791860476436": {
+      "key": "cmd-1791860476436",
+      "value": "{\"command\":\"print(\\\"seeded\\\")\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:16.436Z",
+      "lastAccessed": "2026-10-13T03:01:16.436Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:16.436Z"
+    },
+    "cmd-1791860477871": {
+      "key": "cmd-1791860477871",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:01:17.871Z",
+      "lastAccessed": "2026-10-13T03:01:17.871Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:01:17.871Z"
+    },
+    "cmd-1791860556597": {
+      "key": "cmd-1791860556597",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:36.597Z",
+      "lastAccessed": "2026-10-13T03:02:36.597Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:36.597Z"
+    },
+    "cmd-1791860558210": {
+      "key": "cmd-1791860558210",
+      "value": "{\"command\":\"p='js/game.js'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:38.210Z",
+      "lastAccessed": "2026-10-13T03:02:38.210Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:38.210Z"
+    },
+    "cmd-1791860559661": {
+      "key": "cmd-1791860559661",
+      "value": "{\"command\":\"s=s.replace(': \\\"VETTING\\\")',': \\\"SUBMITTED\\\")')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:39.661Z",
+      "lastAccessed": "2026-10-13T03:02:39.661Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:39.661Z"
+    },
+    "cmd-1791860561093": {
+      "key": "cmd-1791860561093",
+      "value": "{\"command\":\"s=s.replace('pending ? el(\\\"span\\\", { class: \\\"hot\\\" }, el(\\\"b\\\", null, pending), \\\" under review\\\") : null','pending ? el(\\\"span\\\", { class: \\\"hot\\\" }, el(\\\"b\\\", null, pending), \\\" submitted, awaiting Huiting\\\") : null')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:41.093Z",
+      "lastAccessed": "2026-10-13T03:02:41.093Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:41.093Z"
+    },
+    "cmd-1791860562549": {
+      "key": "cmd-1791860562549",
+      "value": "{\"command\":\"s=s.replace('\\\"A claim under review keeps its submit time and can still move ahead of later ones.\\\"','\\\"? = submitted, not yet vetted by Huiting. Places go by submit time, so a submitted card can still move ahead once approved.\\\"')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:42.549Z",
+      "lastAccessed": "2026-10-13T03:02:42.549Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:42.549Z"
+    },
+    "cmd-1791860563979": {
+      "key": "cmd-1791860563979",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:43.979Z",
+      "lastAccessed": "2026-10-13T03:02:43.979Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:43.979Z"
+    },
+    "cmd-1791860565432": {
+      "key": "cmd-1791860565432",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:45.432Z",
+      "lastAccessed": "2026-10-13T03:02:45.432Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:45.432Z"
+    },
+    "cmd-1791860566849": {
+      "key": "cmd-1791860566849",
+      "value": "{\"command\":\"grep -n \\\"SUBMITTED\\\\|awaiting Huiting\\\\|not yet vetted\\\" js/game.js | cut -c1-120\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T03:02:46.849Z",
+      "lastAccessed": "2026-10-13T03:02:46.849Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T03:02:46.849Z"
     }
   },
   "version": "3.0.0"
