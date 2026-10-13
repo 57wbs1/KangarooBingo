@@ -539,6 +539,87 @@
       "lastAccessed": "2026-10-13T02:31:16.237Z",
       "accessCount": 0,
       "expiresAt": "2026-11-12T02:31:16.237Z"
+    },
+    "cmd-1791858706853": {
+      "key": "cmd-1791858706853",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:46.853Z",
+      "lastAccessed": "2026-10-13T02:31:46.853Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:46.853Z"
+    },
+    "cmd-1791858708455": {
+      "key": "cmd-1791858708455",
+      "value": "{\"command\":\"TOKEN=$(gcloud auth print-access-token); B=\\\"https://firestore.googleapis.com/v1/projects/kangaroo-bingo/databases/(default)/documents\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:48.455Z",
+      "lastAccessed": "2026-10-13T02:31:48.455Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:48.455Z"
+    },
+    "cmd-1791858709899": {
+      "key": "cmd-1791858709899",
+      "value": "{\"command\":\"for col in players judges; do\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:49.899Z",
+      "lastAccessed": "2026-10-13T02:31:49.899Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:49.899Z"
+    },
+    "cmd-1791858711328": {
+      "key": "cmd-1791858711328",
+      "value": "{\"command\":\"  for n in $(curl -s -H \\\"Authorization: [redacted]\\\" \\\"$B/$col?pageSize=300\\\" | python3 -c 'import sys,json;[print(d[\\\"name\\\"]) for d in json.load(sys.stdin).get(\\\"documents\\\",[])]'); do\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:51.328Z",
+      "lastAccessed": "2026-10-13T02:31:51.328Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:51.328Z"
+    },
+    "cmd-1791858712774": {
+      "key": "cmd-1791858712774",
+      "value": "{\"command\":\"    curl -s -X DELETE -H \\\"Authorization: [redacted]\\\" \\\"https://firestore.googleapis.com/v1/$n\\\" >/dev/null && echo \\\"deleted ${n##*/documents/}\\\"; done; done\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:52.774Z",
+      "lastAccessed": "2026-10-13T02:31:52.774Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:52.774Z"
+    },
+    "cmd-1791858714207": {
+      "key": "cmd-1791858714207",
+      "value": "{\"command\":\"grep -rn \\\"ROO-3429\\\" . && echo \\\"CODE LEAKED\\\" || echo \\\"judge code not in repo files\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:54.207Z",
+      "lastAccessed": "2026-10-13T02:31:54.207Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:54.207Z"
+    },
+    "cmd-1791858715648": {
+      "key": "cmd-1791858715648",
+      "value": "{\"command\":\"gh auth switch --user 57wbs1 >/dev/null 2>&1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:55.648Z",
+      "lastAccessed": "2026-10-13T02:31:55.648Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:55.648Z"
+    },
+    "cmd-1791858717085": {
+      "key": "cmd-1791858717085",
+      "value": "{\"command\":\"git add -A && git commit -qm \\\"Live bingo app: Firebase-backed cards, server-stamped claims, judge desk, projector leaderboard\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:57.085Z",
+      "lastAccessed": "2026-10-13T02:31:57.085Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:57.085Z"
+    },
+    "cmd-1791858725682": {
+      "key": "cmd-1791858725682",
+      "value": "{\"command\":\"Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\\\" && git push -q origin main && git log --oneline -1\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:32:05.682Z",
+      "lastAccessed": "2026-10-13T02:32:05.682Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:32:05.682Z"
     }
   },
   "version": "3.0.0"
