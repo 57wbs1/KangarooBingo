@@ -1,0 +1,78 @@
+rules_version = '2';
+// Kangaroo Bingo.
+//   players/{uid}  one card per anonymous player; public to signed-in viewers (the leaderboard).
+//   judges/{uid}   created by entering the judge code; the code itself lives in secret/judge,
+//                  which no client can read: rules compare against it server-side.
+//   config/game    { open: bool }: judges open/close claims.
+// The claim time is the server's: a claim must write claimedAt == request.time, and only
+// a judge can approve/reject, without touching claimedAt.
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signedIn() { return request.auth != null; }
+    function isJudge() {
+      return signedIn() && exists(/databases/$(db)/documents/judges/$(request.auth.uid));
+    }
+    function gameOpen() {
+      let g = /databases/$(db)/documents/config/game;
+      return !exists(g) || get(g).data.open == true;
+    }
+    function validPlayer(d) {
+      return d.keys().hasOnly(['name','syn','layout','marks','filled','lines','status','claimedAt',
+                               'note','judgedAt','judgedBy','createdAt','updatedAt'])
+        && d.name is string && d.name.size() > 0 && d.name.size() <= 40
+        && d.syn is string && d.syn.size() <= 20
+        && d.layout is list && d.layout.size() == 24
+        && d.marks is map && d.marks.size() <= 24
+        && d.filled is int && d.lines is int;
+    }
+    function ownerStatusOk(d) {
+      return (d.status == 'playing' && d.claimedAt == null)
+        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen() && d.lines > 0);
+    }
+
+    match /config/game {
+      allow read: if true;
+      allow write: if isJudge();
+    }
+
+    match /secret/{d=**} {
+      allow read, write: if false;
+    }
+
+    match /judges/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['code', 'at'])
+        && request.resource.data.code == get(/databases/$(db)/documents/secret/judge).data.code;
+    }
+
+    match /players/{uid} {
+      allow read: if signedIn();
+
+      allow create: if signedIn() && request.auth.uid == uid
+        && validPlayer(request.resource.data)
+        && request.resource.data.status == 'playing'
+        && request.resource.data.claimedAt == null;
+
+      // Owner: edit while playing or after a rejection; can only move to playing or claimed.
+      // A card under review or approved is locked.
+      allow update: if signedIn() && request.auth.uid == uid
+        && resource.data.status in ['playing', 'rejected']
+        && validPlayer(request.resource.data)
+        && ownerStatusOk(request.resource.data)
+        && !request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny(['layout', 'createdAt', 'note', 'judgedAt', 'judgedBy']);
+
+      // Judge: verdict fields only. claimedAt is untouchable, so the submit time stands.
+      allow update: if isJudge()
+        && resource.data.status in ['claimed', 'approved', 'rejected']
+        && request.resource.data.status in ['claimed', 'approved', 'rejected']
+        && request.resource.data.diff(resource.data).affectedKeys()
+              .hasOnly(['status', 'note', 'judgedAt', 'judgedBy'])
+        && request.resource.data.judgedAt == request.time
+        && request.resource.data.judgedBy == request.auth.uid;
+
+      allow delete: if isJudge();
+    }
+  }
+}

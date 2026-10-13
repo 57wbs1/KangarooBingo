@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3EFE4">
+<meta name="robots" content="noindex">
+<title>Bingo Judge</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<style>
+/* Judge desk: unlock form, then the queue (oldest claim first), then decided claims and game controls. */
+.wrap{max-width:720px}
+.claim{border:2px solid var(--ink);background:var(--card);padding:12px;display:flex;flex-direction:column;gap:10px}
+.claim.first{border-color:var(--stamp);box-shadow:4px 4px 0 var(--stamp)}
+.claim .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.claim .nm{font-size:20px;font-weight:600}
+.claim .tm{font-family:var(--mono);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}
+.claim .meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.decided{display:flex;flex-direction:column;gap:1.5px;background:var(--line);border:2px solid var(--ink)}
+.decided .d{background:var(--card);padding:8px 10px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;align-items:center}
+.decided .d .t{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.chip{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;padding:2px 6px;border:2px solid}
+.chip.ok{color:var(--ok);border-color:var(--ok)}
+.chip.no{color:var(--stamp);border-color:var(--stamp)}
+details{border:1.5px dashed var(--line);padding:10px;background:var(--card)}
+summary{cursor:pointer;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="strip"><div>JUDGE'S DESK</div><div><a class="linkbtn" href="board.html">Leaderboard</a> · <a class="linkbtn" href="./">Player app</a></div></div>
+  <h1>BINGO <span>JUDGE</span></h1>
+
+  <div id="boot" class="boot">Connecting…</div>
+
+  <form id="unlock" class="submit" hidden>
+    <div class="label">JUDGE ACCESS</div>
+    <div class="note">Enter the judge code. This device stays unlocked afterwards.</div>
+    <label for="code">JUDGE CODE</label>
+    <input type="password" id="code" autocomplete="off" required>
+    <button class="btn red" type="submit">Unlock</button>
+  </form>
+
+  <div id="desk" class="wrap" hidden>
+    <div class="status"><div id="summary"></div><div id="openState"></div></div>
+
+    <section class="panel">
+      <div class="label">QUEUE · OLDEST CLAIM FIRST</div>
+      <div class="note">Check each winning line (outlined in red) has a real name in every square. Approve or reject. The submit time stays as stamped either way.</div>
+      <div id="queue" class="wrap"></div>
+    </section>
+
+    <section class="panel">
+      <div class="label">DECIDED</div>
+      <div id="decided"></div>
+    </section>
+
+    <details>
+      <summary>GAME CONTROLS</summary>
+      <div class="wrap" style="margin-top:12px">
+        <div class="btns"><button class="btn" id="toggleOpen" type="button">Close claims</button></div>
+        <div class="note">Closing claims stops new CLAIM BINGO taps. Claims already in the queue stay.</div>
+        <div class="btns"><button class="btn red" id="resetGame" type="button">Reset game: delete every card</button></div>
+        <div class="note">Use after a test run. Every player gets a fresh card on their next visit. Cannot be undone.</div>
+      </div>
+    </details>
+  </div>
+</div>
+<div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+
+<script type="module">
+import { db, signIn, doc, collection, getDoc, getDocs, setDoc, updateDoc, onSnapshot, serverTimestamp, writeBatch } from "./js/fb.js";
+import { standings, miniCard, fmtTime, el, winningLines, toDate } from "./js/game.js";
+
+const $ = id => document.getElementById(id);
+let tt;
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, 2800); }
+
+const user = await signIn();
+const judgeRef = doc(db, "judges", user.uid);
+let isJudge = false;
+try { isJudge = (await getDoc(judgeRef)).exists(); } catch (e) { isJudge = false; }
+$("boot").hidden = true;
+if (isJudge) start(); else $("unlock").hidden = false;
+
+$("unlock").addEventListener("submit", async e => {
+  e.preventDefault();
+  try {
+    await setDoc(judgeRef, { code: $("code").value.trim(), at: serverTimestamp() });
+    $("unlock").hidden = true; start();
+  } catch (err) { toast("Wrong code"); }
+});
+
+let players = [], game = { open: true }, seen = null;
+
+function start() {
+  $("desk").hidden = false;
+  onSnapshot(collection(db, "players"), snap => {
+    players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const pend = players.filter(p => p.status === "claimed");
+    const ids = new Set(pend.map(p => p.id));
+    if (seen && [...ids].some(id => !seen.has(id))) chime();
+    seen = ids;
+    document.title = (pend.length ? "(" + pend.length + ") " : "") + "Bingo Judge";
+    render();
+  });
+  onSnapshot(doc(db, "config", "game"), snap => { game = snap.exists() ? snap.data() : { open: true }; render(); });
+}
+
+function render() {
+  const pend = players.filter(p => p.status === "claimed" && p.claimedAt)
+    .sort((a, b) => toDate(a.claimedAt) - toDate(b.claimedAt));
+  const ranked = standings(players);
+  const decided = players.filter(p => p.status === "approved" || p.status === "rejected")
+    .sort((a, b) => toDate(a.claimedAt) - toDate(b.claimedAt));
+
+  $("summary").textContent = players.length + " players · " + pend.length + " to vet · " + ranked.filter(r => r.rank).length + " approved";
+  $("openState").textContent = game.open === false ? "CLAIMS CLOSED" : "CLAIMS OPEN";
+  $("toggleOpen").textContent = game.open === false ? "Reopen claims" : "Close claims";
+
+  const q = $("queue"); q.textContent = "";
+  if (!pend.length) q.append(el("div", { class: "empty" }, "Queue empty. New claims appear here instantly, with a chime."));
+  pend.forEach((p, i) => {
+    const lines = winningLines(p.layout, p.marks || {}).length;
+    q.append(el("div", { class: "claim" + (i === 0 ? " first" : "") },
+      el("div", { class: "hd" },
+        el("div", null, el("div", { class: "nm" }, p.name), el("div", { class: "meta" }, "SYN " + (p.syn || "—") + " · " + lines + (lines === 1 ? " line" : " lines") + " · " + (p.filled || 0) + "/24 filed")),
+        el("div", { class: "tm" }, fmtTime(p.claimedAt, true))),
+      miniCard(p.layout, p.marks || {}),
+      el("div", { class: "btns" },
+        el("button", { class: "btn green", type: "button", onclick: () => verdict(p, "approved") }, "Approve"),
+        el("button", { class: "btn red", type: "button", onclick: () => verdict(p, "rejected") }, "Reject"))));
+  });
+
+  const d = $("decided"); d.textContent = "";
+  if (!decided.length) { d.append(el("div", { class: "empty" }, "Nothing decided yet.")); return; }
+  const list = el("div", { class: "decided" });
+  decided.forEach(p => {
+    const r = ranked.find(x => x.id === p.id);
+    list.append(el("div", { class: "d" },
+      el("div", null, el("b", null, (r && r.rank ? "#" + r.rank + " " : "") + p.name), " · SYN " + (p.syn || "—"),
+        el("div", { class: "t" }, "Submitted " + fmtTime(p.claimedAt, true) + (p.note ? " · “" + p.note + "”" : ""))),
+      el("div", { class: "btns" },
+        el("span", { class: "chip " + (p.status === "approved" ? "ok" : "no") }, p.status.toUpperCase()),
+        el("button", { class: "linkbtn", type: "button", onclick: () => verdict(p, "claimed") }, "Undo"))));
+  });
+  d.append(list);
+}
+
+async function verdict(p, status) {
+  let note = "";
+  if (status === "rejected") {
+    const r = prompt("Reason for rejecting " + p.name + " (the player sees this):", "");
+    if (r === null) return;
+    note = r.trim().slice(0, 200);
+  }
+  try {
+    await updateDoc(doc(db, "players", p.id), { status, note, judgedAt: serverTimestamp(), judgedBy: user.uid });
+    toast(status === "claimed" ? "Back in the queue" : p.name + " " + status);
+  } catch (err) {
+    console.error(err);
+    toast(status === "claimed" ? "Can't undo: the player has already edited their card" : "Refused by the server");
+  }
+}
+
+$("toggleOpen").onclick = async () => {
+  try { await setDoc(doc(db, "config", "game"), { open: game.open === false }); }
+  catch (e) { toast("Refused by the server"); }
+};
+
+let armed = false;
+$("resetGame").onclick = async () => {
+  if (!armed) { armed = true; $("resetGame").textContent = "Tap again to delete " + players.length + " cards"; setTimeout(() => { armed = false; $("resetGame").textContent = "Reset game: delete every card"; }, 5000); return; }
+  armed = false;
+  const snap = await getDocs(collection(db, "players"));
+  for (let i = 0; i < snap.docs.length; i += 400) {
+    const b = writeBatch(db);
+    snap.docs.slice(i, i + 400).forEach(d => b.delete(d.ref));
+    await b.commit();
+  }
+  $("resetGame").textContent = "Reset game: delete every card";
+  toast("Game reset");
+};
+
+// Short two-tone chime on a new claim (works once the page has been tapped).
+let actx;
+document.addEventListener("pointerdown", () => { try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} }, { once: true });
+function chime() {
+  try { navigator.vibrate && navigator.vibrate([80, 50, 80]); } catch (e) {}
+  if (!actx) return;
+  [880, 1320].forEach((f, i) => {
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.frequency.value = f; o.connect(g); g.connect(actx.destination);
+    const t = actx.currentTime + i * 0.16;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.3, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    o.start(t); o.stop(t + 0.32);
+  });
+}
+</script>
+</body>
+</html>

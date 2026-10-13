@@ -8,6 +8,537 @@
       "lastAccessed": "2026-10-13T02:16:11.001Z",
       "accessCount": 0,
       "expiresAt": "2026-11-12T02:16:11.001Z"
+    },
+    "cmd-1791857866479": {
+      "key": "cmd-1791857866479",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && gh auth switch --user 57wbs1 >/dev/null 2>&1; touch .nojekyll && git init -q -b main && git add -A && git commit -qm \\\"Dining-In Bingo: interactive charge sheet\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:17:46.479Z",
+      "lastAccessed": "2026-10-13T02:17:46.479Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:17:46.479Z"
+    },
+    "cmd-1791858000158": {
+      "key": "cmd-1791858000158",
+      "value": "{\"command\":\"which firebase gcloud; firebase --version; firebase login:list 2>&1 | tail -3; firebase projects:list 2>&1 | tail -25; gcloud config list account 2>&1 | tail -3\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:20:00.158Z",
+      "lastAccessed": "2026-10-13T02:20:00.158Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:20:00.158Z"
+    },
+    "cmd-1791858097660": {
+      "key": "cmd-1791858097660",
+      "value": "{\"command\":\"firebase projects:create kangaroo-bingo --display-name \\\"Kangaroo Bingo\\\" 2>&1 | tail -8\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:21:37.660Z",
+      "lastAccessed": "2026-10-13T02:21:37.660Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:21:37.660Z"
+    },
+    "cmd-1791858119371": {
+      "key": "cmd-1791858119371",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:21:59.371Z",
+      "lastAccessed": "2026-10-13T02:21:59.371Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:21:59.371Z"
+    },
+    "cmd-1791858121045": {
+      "key": "cmd-1791858121045",
+      "value": "{\"command\":\"firebase apps:create web \\\"Kangaroo Bingo Web\\\" --project kangaroo-bingo 2>&1 | tail -4\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:01.045Z",
+      "lastAccessed": "2026-10-13T02:22:01.045Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:01.045Z"
+    },
+    "cmd-1791858122593": {
+      "key": "cmd-1791858122593",
+      "value": "{\"command\":\"gcloud services enable firestore.googleapis.com identitytoolkit.googleapis.com --project kangaroo-bingo 2>&1 | tail -2\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:02.593Z",
+      "lastAccessed": "2026-10-13T02:22:02.593Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:02.593Z"
+    },
+    "cmd-1791858124105": {
+      "key": "cmd-1791858124105",
+      "value": "{\"command\":\"firebase firestore:databases:create \\\"(default)\\\" --location asia-southeast1 --project kangaroo-bingo 2>&1 | tail -3\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:04.105Z",
+      "lastAccessed": "2026-10-13T02:22:04.105Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:04.105Z"
+    },
+    "cmd-1791858154180": {
+      "key": "cmd-1791858154180",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:34.180Z",
+      "lastAccessed": "2026-10-13T02:22:34.180Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:34.180Z"
+    },
+    "cmd-1791858155724": {
+      "key": "cmd-1791858155724",
+      "value": "{\"command\":\"sleep 20; gcloud firestore databases create --location=asia-southeast1 --project kangaroo-bingo 2>&1 | tail -3\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:35.724Z",
+      "lastAccessed": "2026-10-13T02:22:35.724Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:35.724Z"
+    },
+    "cmd-1791858157204": {
+      "key": "cmd-1791858157204",
+      "value": "{\"command\":\"firebase apps:sdkconfig WEB 1:227149337489:web:253b5ce0dbdd0672f64030 --project kangaroo-bingo 2>&1 | grep -E '\\\"(apiKey|authDomain|projectId|appId|messagingSenderId|storageBucket)\\\"'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:37.204Z",
+      "lastAccessed": "2026-10-13T02:22:37.204Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:37.204Z"
+    },
+    "cmd-1791858174822": {
+      "key": "cmd-1791858174822",
+      "value": "{\"command\":\"for i in 1 2 3 4 5 6; do out=$(gcloud firestore databases create --location=asia-southeast1 --project kangaroo-bingo 2>&1); echo \\\"$out\\\" | tail -2; echo \\\"$out\\\" | grep -qiE \\\"error\\\" || break; sleep 30; done\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:22:54.822Z",
+      "lastAccessed": "2026-10-13T02:22:54.822Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:22:54.822Z"
+    },
+    "cmd-1791858183641": {
+      "key": "cmd-1791858183641",
+      "value": "{\"command\":\"TOKEN=$(gcloud auth print-access-token)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:03.641Z",
+      "lastAccessed": "2026-10-13T02:23:03.641Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:03.641Z"
+    },
+    "cmd-1791858185117": {
+      "key": "cmd-1791858185117",
+      "value": "{\"command\":\"curl -s -X POST -H \\\"Authorization: [redacted]\\\" -H \\\"x-goog-user-project: kangaroo-bingo\\\" -H \\\"Content-Type: application/json\\\" \\\"https://identitytoolkit.googleapis.com/v2/projects/kangaroo-bingo/identityPlatform:initializeAuth\\\" -d '{}' | head -5\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:05.117Z",
+      "lastAccessed": "2026-10-13T02:23:05.117Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:05.117Z"
+    },
+    "cmd-1791858218563": {
+      "key": "cmd-1791858218563",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:38.563Z",
+      "lastAccessed": "2026-10-13T02:23:38.563Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:38.563Z"
+    },
+    "cmd-1791858220183": {
+      "key": "cmd-1791858220183",
+      "value": "{\"command\":\"cat > firebase.json <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:40.183Z",
+      "lastAccessed": "2026-10-13T02:23:40.183Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:40.183Z"
+    },
+    "cmd-1791858221623": {
+      "key": "cmd-1791858221623",
+      "value": "{\"command\":\"{\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:41.623Z",
+      "lastAccessed": "2026-10-13T02:23:41.623Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:41.623Z"
+    },
+    "cmd-1791858223022": {
+      "key": "cmd-1791858223022",
+      "value": "{\"command\":\"  \\\"firestore\\\": { \\\"rules\\\": \\\"firestore.rules\\\" },\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:43.022Z",
+      "lastAccessed": "2026-10-13T02:23:43.022Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:43.022Z"
+    },
+    "cmd-1791858224447": {
+      "key": "cmd-1791858224447",
+      "value": "{\"command\":\"  \\\"auth\\\": { \\\"providers\\\": { \\\"anonymous\\\": true } }\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:44.447Z",
+      "lastAccessed": "2026-10-13T02:23:44.447Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:44.447Z"
+    },
+    "cmd-1791858225900": {
+      "key": "cmd-1791858225900",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:45.900Z",
+      "lastAccessed": "2026-10-13T02:23:45.900Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:45.900Z"
+    },
+    "cmd-1791858227361": {
+      "key": "cmd-1791858227361",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:47.361Z",
+      "lastAccessed": "2026-10-13T02:23:47.361Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:47.361Z"
+    },
+    "cmd-1791858228819": {
+      "key": "cmd-1791858228819",
+      "value": "{\"command\":\"cat > .firebaserc <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:48.819Z",
+      "lastAccessed": "2026-10-13T02:23:48.819Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:48.819Z"
+    },
+    "cmd-1791858230302": {
+      "key": "cmd-1791858230302",
+      "value": "{\"command\":\"{ \\\"projects\\\": { \\\"default\\\": \\\"kangaroo-bingo\\\" } }\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:50.302Z",
+      "lastAccessed": "2026-10-13T02:23:50.302Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:50.302Z"
+    },
+    "cmd-1791858231809": {
+      "key": "cmd-1791858231809",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:51.809Z",
+      "lastAccessed": "2026-10-13T02:23:51.809Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:51.809Z"
+    },
+    "cmd-1791858233264": {
+      "key": "cmd-1791858233264",
+      "value": "{\"command\":\"echo 'rules_version = \\\"2\\\"; service cloud.firestore { match /databases/{db}/documents { match /{d=**} { allow read, write: if false; } } }' > firestore.rules\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:53.264Z",
+      "lastAccessed": "2026-10-13T02:23:53.264Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:53.264Z"
+    },
+    "cmd-1791858234714": {
+      "key": "cmd-1791858234714",
+      "value": "{\"command\":\"firebase deploy --only auth --project kangaroo-bingo 2>&1 | tail -6\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:23:54.714Z",
+      "lastAccessed": "2026-10-13T02:23:54.714Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:23:54.714Z"
+    },
+    "cmd-1791858525713": {
+      "key": "cmd-1791858525713",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:45.713Z",
+      "lastAccessed": "2026-10-13T02:28:45.713Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:45.713Z"
+    },
+    "cmd-1791858527275": {
+      "key": "cmd-1791858527275",
+      "value": "{\"command\":\"firebase deploy --only firestore:rules --project kangaroo-bingo 2>&1 | grep -E \\\"✔|Error|error\\\" | head\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:47.275Z",
+      "lastAccessed": "2026-10-13T02:28:47.275Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:47.275Z"
+    },
+    "cmd-1791858528746": {
+      "key": "cmd-1791858528746",
+      "value": "{\"command\":\"CODE=\\\"ROO-$(python3 -c 'import secrets;print(secrets.randbelow(9000)+1000)')\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:48.746Z",
+      "lastAccessed": "2026-10-13T02:28:48.746Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:48.746Z"
+    },
+    "cmd-1791858530183": {
+      "key": "cmd-1791858530183",
+      "value": "{\"command\":\"TOKEN=$(gcloud auth print-access-token)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:50.183Z",
+      "lastAccessed": "2026-10-13T02:28:50.183Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:50.183Z"
+    },
+    "cmd-1791858531597": {
+      "key": "cmd-1791858531597",
+      "value": "{\"command\":\"B=\\\"https://firestore.googleapis.com/v1/projects/kangaroo-bingo/databases/(default)/documents\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:51.597Z",
+      "lastAccessed": "2026-10-13T02:28:51.597Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:51.597Z"
+    },
+    "cmd-1791858533020": {
+      "key": "cmd-1791858533020",
+      "value": "{\"command\":\"curl -s -X PATCH -H \\\"Authorization: [redacted]\\\" -H \\\"Content-Type: application/json\\\" \\\"$B/secret/judge\\\" -d \\\"{\\\\\\\"fields\\\\\\\":{\\\\\\\"code\\\\\\\":{\\\\\\\"stringValue\\\\\\\":\\\\\\\"$CODE\\\\\\\"}}}\\\" | grep -o '\\\"name\\\": \\\"[^\\\"]*\\\"'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:53.020Z",
+      "lastAccessed": "2026-10-13T02:28:53.020Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:53.020Z"
+    },
+    "cmd-1791858534450": {
+      "key": "cmd-1791858534450",
+      "value": "{\"command\":\"curl -s -X PATCH -H \\\"Authorization: [redacted]\\\" -H \\\"Content-Type: application/json\\\" \\\"$B/config/game\\\" -d '{\\\"fields\\\":{\\\"open\\\":{\\\"booleanValue\\\":true}}}' | grep -o '\\\"name\\\": \\\"[^\\\"]*\\\"'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:54.450Z",
+      "lastAccessed": "2026-10-13T02:28:54.450Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:54.450Z"
+    },
+    "cmd-1791858535835": {
+      "key": "cmd-1791858535835",
+      "value": "{\"command\":\"echo \\\"$CODE\\\" > \\\"$CLAUDE_SCRATCH/judgecode\\\" 2>/dev/null; echo \\\"JUDGE CODE: $CODE\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:28:55.835Z",
+      "lastAccessed": "2026-10-13T02:28:55.835Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:28:55.835Z"
+    },
+    "cmd-1791858543382": {
+      "key": "cmd-1791858543382",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && mkdir -p .claude && cat > .claude/launch.json <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:03.382Z",
+      "lastAccessed": "2026-10-13T02:29:03.382Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:03.382Z"
+    },
+    "cmd-1791858544786": {
+      "key": "cmd-1791858544786",
+      "value": "{\"command\":\"{\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:04.786Z",
+      "lastAccessed": "2026-10-13T02:29:04.786Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:04.786Z"
+    },
+    "cmd-1791858546195": {
+      "key": "cmd-1791858546195",
+      "value": "{\"command\":\"  \\\"version\\\": \\\"0.0.1\\\",\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:06.195Z",
+      "lastAccessed": "2026-10-13T02:29:06.195Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:06.195Z"
+    },
+    "cmd-1791858547612": {
+      "key": "cmd-1791858547612",
+      "value": "{\"command\":\"  \\\"configurations\\\": [\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:07.612Z",
+      "lastAccessed": "2026-10-13T02:29:07.612Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:07.612Z"
+    },
+    "cmd-1791858548987": {
+      "key": "cmd-1791858548987",
+      "value": "{\"command\":\"    { \\\"name\\\": \\\"bingo\\\", \\\"runtimeExecutable\\\": \\\"python3\\\", \\\"runtimeArgs\\\": [\\\"-m\\\", \\\"http.server\\\", \\\"5178\\\"], \\\"port\\\": 5178 }\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:08.987Z",
+      "lastAccessed": "2026-10-13T02:29:08.987Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:08.987Z"
+    },
+    "cmd-1791858550403": {
+      "key": "cmd-1791858550403",
+      "value": "{\"command\":\"  ]\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:10.403Z",
+      "lastAccessed": "2026-10-13T02:29:10.403Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:10.403Z"
+    },
+    "cmd-1791858551783": {
+      "key": "cmd-1791858551783",
+      "value": "{\"command\":\"}\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:11.783Z",
+      "lastAccessed": "2026-10-13T02:29:11.783Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:11.783Z"
+    },
+    "cmd-1791858553188": {
+      "key": "cmd-1791858553188",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:13.188Z",
+      "lastAccessed": "2026-10-13T02:29:13.188Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:13.188Z"
+    },
+    "cmd-1791858554570": {
+      "key": "cmd-1791858554570",
+      "value": "{\"command\":\"printf '.claude/\\\\n.firebase/\\\\n*.log\\\\n' > .gitignore\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:14.570Z",
+      "lastAccessed": "2026-10-13T02:29:14.570Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:14.570Z"
+    },
+    "cmd-1791858561898": {
+      "key": "cmd-1791858561898",
+      "value": "{\"command\":\"cat /Users/xynkro/.claude/launch.json\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:21.898Z",
+      "lastAccessed": "2026-10-13T02:29:21.898Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:21.898Z"
+    },
+    "cmd-1791858567642": {
+      "key": "cmd-1791858567642",
+      "value": "{\"command\":\"python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:27.642Z",
+      "lastAccessed": "2026-10-13T02:29:27.642Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:27.642Z"
+    },
+    "cmd-1791858569041": {
+      "key": "cmd-1791858569041",
+      "value": "{\"command\":\"import json\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:29.041Z",
+      "lastAccessed": "2026-10-13T02:29:29.041Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:29.041Z"
+    },
+    "cmd-1791858570425": {
+      "key": "cmd-1791858570425",
+      "value": "{\"command\":\"p='/Users/xynkro/.claude/launch.json'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:30.425Z",
+      "lastAccessed": "2026-10-13T02:29:30.425Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:30.425Z"
+    },
+    "cmd-1791858571822": {
+      "key": "cmd-1791858571822",
+      "value": "{\"command\":\"d=json.load(open(p))\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:31.822Z",
+      "lastAccessed": "2026-10-13T02:29:31.822Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:31.822Z"
+    },
+    "cmd-1791858573208": {
+      "key": "cmd-1791858573208",
+      "value": "{\"command\":\"d['configurations']=[c for c in d['configurations'] if c['name']!='bingo']\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:33.208Z",
+      "lastAccessed": "2026-10-13T02:29:33.208Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:33.208Z"
+    },
+    "cmd-1791858574584": {
+      "key": "cmd-1791858574584",
+      "value": "{\"command\":\"d['configurations'].append({\\\"name\\\":\\\"bingo\\\",\\\"runtimeExecutable\\\":\\\"python3\\\",\\\"runtimeArgs\\\":[\\\"-m\\\",\\\"http.server\\\",\\\"5178\\\",\\\"--directory\\\",\\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\"],\\\"port\\\":5178})\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:34.584Z",
+      "lastAccessed": "2026-10-13T02:29:34.584Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:34.584Z"
+    },
+    "cmd-1791858575974": {
+      "key": "cmd-1791858575974",
+      "value": "{\"command\":\"json.dump(d,open(p,'w'),indent=2)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:35.974Z",
+      "lastAccessed": "2026-10-13T02:29:35.974Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:35.974Z"
+    },
+    "cmd-1791858577343": {
+      "key": "cmd-1791858577343",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:37.343Z",
+      "lastAccessed": "2026-10-13T02:29:37.343Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:37.343Z"
+    },
+    "cmd-1791858578901": {
+      "key": "cmd-1791858578901",
+      "value": "{\"command\":\"rm -rf \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo/.claude\\\"\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:29:38.901Z",
+      "lastAccessed": "2026-10-13T02:29:38.901Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:29:38.901Z"
+    },
+    "cmd-1791858667513": {
+      "key": "cmd-1791858667513",
+      "value": "{\"command\":\"cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && python3 - <<'EOF'\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:07.513Z",
+      "lastAccessed": "2026-10-13T02:31:07.513Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:07.513Z"
+    },
+    "cmd-1791858669070": {
+      "key": "cmd-1791858669070",
+      "value": "{\"command\":\"p='board.html'; s=open(p).read()\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:09.070Z",
+      "lastAccessed": "2026-10-13T02:31:09.070Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:09.070Z"
+    },
+    "cmd-1791858670493": {
+      "key": "cmd-1791858670493",
+      "value": "{\"command\":\"s=s.replace('<h1>DINING-IN <span>BINGO</span></h1>','<h1><b class=\\\"nw\\\">DINING-IN</b> <span>BINGO</span></h1>')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:10.493Z",
+      "lastAccessed": "2026-10-13T02:31:10.493Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:10.493Z"
+    },
+    "cmd-1791858671953": {
+      "key": "cmd-1791858671953",
+      "value": "{\"command\":\"s=s.replace('.rail h1{font-size:clamp(56px,7vw,96px)}','.rail h1{font-size:clamp(52px,5.2vw,76px)}\\\\n.rail h1 .nw{white-space:nowrap;font-weight:inherit}')\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:11.953Z",
+      "lastAccessed": "2026-10-13T02:31:11.953Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:11.953Z"
+    },
+    "cmd-1791858673381": {
+      "key": "cmd-1791858673381",
+      "value": "{\"command\":\"open(p,'w').write(s)\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:13.381Z",
+      "lastAccessed": "2026-10-13T02:31:13.381Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:13.381Z"
+    },
+    "cmd-1791858674822": {
+      "key": "cmd-1791858674822",
+      "value": "{\"command\":\"EOF\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:14.822Z",
+      "lastAccessed": "2026-10-13T02:31:14.822Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:14.822Z"
+    },
+    "cmd-1791858676237": {
+      "key": "cmd-1791858676237",
+      "value": "{\"command\":\"grep -n 'nw' board.html\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:31:16.237Z",
+      "lastAccessed": "2026-10-13T02:31:16.237Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:31:16.237Z"
     }
   },
   "version": "3.0.0"

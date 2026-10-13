@@ -5,72 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F3EFE4">
 <title>Dining-In Bingo</title>
-<meta name="description" content="Kangaroo Court Division — Dining-In Bingo charge sheet.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F3EFE4'/%3E%3Crect x='8' y='14' width='48' height='36' fill='none' stroke='%23B42318' stroke-width='5' transform='rotate(-8 32 32)'/%3E%3Ctext x='32' y='41' font-family='Arial Narrow,sans-serif' font-weight='900' font-size='20' text-anchor='middle' fill='%23B42318' transform='rotate(-8 32 32)'%3EBINGO%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Kangaroo Court Division — Dining-In Bingo charge sheet and live leaderboard.">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
-<style>
-/* Layout: one phone-width charge sheet — header, player details, 5×5 grid, submit block; a bottom sheet edits one square. Single committed paper look in both themes. */
-:root{
-  --paper:#F3EFE4; --card:#FAF8F1; --ink:#16213A; --muted:#4A5468; --stamp:#B42318; --filled:#F6E3DC; --line:#16213A;
-  --display:'Big Shoulders Stencil Display', Oswald, 'Arial Narrow', sans-serif;
-  --body:'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif;
-  --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  color-scheme: light;
-}
-*{box-sizing:border-box}
-html,body{background:var(--paper);color:var(--ink);margin:0}
-body{font-family:var(--body);font-size:16px;line-height:1.35;padding-inline:16px;padding-block:calc(20px + env(safe-area-inset-top,0px)) calc(120px + env(safe-area-inset-bottom,0px));-webkit-text-size-adjust:100%}
-[hidden]{display:none!important}
-.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
-.strip{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--muted);border-bottom:1.5px solid var(--line);padding-bottom:6px}
-h1{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(46px,14vw,76px);line-height:.9;letter-spacing:.01em;text-wrap:balance}
-h1 span{color:var(--stamp)}
-.sub{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;margin-top:6px}
-.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.field{display:flex;flex-direction:column;gap:4px;min-width:0}
-label,.label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--stamp)}
-input[type=text]{font:inherit;font-size:17px;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:0;padding:10px 10px;width:100%;min-width:0}
-input[type=text]:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
-.status{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:3px solid var(--line);padding-top:10px;font-family:var(--mono);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
-.stamp{border:3px solid var(--stamp);color:var(--stamp);font-family:var(--display);font-weight:900;letter-spacing:.1em;line-height:1;padding:4px 10px 2px;transform:rotate(-6deg);text-align:center;white-space:nowrap}
-.stamp small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;font-weight:700;margin-top:3px}
-.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.5px;background:var(--line);border:2.5px solid var(--line)}
-.head{background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:900;font-size:26px;text-align:center;padding:4px 0 2px}
-.cell{appearance:none;-webkit-appearance:none;border:0;border-radius:0;margin:0;background:var(--card);color:var(--ink);font:inherit;text-align:left;padding:6px 5px 6px;min-height:104px;display:flex;flex-direction:column;gap:3px;cursor:pointer;min-width:0;-webkit-tap-highlight-color:transparent}
-.cell .no{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--stamp);line-height:1}
-.cell .txt{font-size:12px;font-weight:600;line-height:1.15;flex:1;overflow-wrap:anywhere}
-.cell .who{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--stamp);border-top:1.5px solid var(--line);padding-top:2px;min-height:14px;overflow-wrap:anywhere;line-height:1.15}
-.cell.filled{background:var(--filled)}
-.cell.win{box-shadow:inset 0 0 0 3px var(--stamp)}
-.free{background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:6px 2px;min-height:104px}
-.free .label{color:var(--ink);font-size:9px;letter-spacing:.1em}
-.free .stamp{font-size:13px;padding:3px 5px 1px;white-space:normal}
-.orders{display:flex;flex-direction:column;gap:8px}
-.order{display:flex;gap:10px;align-items:baseline}
-.order b{font-family:var(--display);font-weight:900;font-size:22px;color:var(--stamp);line-height:1;flex:none;width:26px}
-.submit{display:flex;flex-direction:column;gap:10px;border:1.5px dashed var(--line);background:var(--card);padding:14px}
-.btns{display:flex;flex-wrap:wrap;gap:10px}
-.btn{appearance:none;-webkit-appearance:none;font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.06em;border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:12px 16px;min-height:46px;cursor:pointer;border-radius:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.btn.ghost{background:transparent;color:var(--ink)}
-.btn.red{background:var(--stamp);border-color:var(--stamp);color:#fff}
-.btn[disabled],.btn[aria-disabled=true]{opacity:.45;cursor:not-allowed}
-.note{font-size:14px;color:var(--muted)}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--muted)}
-.linkbtn{appearance:none;background:none;border:0;padding:0;font:inherit;color:var(--stamp);text-decoration:underline;cursor:pointer;letter-spacing:.08em}
-.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:3px solid var(--ink);box-shadow:0 -10px 30px rgba(22,33,58,.25);padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));z-index:10}
-.sheet .in{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-.sheet .off{font-size:20px;font-weight:600;line-height:1.2}
-.scrim{position:fixed;inset:0;background:rgba(22,33,58,.35);z-index:9}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:13px;padding:10px 14px;z-index:20;max-width:calc(100vw - 32px)}
-@keyframes thump{0%{transform:rotate(-6deg) scale(1.8);opacity:0}60%{transform:rotate(-6deg) scale(.92);opacity:1}100%{transform:rotate(-6deg) scale(1)}}
-.stamp.new{animation:thump .45s ease-out}
-@media (prefers-reduced-motion:reduce){.stamp.new{animation:none}}
-@media (max-width:380px){.cell .txt{font-size:11px}.cell{padding:5px 4px}}
-</style>
+<link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-
+<!-- Layout: header, tab switch (MY CARD / LEADERBOARD), then the active pane. Card pane = enlist form or the
+     shuffled 5×5 card + claim block. Board pane = live standings. A bottom sheet edits one square. -->
 <div class="wrap">
   <div class="strip"><div>RESTRICTED (NOT REALLY)</div><div>FORM DI-01 · JOINT FORMAL DINING-IN</div></div>
   <div>
@@ -78,251 +21,308 @@ input[type=text]:focus-visible,button:focus-visible,a:focus-visible{outline:3px 
     <div class="sub">OFFICIAL CHARGE SHEET · KANGAROO COURT DIVISION</div>
   </div>
 
-  <div class="fields">
-    <div class="field"><label for="pname">YOUR NAME</label><input type="text" id="pname" autocomplete="name" placeholder="e.g. Caspar"></div>
-    <div class="field"><label for="psyn">SYNDICATE</label><input type="text" id="psyn" inputmode="numeric" placeholder="e.g. 7"></div>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tabCard" aria-selected="true" aria-controls="paneCard">MY CARD</button>
+    <button class="tab" role="tab" id="tabBoard" aria-selected="false" aria-controls="paneBoard"><span class="live" aria-hidden="true"></span>LEADERBOARD</button>
   </div>
 
-  <div class="status">
-    <div id="count">0 / 24 filed · 0 lines</div>
-    <div id="bingo" hidden></div>
-  </div>
+  <div id="boot" class="boot">Reporting to the mess…</div>
 
-  <div class="grid" id="grid" aria-label="Bingo card"></div>
+  <!-- CARD -->
+  <div id="paneCard" role="tabpanel" aria-labelledby="tabCard" hidden>
+    <div class="wrap">
+      <form id="enlist" class="submit" hidden>
+        <div class="label">REPORT FOR DUTY</div>
+        <div class="note">Enter your name and syndicate to get your card. Every card is shuffled, so your neighbour's lines are not yours.</div>
+        <div class="fields">
+          <div class="field"><label for="pname">YOUR NAME</label><input type="text" id="pname" autocomplete="name" maxlength="40" placeholder="e.g. Caspar" required></div>
+          <div class="field"><label for="psyn">SYNDICATE</label><input type="text" id="psyn" inputmode="numeric" maxlength="20" placeholder="e.g. 7" required></div>
+        </div>
+        <button class="btn red" type="submit" id="enlistBtn">Issue my card</button>
+      </form>
 
-  <div class="orders">
-    <div class="label">STANDING ORDERS</div>
-    <div class="order"><b>01</b><div>Write the name of the person you observe for each square.</div></div>
-    <div class="order"><b>02</b><div>Fastest to get a bingo gets a prize.</div></div>
-    <div class="order"><b>03</b><div>Top 5 get points added to their syndicate games points.</div></div>
-    <div class="order"><b>04</b><div>Once you get a bingo, submit your card to Huiting below.</div></div>
-  </div>
+      <div id="play" class="wrap" hidden>
+        <div class="who-bar">
+          <div id="meLine"></div>
+          <button class="linkbtn" id="editMe" type="button">Edit</button>
+        </div>
+        <div class="fields" id="meEdit" hidden>
+          <div class="field"><label for="ename">YOUR NAME</label><input type="text" id="ename" maxlength="40"></div>
+          <div class="field"><label for="esyn">SYNDICATE</label><input type="text" id="esyn" maxlength="20"></div>
+          <div class="btns"><button class="btn" id="saveMe" type="button">Save</button><button class="btn ghost" id="cancelMe" type="button">Cancel</button></div>
+        </div>
 
-  <div class="submit">
-    <div class="label">SUBMIT EVIDENCE</div>
-    <div class="note" id="submitNote">Complete a line (row, column or diagonal) to submit.</div>
-    <div class="btns">
-      <a class="btn red" id="formBtn" href="#" target="_blank" rel="noopener" aria-disabled="true" hidden>Submit to Huiting</a>
-      <button class="btn red" id="tgBtn" type="button" hidden>Copy &amp; send on Telegram</button>
-      <button class="btn ghost" id="copyBtn" type="button">Copy my card</button>
+        <div class="status">
+          <div id="count">0 / 24 filed · 0 lines</div>
+          <div id="bingo" hidden></div>
+        </div>
+
+        <div class="grid" id="grid" aria-label="Bingo card"></div>
+
+        <div class="submit" id="claimBox" aria-live="polite"></div>
+
+        <div class="orders">
+          <div class="label">STANDING ORDERS</div>
+          <div class="order"><b>01</b><div>Write the name of the person you observe for each square.</div></div>
+          <div class="order"><b>02</b><div>Fastest to get a bingo gets a prize.</div></div>
+          <div class="order"><b>03</b><div>Top 5 get points added to their syndicate games points.</div></div>
+          <div class="order"><b>04</b><div>Complete a line and tap CLAIM BINGO. The server stamps the time. That time is final, and Huiting vets your card.</div></div>
+        </div>
+      </div>
     </div>
-    <textarea id="copyFallback" readonly hidden style="width:100%;min-height:140px;font-family:var(--mono);font-size:12px"></textarea>
+  </div>
+
+  <!-- BOARD -->
+  <div id="paneBoard" role="tabpanel" aria-labelledby="tabBoard" hidden>
+    <div class="board" id="board"></div>
   </div>
 
   <div class="foot">
     <div>ALL VERDICTS FINAL · NO APPEALS</div>
-    <div id="resetWrap"><button class="linkbtn" id="resetBtn" type="button">Clear my card</button></div>
+    <a class="linkbtn" href="board.html">Projector view</a>
   </div>
 </div>
 
 <div class="scrim" id="scrim" hidden></div>
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetOff">
-  <div class="in">
+  <form class="in" id="sheetForm">
     <div class="label" id="sheetNo">No. 01</div>
     <div class="off" id="sheetOff"></div>
     <label for="accused">ACCUSED</label>
-    <input type="text" id="accused" placeholder="Name of the person you saw" autocomplete="off">
+    <input type="text" id="accused" maxlength="40" placeholder="Name of the person you saw" autocomplete="off">
     <div class="btns">
-      <button class="btn" id="saveBtn" type="button">Save</button>
+      <button class="btn" id="saveBtn" type="submit">Save</button>
       <button class="btn ghost" id="clearBtn" type="button">Clear square</button>
       <button class="btn ghost" id="cancelBtn" type="button">Cancel</button>
     </div>
-  </div>
+  </form>
 </div>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
 
-<script>
-// Google Form for submissions. Paste the form's pre-filled link pieces here.
-// When url is empty, the Submit button stays hidden and players use Telegram / "Copy my card".
-const FORM = {
-  url: "",            // e.g. https://docs.google.com/forms/d/e/XXXX/viewform
-  name: "",           // e.g. entry.111111
-  syndicate: "",      // e.g. entry.222222
-  bingoAt: "",        // e.g. entry.333333
-  card: ""            // e.g. entry.444444
-};
-// Telegram handle cards are sent to when there is no form (no @). Empty hides the button.
-const TELEGRAM = "HUITINGTAN";
-
-const SQUARES = [
-  "Arrives after the Head Table",
-  "Eats with the wrong utensils",
-  "Stands at the wrong time, then sits slowly",
-  "Talks so loud the Head Table hears",
-  "Takes a selfie during formal dinner",
-  "Phone seen ON the table",
-  "Spills a drink or soup",
-  "Eats before the Head Table",
-  "Elbows on the table, caught in 4K",
-  "Fires shots before the colours leave",
-  "Forgets the toast mouths along",
-  "Drops cutlery, whole mess hears",
-  "Leaves seat without permission",
-  "Receives shots before the colours leave",
-  "Laughs at the wrong moment",
-  "Sits in a seat other than assigned",
-  "Checks their watch during a speech",
-  "Takes a photo of the food",
-  "Sits before being told",
-  "Starts drinking too early",
-  "Puts used cutlery back on the tablecloth",
-  "Passes the port the wrong way",
-  "Doesn’t follow dress regulations",
-  "Nods off during a speech"
-];
-const FREE = 12; // grid index of the free space
-
-// grid positions 0..24 -> square index (null for free)
-const POS = []; { let s = 0; for (let i = 0; i < 25; i++) POS.push(i === FREE ? null : s++); }
-const LINES = [];
-for (let r = 0; r < 5; r++) LINES.push([0,1,2,3,4].map(c => r*5+c));
-for (let c = 0; c < 5; c++) LINES.push([0,1,2,3,4].map(r => r*5+c));
-LINES.push([0,6,12,18,24], [4,8,12,16,20]);
-
-const KEY = "dining-in-bingo-v1";
-let state = { name: "", syndicate: "", marks: {}, bingoAt: null };
-try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && typeof s === "object") state = Object.assign(state, s); } catch (e) {}
-function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+<script type="module">
+import { db, signIn, doc, collection, setDoc, updateDoc, onSnapshot, serverTimestamp } from "./js/fb.js";
+import { SQUARES, gridOf, accusedAt, winningLines, filledCount, shuffledLayout, standings,
+         renderBoard, fmtTime, pad, el, TOP } from "./js/game.js";
 
 const $ = id => document.getElementById(id);
-const pad = n => String(n).padStart(2, "0");
-const fmtTime = iso => { const d = new Date(iso); return pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds()); };
+let tt;
+function toast(msg, ms = 2600) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, ms); }
+const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
 
-function filledAt(pos){ const s = POS[pos]; return s === null || !!(state.marks[s] && state.marks[s].trim()); }
-function winningLines(){ return LINES.filter(l => l.every(filledAt)); }
+// ---- tabs ----
+function showTab(which) {
+  const board = which === "board";
+  $("tabCard").setAttribute("aria-selected", String(!board));
+  $("tabBoard").setAttribute("aria-selected", String(board));
+  $("paneCard").hidden = board || !booted;
+  $("paneBoard").hidden = !board || !booted;
+  try { history.replaceState(null, "", board ? "#board" : location.pathname); } catch (e) {}
+}
+let tab = location.hash === "#board" ? "board" : "card";
+$("tabCard").onclick = () => { tab = "card"; showTab(tab); };
+$("tabBoard").onclick = () => { tab = "board"; showTab(tab); };
 
-function render(newBingo){
-  const grid = $("grid");
-  const wins = winningLines();
+// ---- state ----
+let booted = false, uid = null, meRef = null;
+let me = null, mePending = false, players = [], game = { open: true };
+
+try {
+  const user = await signIn();
+  uid = user.uid;
+} catch (e) {
+  $("boot").textContent = "Could not reach the server. Check your signal and reload.";
+  throw e;
+}
+meRef = doc(db, "players", uid);
+
+onSnapshot(meRef, { includeMetadataChanges: true }, snap => {
+  const before = me && me.status;
+  me = snap.exists() ? snap.data() : null;
+  mePending = snap.metadata.hasPendingWrites;
+  if (!booted) { booted = true; $("boot").hidden = true; showTab(tab); }
+  if (before && me && before !== me.status && !mePending) {
+    if (me.status === "approved") { toast("APPROVED. Check the leaderboard.", 4000); buzz([80, 60, 200]); }
+    if (me.status === "rejected") { toast("Claim rejected. See the note below.", 4000); buzz(300); }
+  }
+  renderCard();
+}, err => { $("boot").textContent = "Server refused the connection. Reload to try again."; console.error(err); });
+
+onSnapshot(collection(db, "players"), snap => {
+  players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderBoard($("board"), players, { meUid: uid });
+  if (me) renderClaim();
+});
+
+onSnapshot(doc(db, "config", "game"), snap => {
+  game = snap.exists() ? snap.data() : { open: true };
+  if (me) renderClaim();
+});
+
+// ---- enlist / edit ----
+$("enlist").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("pname").value.trim(), syn = $("psyn").value.trim();
+  if (!name || !syn) return toast("Name and syndicate, please");
+  $("enlistBtn").disabled = true;
+  try {
+    await setDoc(meRef, {
+      name, syn, layout: shuffledLayout(), marks: {}, filled: 0, lines: 0,
+      status: "playing", claimedAt: null, createdAt: serverTimestamp(), updatedAt: serverTimestamp()
+    });
+  } catch (err) { console.error(err); toast("Could not issue your card. Try again."); }
+  $("enlistBtn").disabled = false;
+});
+
+const editable = () => me && (me.status === "playing" || me.status === "rejected");
+
+$("editMe").onclick = () => {
+  if (!editable()) return toast("Card is locked while under review");
+  $("ename").value = me.name; $("esyn").value = me.syn; $("meEdit").hidden = false; $("ename").focus();
+};
+$("cancelMe").onclick = () => $("meEdit").hidden = true;
+$("saveMe").onclick = () => {
+  const name = $("ename").value.trim(), syn = $("esyn").value.trim();
+  if (!name) return toast("Name can't be blank");
+  $("meEdit").hidden = true;
+  write({ name, syn });
+};
+
+// Owner writes. Any edit after a rejection puts the card back in play (a new claim gets a new time).
+function write(fields) {
+  const patch = { ...fields, updatedAt: serverTimestamp() };
+  if (me.status === "rejected") { patch.status = "playing"; patch.claimedAt = null; }
+  updateDoc(meRef, patch).catch(err => { console.error(err); toast("Change refused by the server"); });
+}
+
+// ---- card ----
+function renderCard() {
+  $("enlist").hidden = !!me;
+  $("play").hidden = !me;
+  if (!me) return;
+  $("meLine").textContent = me.name + " · SYN " + (me.syn || "—");
+  const layout = me.layout, marks = me.marks || {};
+  const g = gridOf(layout);
+  const wins = winningLines(layout, marks);
   const winPos = new Set(wins.flat());
+  const grid = $("grid");
+  grid.className = "grid" + (editable() ? "" : " locked");
   grid.textContent = "";
-  "BINGO".split("").forEach(ch => { const h = document.createElement("div"); h.className = "head"; h.textContent = ch; grid.appendChild(h); });
-  for (let p = 0; p < 25; p++) {
-    const s = POS[p];
-    if (s === null) {
-      const f = document.createElement("div"); f.className = "free";
-      const l = document.createElement("div"); l.className = "label"; l.textContent = "FREE SPACE";
-      const st = document.createElement("div"); st.className = "stamp"; st.textContent = "CASE DISMISSED";
-      f.append(l, st); grid.appendChild(f); continue;
+  "BINGO".split("").forEach(ch => grid.append(el("div", { class: "head", "aria-hidden": "true" }, ch)));
+  g.forEach((sq, p) => {
+    if (sq === null) {
+      grid.append(el("div", { class: "free" }, el("div", { class: "label" }, "FREE SPACE"), el("div", { class: "stamp" }, "CASE DISMISSED")));
+      return;
     }
-    const b = document.createElement("button");
-    b.type = "button";
-    const who = (state.marks[s] || "").trim();
-    b.className = "cell" + (who ? " filled" : "") + (winPos.has(p) ? " win" : "");
-    const no = document.createElement("div"); no.className = "no"; no.textContent = "No. " + pad(s+1);
-    const t = document.createElement("div"); t.className = "txt"; t.textContent = SQUARES[s];
-    const w = document.createElement("div"); w.className = "who"; w.textContent = who;
-    b.setAttribute("aria-label", "No. " + (s+1) + ": " + SQUARES[s] + (who ? ". Accused: " + who : ". Empty"));
-    b.append(no, t, w);
-    b.addEventListener("click", () => openSheet(s));
-    grid.appendChild(b);
+    const who = accusedAt(marks, sq);
+    grid.append(el("button", {
+      type: "button",
+      class: "cell" + (who ? " filled" : "") + (winPos.has(p) ? " win" : ""),
+      "aria-label": "No. " + (sq + 1) + ": " + SQUARES[sq] + (who ? ". Accused: " + who : ". Empty"),
+      onclick: () => openSheet(sq)
+    }, el("div", { class: "no" }, "No. " + pad(sq + 1)), el("div", { class: "txt" }, SQUARES[sq]), el("div", { class: "who" }, who)));
+  });
+  $("count").textContent = filledCount(marks) + " / 24 filed · " + wins.length + (wins.length === 1 ? " line" : " lines");
+  renderStamp(wins.length);
+  renderClaim();
+}
+
+let lastStamp = "";
+function renderStamp(lines) {
+  const b = $("bingo");
+  let txt = "", cls = "stamp", small = "";
+  if (me.status === "approved") { txt = "APPROVED"; cls += " ok"; small = "AT " + fmtTime(me.claimedAt); }
+  else if (me.status === "claimed") { txt = "CLAIMED"; small = mePending ? "SENDING…" : "AT " + fmtTime(me.claimedAt); }
+  else if (lines) { txt = "BINGO"; cls += " ink"; small = "CLAIM IT BELOW"; }
+  b.hidden = !txt;
+  if (!txt) { lastStamp = ""; return; }
+  const key = txt;
+  b.className = cls + (key !== lastStamp ? " new" : "");
+  lastStamp = key;
+  b.style.fontSize = "24px";
+  b.textContent = txt;
+  b.append(el("small", null, small));
+}
+
+function renderClaim() {
+  const box = $("claimBox");
+  box.className = "submit";
+  box.textContent = "";
+  const lines = winningLines(me.layout, me.marks || {}).length;
+  const row = standings(players).find(r => r.id === uid);
+
+  if (me.status === "approved") {
+    box.className = "submit ok";
+    box.append(el("div", { class: "label" }, "VERDICT: APPROVED"),
+      el("div", { class: "big-time" }, row && row.rank ? "#" + row.rank + (row.rank <= TOP ? " · TOP " + TOP : "") : "Approved"),
+      el("div", { class: "note" }, "Submitted at " + fmtTime(me.claimedAt) + " by server time."));
+    return;
   }
-  const filled = Object.values(state.marks).filter(v => v && v.trim()).length;
-  $("count").textContent = filled + " / 24 filed · " + wins.length + (wins.length === 1 ? " line" : " lines");
-  const bingo = $("bingo");
-  if (state.bingoAt) {
-    bingo.hidden = false;
-    bingo.className = "stamp" + (newBingo ? " new" : "");
-    bingo.style.fontSize = "26px";
-    bingo.textContent = "";
-    bingo.append("BINGO");
-    const sm = document.createElement("small"); sm.textContent = "AT " + fmtTime(state.bingoAt); bingo.appendChild(sm);
-  } else bingo.hidden = true;
-  renderSubmit();
-}
-
-function cardText(){
-  const lines = [];
-  lines.push("DINING-IN BINGO");
-  lines.push("Name: " + (state.name || "—") + " | Syndicate: " + (state.syndicate || "—"));
-  lines.push("Bingo at: " + (state.bingoAt ? fmtTime(state.bingoAt) : "no bingo yet") + " | Lines: " + winningLines().length);
-  SQUARES.forEach((q, i) => { const w = (state.marks[i] || "").trim(); if (w) lines.push(pad(i+1) + ". " + q + " — " + w); });
-  return lines.join("\n");
-}
-
-function renderSubmit(){
-  const ready = !!state.bingoAt;
-  const fb = $("formBtn");
-  const hasForm = !!FORM.url;
-  const hasTg = !hasForm && !!TELEGRAM;
-  fb.hidden = !hasForm;
-  $("tgBtn").hidden = !hasTg;
-  if (hasForm) {
-    const q = new URLSearchParams({ usp: "pp_url" });
-    if (FORM.name) q.set(FORM.name, state.name || "");
-    if (FORM.syndicate) q.set(FORM.syndicate, state.syndicate || "");
-    if (FORM.bingoAt) q.set(FORM.bingoAt, state.bingoAt ? fmtTime(state.bingoAt) : "");
-    if (FORM.card) q.set(FORM.card, cardText());
-    fb.href = FORM.url + "?" + q.toString();
-    fb.setAttribute("aria-disabled", ready && state.name ? "false" : "true");
+  if (me.status === "claimed") {
+    box.append(el("div", { class: "label" }, mePending ? "SENDING CLAIM" : "CLAIM SUBMITTED · WITH HUITING"),
+      el("div", { class: "big-time" }, mePending ? "--:--:--" : fmtTime(me.claimedAt)),
+      el("div", { class: "note" }, mePending
+        ? "Your claim is on its way. The time is stamped when it reaches the server. Keep this page open."
+        : "That is your official submit time. Your card is locked while Huiting vets it."));
+    return;
   }
-  if (hasTg) $("tgBtn").setAttribute("aria-disabled", ready && state.name ? "false" : "true");
-  let note;
-  if (!ready) note = "Complete a line (row, column or diagonal) to submit.";
-  else if (!state.name) note = "Bingo! Add your name at the top, then submit.";
-  else if (hasForm) note = "Bingo! Tap Submit. The form's timestamp decides who was fastest.";
-  else if (hasTg) note = "Bingo! Tap the red button: your card is copied and Huiting's Telegram opens. Paste and send. Her message timestamp decides who was fastest.";
-  else note = "Bingo! Copy your card and send it to Huiting.";
-  $("submitNote").textContent = note;
+  if (me.status === "rejected") {
+    box.className = "submit bad";
+    box.append(el("div", { class: "label" }, "VERDICT: REJECTED"),
+      el("div", null, me.note ? "“" + me.note + "”" : "No reason given."),
+      el("div", { class: "note" }, "Fix your card and claim again. A new claim gets a new time."));
+  }
+  if (game.open === false) {
+    box.append(el("div", { class: "label" }, "CLAIMS CLOSED"), el("div", { class: "note" }, "The judge has closed claims."));
+    return;
+  }
+  if (!lines) {
+    if (me.status !== "rejected") box.append(el("div", { class: "label" }, "CLAIM"), el("div", { class: "note" }, "Complete a line (row, column or diagonal) to claim."));
+    return;
+  }
+  const btn = el("button", { class: "btn red huge", type: "button" }, "CLAIM BINGO");
+  btn.onclick = claim;
+  box.append(btn, el("div", { class: "note" }, "The server stamps the time the moment you tap. That time decides your place."));
 }
 
-$("formBtn").addEventListener("click", e => {
-  if ($("formBtn").getAttribute("aria-disabled") === "true") { e.preventDefault(); toast(state.bingoAt ? "Add your name first" : "No bingo yet"); }
-});
-
-function copyText(text, onOk){
-  const fallback = () => { const ta = $("copyFallback"); ta.value = text; ta.hidden = false; ta.focus(); ta.select(); toast("Select all and copy"); };
-  try { navigator.clipboard.writeText(text).then(onOk, fallback); } catch (e) { fallback(); }
+async function claim() {
+  if (!me || !editable()) return;
+  buzz(60);
+  try {
+    await updateDoc(meRef, { status: "claimed", claimedAt: serverTimestamp(), updatedAt: serverTimestamp() });
+    toast("Claim stamped. With Huiting for vetting.", 3500);
+  } catch (err) {
+    console.error(err);
+    toast(game.open === false ? "Claims are closed" : "Claim refused. Check your line and try again.");
+  }
 }
 
-$("tgBtn").addEventListener("click", () => {
-  if ($("tgBtn").getAttribute("aria-disabled") === "true") { toast(state.bingoAt ? "Add your name first" : "No bingo yet"); return; }
-  // Open synchronously inside the tap so mobile browsers don't block it, then copy.
-  window.open("https://t.me/" + TELEGRAM, "_blank", "noopener");
-  copyText(cardText(), () => toast("Card copied: paste it to Huiting"));
-});
-
+// ---- square sheet ----
 let current = null;
-function openSheet(s){
-  current = s;
-  $("sheetNo").textContent = "No. " + pad(s+1);
-  $("sheetOff").textContent = SQUARES[s];
-  $("accused").value = state.marks[s] || "";
+function openSheet(sq) {
+  if (!editable()) return toast(me.status === "approved" ? "Card approved. No more edits." : "Card is locked while under review");
+  current = sq;
+  $("sheetNo").textContent = "No. " + pad(sq + 1);
+  $("sheetOff").textContent = SQUARES[sq];
+  $("accused").value = accusedAt(me.marks, sq);
   $("sheet").hidden = false; $("scrim").hidden = false;
   setTimeout(() => $("accused").focus(), 30);
 }
-function closeSheet(){ $("sheet").hidden = true; $("scrim").hidden = true; current = null; }
-function setMark(val){
-  const before = !!state.bingoAt;
-  if (val) state.marks[current] = val; else delete state.marks[current];
-  const has = winningLines().length > 0;
-  if (has && !state.bingoAt) state.bingoAt = new Date().toISOString();
-  if (!has) state.bingoAt = null;
-  save(); closeSheet(); render(!before && !!state.bingoAt);
-  if (!before && state.bingoAt) toast("BINGO! Submit your card below.");
+function closeSheet() { $("sheet").hidden = true; $("scrim").hidden = true; current = null; }
+function setMark(val) {
+  if (current === null) return;
+  const marks = { ...(me.marks || {}) };
+  if (val) marks[current] = val; else delete marks[current];
+  const hadLine = winningLines(me.layout, me.marks || {}).length > 0;
+  const lines = winningLines(me.layout, marks).length;
+  closeSheet();
+  write({ marks, filled: filledCount(marks), lines });
+  if (!hadLine && lines) { toast("BINGO! Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
 }
-$("saveBtn").addEventListener("click", () => setMark($("accused").value.trim()));
-$("clearBtn").addEventListener("click", () => setMark(""));
-$("cancelBtn").addEventListener("click", closeSheet);
-$("scrim").addEventListener("click", closeSheet);
-$("accused").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); setMark($("accused").value.trim()); } if (e.key === "Escape") closeSheet(); });
-
-$("pname").value = state.name; $("psyn").value = state.syndicate;
-$("pname").addEventListener("input", e => { state.name = e.target.value.trim(); save(); renderSubmit(); });
-$("psyn").addEventListener("input", e => { state.syndicate = e.target.value.trim(); save(); renderSubmit(); });
-
-$("copyBtn").addEventListener("click", () => copyText(cardText(), () => toast("Card copied")));
-
-let armed = false;
-$("resetBtn").addEventListener("click", () => {
-  if (!armed) { armed = true; $("resetBtn").textContent = "Tap again to clear every square"; setTimeout(() => { armed = false; $("resetBtn").textContent = "Clear my card"; }, 4000); return; }
-  armed = false; state.marks = {}; state.bingoAt = null; save(); $("resetBtn").textContent = "Clear my card"; render(false); toast("Card cleared");
-});
-
-let tt;
-function toast(msg){ const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(tt); tt = setTimeout(() => t.hidden = true, 2600); }
-
-render(false);
+$("sheetForm").addEventListener("submit", e => { e.preventDefault(); setMark($("accused").value.trim()); });
+$("clearBtn").onclick = () => setMark("");
+$("cancelBtn").onclick = closeSheet;
+$("scrim").onclick = closeSheet;
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("sheet").hidden) closeSheet(); });
 </script>
 </body>
 </html>

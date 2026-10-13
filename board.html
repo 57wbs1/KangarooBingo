@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3EFE4">
+<title>Bingo Leaderboard</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<style>
+/* Projector layout: title + join QR on the left rail, live board on the right. Stacks on a phone. */
+body{padding-block:24px}
+.screen{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:40px;align-items:start}
+.rail{display:flex;flex-direction:column;gap:18px;position:sticky;top:24px}
+.rail h1{font-size:clamp(52px,5.2vw,76px)}
+.rail h1 .nw{white-space:nowrap;font-weight:inherit}
+.qr{background:#fff;border:3px solid var(--ink);padding:14px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.qr #qr img,.qr #qr canvas{width:220px!important;height:220px!important;image-rendering:pixelated}
+.qr .url{font-family:var(--mono);font-weight:700;font-size:14px;text-align:center;overflow-wrap:anywhere}
+.clock{font-family:var(--mono);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.board-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px}
+.board-grid .stats{grid-column:1/-1;font-size:16px}
+.board-grid .stats b{font-size:24px}
+.board-grid > section:first-of-type{grid-row:span 2}
+.lb.big .row{padding:12px 16px;grid-template-columns:64px minmax(0,1fr) auto}
+.lb.big .rk{font-size:44px}
+.lb.big .n{font-size:26px}
+.lb.big .s{font-size:14px}
+.lb.big .tm{font-size:22px}
+.label{font-size:14px}
+@media (max-width:900px){.screen,.board-grid{grid-template-columns:minmax(0,1fr)}.rail{position:static}.board-grid > section:first-of-type{grid-row:auto}}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="rail">
+    <div class="strip"><div>KANGAROO COURT DIVISION</div></div>
+    <h1><b class="nw">DINING-IN</b> <span>BINGO</span></h1>
+    <div class="clock" id="clock" aria-label="Current time">--:--:--</div>
+    <div class="qr">
+      <div class="label">SCAN TO PLAY</div>
+      <div id="qr" role="img" aria-label="QR code to the bingo app"></div>
+      <div class="url" id="url"></div>
+    </div>
+  </div>
+  <div class="board-grid" id="board"><div class="boot">Connecting…</div></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module">
+import { db, signIn, collection, onSnapshot } from "./js/fb.js";
+import { renderBoard, fmtTime } from "./js/game.js";
+
+const appUrl = new URL("./", location.href).href;
+document.getElementById("url").textContent = appUrl.replace(/^https?:\/\//, "");
+try { new QRCode(document.getElementById("qr"), { text: appUrl, width: 220, height: 220, colorDark: "#16213A", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
+
+const tick = () => document.getElementById("clock").textContent = fmtTime(new Date());
+tick(); setInterval(tick, 1000);
+
+await signIn();
+onSnapshot(collection(db, "players"), snap => {
+  renderBoard(document.getElementById("board"), snap.docs.map(d => ({ id: d.id, ...d.data() })), { big: true });
+});
+</script>
+</body>
+</html>
