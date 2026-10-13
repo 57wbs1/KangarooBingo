@@ -1,0 +1,14 @@
+{
+  "entries": {
+    "cmd-1791857771001": {
+      "key": "cmd-1791857771001",
+      "value": "{\"command\":\"mkdir -p \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && cd \\\"/Users/xynkro/Documents/1. CSC/KangarooBingo\\\" && ls -la\",\"exitCode\":0,\"success\":true}",
+      "namespace": "commands",
+      "storedAt": "2026-10-13T02:16:11.001Z",
+      "lastAccessed": "2026-10-13T02:16:11.001Z",
+      "accessCount": 0,
+      "expiresAt": "2026-11-12T02:16:11.001Z"
+    }
+  },
+  "version": "3.0.0"
+}
