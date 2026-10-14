@@ -149,7 +149,7 @@ export function mostWanted(players, n = 8) {
   return [...m.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).slice(0, n);
 }
 
-// Herd view (judge only): for each offence, who the crowd charged and on how many cards.
+// Herd view (judge only): for each offence, who the crowd charged, on how many cards, and by whom.
 export function herd(players) {
   return SQUARES.map((q, sq) => {
     const m = new Map(); let cards = 0;
@@ -157,8 +157,8 @@ export function herd(players) {
       const who = accusedAt(p.marks, sq); if (!who) return;
       cards++;
       const k = normName(who);
-      const e = m.get(k) || { name: who.replace(/\s+/g, " "), count: 0 };
-      e.count++; m.set(k, e);
+      const e = m.get(k) || { name: who.replace(/\s+/g, " "), count: 0, by: [] };
+      e.count++; e.by.push((p.name || "?") + (p.syn ? " (Syn " + p.syn + ")" : "")); m.set(k, e);
     });
     return { sq, q, cards, names: [...m.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)) };
   });

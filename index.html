@@ -99,7 +99,7 @@
       </section>
 
       <section class="panel" data-pane="evidence" hidden>
-        <div class="note">What the crowd saw. For each offence, who was charged and on how many cards. Search a name to see every charge against them.</div>
+        <div class="note">What the crowd saw. For each offence, who was charged, on how many cards, and who voted for them. Search a name to see every charge against them.</div>
         <label for="evq">SEARCH A NAME</label>
         <input type="text" id="evq" placeholder="e.g. Paul Soliano" autocomplete="off">
         <div id="evidence" class="ev"></div>
@@ -533,7 +533,8 @@ function renderEvidence() {
         ? el("ol", { class: "mw" }, names.slice(0, qv ? 20 : 5).map(n => el("li", null,
             el("span", { class: "who" }, n.name),
             el("span", { class: "bar" }, el("i", { style: "width:" + Math.round(100 * n.count / max) + "%" })),
-            el("b", null, n.count))))
+            el("b", null, n.count),
+            el("div", { class: "vb" }, "Voted by: " + n.by.join(", ")))))
         : el("div", { class: "fine" }, "Nobody charged yet.")));
   });
   if (!any) box.append(el("div", { class: "empty" }, qv ? "No charges against that name." : "No cards yet."));

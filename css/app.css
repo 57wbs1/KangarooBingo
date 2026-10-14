@@ -110,6 +110,7 @@ input:disabled{opacity:.6}
 .mw .bar{height:12px;background:var(--card);border:1.5px solid var(--ink)}
 .mw .bar i{display:block;height:100%;background:var(--stamp)}
 .mw b{font-family:var(--mono);text-align:right}
+.mw .vb{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-4px;overflow-wrap:anywhere}
 
 /* judge mini card */
 .mini{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--line);border:2px solid var(--line)}
