@@ -117,23 +117,15 @@ export function fmtTime(ts, ms = false) {
 const millis = p => (toDate(p.claimedAt) || new Date(8.64e15)).getTime();
 
 // ---- leaderboard ----
-// Every live claim (under review or approved) in server-time order. Only approved claims get a
-// rank; one still under review keeps its place in the queue and can land ahead of later ones.
+// Every live claim (under review or approved): more lines first, then earliest submit time.
+// Only approved claims get a rank; one still under review keeps its place and can land ahead.
+export const linesOf = p => p.lines || (p.layout ? winningLines(p.layout, p.marks || {}).length : 0);
 export function standings(players) {
   let rank = 0;
   return players
     .filter(p => p.claimedAt && (p.status === "claimed" || p.status === "approved"))
-    .sort((a, b) => millis(a) - millis(b))
+    .sort((a, b) => linesOf(b) - linesOf(a) || millis(a) - millis(b))
     .map(p => ({ ...p, rank: p.status === "approved" ? ++rank : null }));
-}
-
-export function synTally(rows) {
-  const t = new Map();
-  rows.filter(r => r.rank && r.rank <= TOP).forEach(r => {
-    const k = (r.syn || "—").trim() || "—";
-    t.set(k, (t.get(k) || 0) + 1);
-  });
-  return [...t.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], undefined, { numeric: true }));
 }
 
 // Accused names across every card, merged case- and space-insensitively.
@@ -201,7 +193,7 @@ export function accusedIndex(cards) {
 // The public leaderboard row mirrored from a private card (server rules check it matches).
 export function publicRow(p) {
   return {
-    name: p.name, syn: p.syn, filled: p.filled || 0, status: p.status, claimedAt: p.claimedAt ?? null,
+    name: p.name, syn: p.syn, filled: p.filled || 0, lines: p.lines || 0, status: p.status, claimedAt: p.claimedAt ?? null,
     accused: Object.values(p.marks || {}).map(v => String(v).trim()).filter(Boolean).slice(0, TOTAL)
   };
 }
@@ -253,28 +245,24 @@ export function renderBoard(root, players, { meUid = null } = {}) {
     el("span", null, el("b", null, approved.length), " approved"),
     pending ? el("span", { class: "hot" }, el("b", null, pending), " submitted, awaiting Huiting") : null));
 
-  const lb = el("section", { class: "panel" }, el("div", { class: "label" }, "LEADERBOARD · BY SUBMIT TIME"));
+  const lb = el("section", { class: "panel" }, el("div", { class: "label" }, "LEADERBOARD · MOST LINES, THEN FIRST IN"));
   if (!rows.length) lb.append(el("div", { class: "empty" }, "No bingos yet. The court is watching."));
   else {
     const list = el("ol", { class: "lb" });
+    let pendingAbove = false;   // an unvetted claim ranked higher could still take the bottle
     rows.forEach(r => {
-      const top = r.rank && r.rank <= TOP;
+      const top = r.rank === 1 && !pendingAbove;
       list.append(el("li", { class: "row" + (top ? " top" : "") + (r.rank ? "" : " pend") + (r.id === meUid ? " me" : "") },
         el("div", { class: "rk" }, r.rank ? pad(r.rank) : "?"),
-        el("div", { class: "nm" }, el("div", { class: "n" }, r.name || "—"), el("div", { class: "s" }, "SYN " + (r.syn || "—"))),
-        el("div", { class: "tm" }, fmtTime(r.claimedAt), el("small", null, r.rank === 1 ? "WINS THE BOTTLE" : r.rank ? (top ? "TOP " + TOP : "APPROVED") : "SUBMITTED"))));
+        el("div", { class: "nm" }, el("div", { class: "n" }, r.name || "—"), el("div", { class: "s" }, "SYN " + (r.syn || "—") + " · " + linesOf(r) + (linesOf(r) === 1 ? " LINE" : " LINES"))),
+        el("div", { class: "tm" }, fmtTime(r.claimedAt), el("small", null, r.rank === 1 && !pendingAbove ? "WINS THE BOTTLE" : r.rank ? "APPROVED" : "SUBMITTED"))));
+      if (!r.rank) pendingAbove = true;
     });
     lb.append(list);
-    if (pending) lb.append(el("div", { class: "fine" }, "? = submitted, not yet vetted by Huiting. Places go by submit time, so a submitted card can still move ahead once approved."));
+    if (pending) lb.append(el("div", { class: "fine" }, "? = submitted, not yet vetted by Huiting. More lines beat fewer; on equal lines the earlier submit time wins. A submitted card can still move ahead once approved."));
   }
   root.append(lb);
 
-  const tally = synTally(rows);
-  const st = el("section", { class: "panel" }, el("div", { class: "label" }, "TOP " + TOP + " BY SYNDICATE"));
-  if (!tally.length) st.append(el("div", { class: "empty" }, "No approved bingos yet."));
-  else st.append(el("div", { class: "tally" }, tally.map(([s, n]) =>
-    el("div", { class: "t" }, el("b", null, "SYN " + s), el("span", null, n + (n === 1 ? " place" : " places"))))));
-  root.append(st);
 
   const mw = mostWanted(players, 6);
   const wp = el("section", { class: "panel" }, el("div", { class: "label" }, "MOST WANTED · MOST ACCUSED"));

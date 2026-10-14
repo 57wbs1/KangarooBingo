@@ -15,7 +15,7 @@
 <!-- Layout: one page. Header, tab switch (MY CARD / LEADERBOARD / JUDGE once unlocked), the active pane,
      and a footer with Judge login. Bottom sheets edit one square and take the judge code. -->
 <div class="wrap" id="main">
-  <div class="strip"><div>RESTRICTED (NOT REALLY)</div><div>FORM DI-01 · JOINT FORMAL DINING-IN</div></div>
+  <div class="strip"><div>RESTRICTED (NOT REALLY)</div><div>AF-FORM 2992 · GKSCSC DINING-IN</div></div>
   <div>
     <h1>DINING-IN <span>BINGO</span></h1>
     <div class="sub">OFFICIAL CHARGE SHEET · KANGAROO COURT DIVISION</div>
@@ -66,11 +66,10 @@
           <div class="label">STANDING ORDERS</div>
           <div class="order"><b>01</b><div>Write the name of the person you observe for each square.</div></div>
           <div class="order"><b>02</b><div>BINGO = one complete line: across, down or diagonal. The free space counts.</div></div>
-          <div class="order"><b>03</b><div>One prize: a bottle, to the first BINGO that passes vetting.</div></div>
-          <div class="order"><b>04</b><div>Top 5 get points added to their syndicate games points.</div></div>
-          <div class="order"><b>05</b><div>Charge one person at most 3 times on your card.</div></div>
-          <div class="order"><b>06</b><div>Every charge is cross-checked against everyone else's cards, and Huiting spot-checks in person. A fake card is disqualified.</div></div>
-          <div class="order"><b>07</b><div>Tap CLAIM BINGO as soon as you complete a line. The server stamps the time, and that time is final.</div></div>
+          <div class="order"><b>03</b><div>One prize: a bottle, to #1 on the leaderboard. More lines beat fewer: 2 lines outrank any 1-line BINGO, 3 outrank 2, and so on. On equal lines, the earlier submit time wins.</div></div>
+          <div class="order"><b>04</b><div>Charge one person at most 3 times on your card.</div></div>
+          <div class="order"><b>05</b><div>Every charge is cross-checked against everyone else's cards, and Huiting spot-checks in person. A fake card is disqualified.</div></div>
+          <div class="order"><b>06</b><div>Tap CLAIM BINGO when you're happy with your lines. The server stamps the time. To go for more lines after claiming, withdraw your claim; your submit time is lost and you get a new one when you claim again.</div></div>
         </div>
       </div>
     </div>
@@ -164,7 +163,7 @@
 <script type="module">
 import { db, signIn, doc, collection, getDoc, getDocs, setDoc, onSnapshot, serverTimestamp, writeBatch } from "./js/fb.js";
 import { SQUARES, TOTAL, MAX_PER_NAME, gridOf, accusedAt, winningLines, filledCount, hasBingo, NEED, lineSquares, shuffledLayout,
-         standings, renderBoard, fmtTime, pad, el, TOP, publicRow, chargesOn, corroboration, spotChecks,
+         standings, linesOf, renderBoard, fmtTime, pad, el, TOP, publicRow, chargesOn, corroboration, spotChecks,
          miniCard, herd, accusedIndex, normName, toDate } from "./js/game.js";
 
 const $ = id => document.getElementById(id);
@@ -237,8 +236,9 @@ function route() {
 function commit(patch) {
   const next = { ...me, ...patch };
   if (!patch.status && me.status === "rejected") { next.status = "playing"; next.claimedAt = null; }
+  next.lines = winningLines(next.layout, next.marks || {}).length;   // the server re-counts this
   const b = writeBatch(db);
-  const pPatch = { ...patch, updatedAt: serverTimestamp() };
+  const pPatch = { ...patch, lines: next.lines, updatedAt: serverTimestamp() };
   if (next.status !== me.status) { pPatch.status = next.status; pPatch.claimedAt = next.claimedAt; }
   b.update(meRef, pPatch);
   b.set(boardRef, publicRow(next));
@@ -329,8 +329,9 @@ function renderClaim() {
   if (me.status === "approved") {
     box.className = "submit ok";
     box.append(el("div", { class: "label" }, "VERDICT: APPROVED"),
-      el("div", { class: "big-time" }, row && row.rank ? "#" + row.rank + (row.rank === 1 ? " · THE BOTTLE" : row.rank <= TOP ? " · TOP " + TOP : "") : "Approved"),
-      el("div", { class: "note" }, "Submitted at " + fmtTime(me.claimedAt) + " by server time."));
+      el("div", { class: "big-time" }, row && row.rank ? "#" + row.rank + (row.rank === 1 ? " · THE BOTTLE" : "") : "Approved"),
+      el("div", { class: "note" }, "Submitted with " + linesOf(me) + (linesOf(me) === 1 ? " line" : " lines") + " at " + fmtTime(me.claimedAt) + " by server time."),
+      withdrawBtn());
     return;
   }
   if (me.status === "claimed") {
@@ -338,7 +339,8 @@ function renderClaim() {
       el("div", { class: "big-time" }, mePending ? "--:--:--" : fmtTime(me.claimedAt)),
       el("div", { class: "note" }, mePending
         ? "Your claim is on its way. The time is stamped when it reaches the server. Keep this page open."
-        : "That is your official submit time. Your card is locked while Huiting vets it. She may come and spot-check a few charges."));
+        : "That is your official submit time, with " + linesOf(me) + (linesOf(me) === 1 ? " line" : " lines") + ". Your card is locked while Huiting vets it. She may come and spot-check a few charges."),
+      mePending ? null : withdrawBtn());
     return;
   }
   if (me.status === "rejected") {
@@ -361,6 +363,19 @@ function renderClaim() {
   box.append(btn, el("div", { class: "note" }, "The server stamps the time the moment you tap. That time decides your place."));
 }
 
+// Withdraw a claim (or an approval) to keep playing for more lines. The submit time is lost.
+function withdrawBtn() {
+  return el("button", { class: "linkbtn", type: "button", onclick: withdraw }, "Withdraw and go for more lines");
+}
+async function withdraw() {
+  const msg = me.status === "approved"
+    ? "Give up your APPROVED place to go for more lines? Your submit time is lost and Huiting must vet you again."
+    : "Withdraw your claim to go for more lines? Your submit time is lost; you get a new one when you claim again.";
+  if (!confirm(msg)) return;
+  try { await commit({ status: "playing", claimedAt: null }); toast("Claim withdrawn. Keep going."); }
+  catch (err) { console.error(err); toast("Refused by the server"); }
+}
+
 async function claim() {
   if (!me || !editable() || !hasBingo(me.layout, me.marks)) return;
   buzz(60);
@@ -376,7 +391,7 @@ async function claim() {
 // ---------------- square sheet ----------------
 let current = null;
 function openSheet(sq) {
-  if (!editable()) return toast(me.status === "approved" ? "Card approved. No more edits." : "Card is locked while under review");
+  if (!editable()) return toast("Card is locked. Tap “Withdraw and go for more lines” below to keep playing.", 3500);
   current = sq;
   $("sheetNo").textContent = "No. " + pad(sq + 1);
   $("sheetOff").textContent = SQUARES[sq];

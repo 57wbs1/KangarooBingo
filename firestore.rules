@@ -7,7 +7,7 @@ rules_version = '2';
 //   judges/{uid}   created by entering the judge code; the code lives in secret/judge, which no
 //                  client can read: rules compare against it server-side.
 //   config/game    { open: bool }: judges open/close claims.
-// BINGO = 1 completed line (across, down or diagonal). The claim time is the server's: a claim must write
+// BINGO = 1+ completed lines (across, down or diagonal); more lines outrank fewer. The claim time is the server's: a claim must write
 // claimedAt == request.time, and only a judge can approve/reject, without touching claimedAt.
 service cloud.firestore {
   match /databases/{db}/documents {
@@ -31,8 +31,9 @@ service cloud.firestore {
     }
     // Square at layout position k has a name on it.
     function on(d, k) { return string(d.layout[k]) in d.marks; }
-    // BINGO = at least 1 completed line (5 rows, 5 columns, 2 diagonals; the free centre counts).
-    function bingo(d) {
+    // Completed lines on a card: 5 rows, 5 columns, 2 diagonals (the free centre counts).
+    // The server counts them itself, so a card can never claim more lines than it has.
+    function lineCount(d) {
       return [
         (on(d, 0) && on(d, 1) && on(d, 2) && on(d, 3) && on(d, 4)),
         (on(d, 5) && on(d, 6) && on(d, 7) && on(d, 8) && on(d, 9)),
@@ -46,18 +47,21 @@ service cloud.firestore {
         (on(d, 4) && on(d, 9) && on(d, 13) && on(d, 18) && on(d, 23)),
         (on(d, 0) && on(d, 6) && on(d, 17) && on(d, 23)),
         (on(d, 4) && on(d, 8) && on(d, 15) && on(d, 19))
-      ].removeAll([false]).size() >= 1;
+      ].removeAll([false]).size();
     }
     function ownerStatusOk(d) {
       return (d.status == 'playing' && d.claimedAt == null)
-        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen() && bingo(d));
+        // Claiming: the server counts the lines itself (once: rules have a per-request budget), so the
+        // line count that ranks the claim is always real. A claimed card is locked, so it stays real.
+        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen()
+            && d.lines >= 1 && d.lines == lineCount(d));
     }
     // The public row must equal the card as it stands after this write.
     function mirrors(uid) {
       let p = getAfter(/databases/$(db)/documents/players/$(uid)).data;
       let r = request.resource.data;
-      return r.keys().hasOnly(['name','syn','filled','status','claimedAt','accused'])
-        && r.name == p.name && r.syn == p.syn && r.filled == p.filled
+      return r.keys().hasOnly(['name','syn','filled','lines','status','claimedAt','accused'])
+        && r.name == p.name && r.syn == p.syn && r.filled == p.filled && r.lines == p.lines
         && r.status == p.status && r.claimedAt == p.claimedAt
         && r.accused is list && r.accused.size() <= 24;
     }
@@ -92,10 +96,10 @@ service cloud.firestore {
         && request.resource.data.status == 'playing'
         && request.resource.data.claimedAt == null;
 
-      // Owner: edit while playing or after a rejection; can only move to playing or claimed.
-      // A card under review or approved is locked.
+      // Owner: can only move the card to playing or claimed. A card under review or approved is
+      // locked unless the owner withdraws it (back to playing, claim time cleared) to go for more lines.
       allow update: if signedIn() && request.auth.uid == uid
-        && resource.data.status in ['playing', 'rejected']
+        && (resource.data.status in ['playing', 'rejected'] || request.resource.data.status == 'playing')
         && validPlayer(request.resource.data)
         && ownerStatusOk(request.resource.data)
         && !request.resource.data.diff(resource.data).affectedKeys()
