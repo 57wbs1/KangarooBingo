@@ -106,7 +106,7 @@
       </section>
 
       <section class="panel" data-pane="accused" hidden>
-        <div class="note">Every person who has been charged, most charges first. Tap a name to see each offence and who charged them.</div>
+        <div class="note">Every person who has been charged, most charges first. Tap a name to see each offence and who voted for them.</div>
         <label for="acq">SEARCH A NAME</label>
         <input type="text" id="acq" placeholder="e.g. Paul Soliano" autocomplete="off">
         <div id="accusedList" class="acc"></div>
@@ -510,7 +510,7 @@ function renderAccused() {
       p.aliases.length ? el("div", { class: "fine" }, "Also written as: " + p.aliases.join(", ")) : null,
       el("ol", { class: "offs" }, p.offences.map(o => el("li", null,
         el("div", null, el("b", null, "No. " + pad(o.sq + 1)), " " + o.q, el("span", { class: "x" }, " ×" + o.who.length)),
-        el("div", { class: "by" }, "Charged by " + o.who.join(", "))))));
+        el("div", { class: "by" }, "Voted by: " + o.who.join(", "))))));
     d.addEventListener("toggle", () => d.open ? openPeople.add(p.name) : openPeople.delete(p.name));
     box.append(d);
   });
