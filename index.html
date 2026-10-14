@@ -65,12 +65,12 @@
         <div class="orders">
           <div class="label">STANDING ORDERS</div>
           <div class="order"><b>01</b><div>Write the name of the person you observe for each square.</div></div>
-          <div class="order"><b>02</b><div>BINGO = any 2 complete lines: across, down or diagonal, in any combination. The free space counts.</div></div>
+          <div class="order"><b>02</b><div>BINGO = one complete line: across, down or diagonal. The free space counts.</div></div>
           <div class="order"><b>03</b><div>One prize: a bottle, to the first BINGO that passes vetting.</div></div>
           <div class="order"><b>04</b><div>Top 5 get points added to their syndicate games points.</div></div>
           <div class="order"><b>05</b><div>Charge one person at most 3 times on your card.</div></div>
           <div class="order"><b>06</b><div>Every charge is cross-checked against everyone else's cards, and Huiting spot-checks in person. A fake card is disqualified.</div></div>
-          <div class="order"><b>07</b><div>Tap CLAIM BINGO as soon as you have 2 lines. The server stamps the time, and that time is final.</div></div>
+          <div class="order"><b>07</b><div>Tap CLAIM BINGO as soon as you complete a line. The server stamps the time, and that time is final.</div></div>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
       </div>
 
       <section class="panel" data-pane="queue">
-        <div class="note">Oldest claim first. The winning lines are outlined in red. Each square shows how many <b>other</b> players charged the same person with the same offence. <b>UNBACKED</b> means nobody else saw it. Verify the 3 <b>CHECK</b> squares in person, then approve or reject. The submit time stays as stamped.</div>
+        <div class="note">Oldest claim first. Completed lines are outlined in red. Each square shows how many <b>other</b> players charged the same person with the same offence. <b>UNBACKED</b> means nobody else saw it. Verify the 3 <b>CHECK</b> squares in person, then approve or reject. The submit time stays as stamped.</div>
         <div id="queue" class="wrap"></div>
       </section>
 
@@ -299,7 +299,7 @@ function renderCard() {
     }, el("div", { class: "no" }, "No. " + pad(sq + 1)), el("div", { class: "txt" }, SQUARES[sq]), el("div", { class: "who" }, who)));
   });
   const L = winningLines(me.layout, marks).length;
-  $("count").textContent = filledCount(marks) + " / " + TOTAL + " filed · " + Math.min(L, NEED) + " of " + NEED + " lines" + (L > NEED ? " (+" + (L - NEED) + ")" : "");
+  $("count").textContent = filledCount(marks) + " / " + TOTAL + " filed · " + L + (L === 1 ? " line" : " lines");
   renderStamp();
   renderClaim();
 }
@@ -353,7 +353,7 @@ function renderClaim() {
   }
   if (!full) {
     if (me.status !== "rejected") box.append(el("div", { class: "label" }, "CLAIM"),
-      el("div", { class: "note" }, "Complete " + NEED + " lines (across, down or diagonal, any mix) to claim. You have " + Math.min(winningLines(me.layout, me.marks).length, NEED) + "."));
+      el("div", { class: "note" }, "Complete a line (across, down or diagonal) to claim."));
     return;
   }
   const btn = el("button", { class: "btn red huge", type: "button" }, "CLAIM BINGO");
@@ -397,7 +397,7 @@ function setMark(val) {
   closeSheets();
   commit({ marks, filled: filledCount(marks), lines: winningLines(me.layout, marks).length })
     .catch(err => { console.error(err); toast("Change refused by the server"); });
-  if (!had && hasBingo(me.layout, marks)) { toast("BINGO! 2 lines. Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
+  if (!had && hasBingo(me.layout, marks)) { toast("BINGO! Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
 }
 $("sheetForm").addEventListener("submit", e => { e.preventDefault(); setMark($("accused").value.trim()); });
 $("clearBtn").onclick = () => setMark("");

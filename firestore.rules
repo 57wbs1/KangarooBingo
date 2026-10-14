@@ -7,7 +7,7 @@ rules_version = '2';
 //   judges/{uid}   created by entering the judge code; the code lives in secret/judge, which no
 //                  client can read: rules compare against it server-side.
 //   config/game    { open: bool }: judges open/close claims.
-// BINGO = 2 completed lines (any mix of across/down/diagonal). The claim time is the server's: a claim must write
+// BINGO = 1 completed line (across, down or diagonal). The claim time is the server's: a claim must write
 // claimedAt == request.time, and only a judge can approve/reject, without touching claimedAt.
 service cloud.firestore {
   match /databases/{db}/documents {
@@ -31,7 +31,7 @@ service cloud.firestore {
     }
     // Square at layout position k has a name on it.
     function on(d, k) { return string(d.layout[k]) in d.marks; }
-    // BINGO = at least 2 completed lines (5 rows, 5 columns, 2 diagonals; the free centre counts).
+    // BINGO = at least 1 completed line (5 rows, 5 columns, 2 diagonals; the free centre counts).
     function bingo(d) {
       return [
         (on(d, 0) && on(d, 1) && on(d, 2) && on(d, 3) && on(d, 4)),
@@ -46,7 +46,7 @@ service cloud.firestore {
         (on(d, 4) && on(d, 9) && on(d, 13) && on(d, 18) && on(d, 23)),
         (on(d, 0) && on(d, 6) && on(d, 17) && on(d, 23)),
         (on(d, 4) && on(d, 8) && on(d, 15) && on(d, 19))
-      ].removeAll([false]).size() >= 2;
+      ].removeAll([false]).size() >= 1;
     }
     function ownerStatusOk(d) {
       return (d.status == 'playing' && d.claimedAt == null)

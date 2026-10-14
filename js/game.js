@@ -29,7 +29,7 @@ export const SQUARES = [
 export const FREE = 12;   // centre of the 5×5 grid
 export const TOP = 5;     // places that score syndicate points
 export const TOTAL = 24;  // squares on a card
-export const NEED = 2;    // BINGO = this many completed lines, any mix of across / down / diagonal (free space counts)
+export const NEED = 1;    // BINGO = one completed line: across, down or diagonal (free space counts)
 export const MAX_PER_NAME = 3; // one person can be charged at most this many times on one card
 
 export const LINES = [];
