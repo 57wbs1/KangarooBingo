@@ -25,6 +25,7 @@ input:disabled{opacity:.6}
 
 /* tabs */
 .tabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);border:2px solid var(--ink)}
+.tabs.seg{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}
 .tabs.seg .tab{font-size:11px;min-height:44px;letter-spacing:.04em}
 .tab{appearance:none;-webkit-appearance:none;border:0;border-radius:0;background:transparent;color:var(--ink);font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.08em;min-height:46px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .tab[aria-selected=true]{background:var(--ink);color:var(--paper)}
@@ -149,3 +150,17 @@ input:disabled{opacity:.6}
 .evh{font-size:14px;font-weight:600;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
 .evh b{font-family:var(--mono);color:var(--stamp);font-size:12px}
 .evh span{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* organisers: accused people */
+.acc{display:flex;flex-direction:column;gap:8px}
+.person{border:1.5px solid var(--ink);background:var(--card);padding:0}
+.person summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px;min-height:44px}
+.person summary::-webkit-details-marker{display:none}
+.person[open] summary{border-bottom:1.5px solid var(--ink);background:var(--filled)}
+.person .pn{font-weight:600;font-size:17px;overflow-wrap:anywhere}
+.person .pc{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--stamp);white-space:nowrap}
+.person > .fine{padding:8px 12px 0}
+.offs{margin:0;padding:8px 12px 12px 30px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.offs b{font-family:var(--mono);font-size:12px;color:var(--stamp)}
+.offs .x{font-family:var(--mono);font-weight:700}
+.offs .by{font-size:12px;color:var(--muted)}

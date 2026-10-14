@@ -28,7 +28,8 @@ export const SQUARES = [
 ];
 export const FREE = 12;   // centre of the 5×5 grid
 export const TOP = 5;     // places that score syndicate points
-export const TOTAL = 24;  // BINGO = every square filled (one prize: first verified full card)
+export const TOTAL = 24;  // squares on a card
+export const NEED = 2;    // BINGO = this many completed lines, any mix of across / down / diagonal (free space counts)
 export const MAX_PER_NAME = 3; // one person can be charged at most this many times on one card
 
 export const LINES = [];
@@ -63,7 +64,12 @@ export function winningLines(layout, marks) {
 export function filledCount(marks) {
   return Object.values(marks || {}).filter(v => v && String(v).trim()).length;
 }
-export const isFull = marks => filledCount(marks) >= TOTAL;
+export const hasBingo = (layout, marks) => winningLines(layout, marks).length >= NEED;
+// Squares (by square index) that sit on a completed line.
+export function lineSquares(layout, marks) {
+  const g = gridOf(layout);
+  return [...new Set(winningLines(layout, marks).flat())].map(p => g[p]).filter(sq => sq !== null);
+}
 
 // ---- names ----
 export const normName = s => String(s || "").trim().replace(/\s+/g, " ").toLowerCase();
@@ -89,13 +95,13 @@ export function corroboration(player, players) {
   return out;
 }
 
-// Three squares for the judge to verify in person, uncorroborated ones first.
-// Seeded by the player id so the picks stay put while the judge looks.
-export function spotChecks(player, corr, n = 3) {
+// Three squares for the judge to verify in person, taken from the completed lines, uncorroborated
+// ones first. Seeded by the player id so the picks stay put while the judge looks.
+export function spotChecks(player, corr, pool, n = 3) {
   let h = 2166136261;
   for (const c of String(player.id)) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
   const rnd = () => (h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) / 4294967296;
-  return [...Array(TOTAL).keys()]
+  return (pool && pool.length ? pool : [...Array(TOTAL).keys()])
     .filter(sq => accusedAt(player.marks, sq))
     .map(sq => ({ sq, k: (corr[sq] ? 1 : 0) + rnd() }))
     .sort((a, b) => a.k - b.k).slice(0, n).map(x => x.sq);
@@ -158,6 +164,40 @@ export function herd(players) {
   });
 }
 
+// Organisers' view of every accused person: their charges, by offence, with who charged them.
+// "Paul" folds into "Paul Soliano" when that is the only fuller name it could be.
+export function accusedIndex(cards) {
+  const m = new Map();
+  cards.forEach(c => Object.entries(c.marks || {}).forEach(([sq, v]) => {
+    const name = String(v || "").trim().replace(/\s+/g, " ");
+    if (!name) return;
+    const k = normName(name);
+    const e = m.get(k) || { key: k, name, aliases: new Set(), charges: [] };
+    e.aliases.add(name);
+    e.charges.push({ sq: Number(sq), by: c.name || "?", bySyn: c.syn || "" });
+    m.set(k, e);
+  }));
+  for (const [k, e] of [...m.entries()]) {
+    const words = k.split(" ");
+    const fuller = [...m.keys()].filter(o => o !== k && o.split(" ").length > words.length && sameAccused(o, k));
+    if (fuller.length === 1) {
+      const t = m.get(fuller[0]);
+      e.aliases.forEach(a => t.aliases.add(a));
+      t.charges.push(...e.charges);
+      m.delete(k);
+    }
+  }
+  return [...m.values()].map(e => {
+    const by = new Map();
+    e.charges.forEach(ch => { const o = by.get(ch.sq) || { sq: ch.sq, q: SQUARES[ch.sq], who: [] }; o.who.push(ch.by + (ch.bySyn ? " (Syn " + ch.bySyn + ")" : "")); by.set(ch.sq, o); });
+    return {
+      name: e.name, aliases: [...e.aliases].filter(a => a !== e.name),
+      total: e.charges.length, accusers: new Set(e.charges.map(c => c.by)).size,
+      offences: [...by.values()].sort((a, b) => b.who.length - a.who.length || a.sq - b.sq)
+    };
+  }).sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
+}
+
 // The public leaderboard row mirrored from a private card (server rules check it matches).
 export function publicRow(p) {
   return {
@@ -179,16 +219,18 @@ export function el(tag, attrs, ...kids) {
   return e;
 }
 
-// Read-only mini card (judge view): seen-by-others count per square, spot checks outlined.
+// Read-only mini card (judge view): completed lines outlined, seen-by-others count per square,
+// spot checks tagged.
 export function miniCard(layout, marks, corr = {}, checks = []) {
   const g = gridOf(layout);
   const chk = new Set(checks);
+  const line = new Set(lineSquares(layout, marks));
   const grid = el("div", { class: "mini" });
   g.forEach(sq => {
     if (sq === null) { grid.append(el("div", { class: "mc free" }, "FREE")); return; }
     const who = accusedAt(marks, sq);
     const n = corr[sq] || 0;
-    grid.append(el("div", { class: "mc" + (who ? " on" : "") + (chk.has(sq) ? " win" : "") },
+    grid.append(el("div", { class: "mc" + (who ? " on" : "") + (line.has(sq) ? " win" : "") },
       el("div", { class: "q" }, SQUARES[sq]),
       el("div", { class: "a" }, who),
       who ? el("div", { class: "seen" + (n ? " yes" : "") }, n ? "SEEN BY +" + n : "UNBACKED") : null,

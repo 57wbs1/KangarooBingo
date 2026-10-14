@@ -65,12 +65,12 @@
         <div class="orders">
           <div class="label">STANDING ORDERS</div>
           <div class="order"><b>01</b><div>Write the name of the person you observe for each square.</div></div>
-          <div class="order"><b>02</b><div>BINGO means ALL 24 squares filled. No lines, no shortcuts.</div></div>
-          <div class="order"><b>03</b><div>One prize: a bottle, to the first full card that passes vetting.</div></div>
+          <div class="order"><b>02</b><div>BINGO = any 2 complete lines: across, down or diagonal, in any combination. The free space counts.</div></div>
+          <div class="order"><b>03</b><div>One prize: a bottle, to the first BINGO that passes vetting.</div></div>
           <div class="order"><b>04</b><div>Top 5 get points added to their syndicate games points.</div></div>
           <div class="order"><b>05</b><div>Charge one person at most 3 times on your card.</div></div>
           <div class="order"><b>06</b><div>Every charge is cross-checked against everyone else's cards, and Huiting spot-checks in person. A fake card is disqualified.</div></div>
-          <div class="order"><b>07</b><div>Tap CLAIM BINGO when your card is full. The server stamps the time, and that time is final.</div></div>
+          <div class="order"><b>07</b><div>Tap CLAIM BINGO as soon as you have 2 lines. The server stamps the time, and that time is final.</div></div>
         </div>
       </div>
     </div>
@@ -88,12 +88,13 @@
       <div class="tabs seg" role="tablist" aria-label="Judge sections">
         <button class="tab" type="button" data-seg="queue" aria-selected="true">QUEUE <span id="segQ"></span></button>
         <button class="tab" type="button" data-seg="evidence" aria-selected="false">EVIDENCE</button>
+        <button class="tab" type="button" data-seg="accused" aria-selected="false">ACCUSED</button>
         <button class="tab" type="button" data-seg="decided" aria-selected="false">DECIDED</button>
         <button class="tab" type="button" data-seg="controls" aria-selected="false">CONTROLS</button>
       </div>
 
       <section class="panel" data-pane="queue">
-        <div class="note">Oldest claim first. Each square shows how many <b>other</b> players charged the same person with the same offence. <b>UNBACKED</b> means nobody else saw it. Verify the 3 <b>CHECK</b> squares in person, then approve or reject. The submit time stays as stamped.</div>
+        <div class="note">Oldest claim first. The winning lines are outlined in red. Each square shows how many <b>other</b> players charged the same person with the same offence. <b>UNBACKED</b> means nobody else saw it. Verify the 3 <b>CHECK</b> squares in person, then approve or reject. The submit time stays as stamped.</div>
         <div id="queue" class="wrap"></div>
       </section>
 
@@ -102,6 +103,13 @@
         <label for="evq">SEARCH A NAME</label>
         <input type="text" id="evq" placeholder="e.g. Paul Soliano" autocomplete="off">
         <div id="evidence" class="ev"></div>
+      </section>
+
+      <section class="panel" data-pane="accused" hidden>
+        <div class="note">Every person who has been charged, most charges first. Tap a name to see each offence and who charged them.</div>
+        <label for="acq">SEARCH A NAME</label>
+        <input type="text" id="acq" placeholder="e.g. Paul Soliano" autocomplete="off">
+        <div id="accusedList" class="acc"></div>
       </section>
 
       <section class="panel" data-pane="decided" hidden>
@@ -155,9 +163,9 @@
 
 <script type="module">
 import { db, signIn, doc, collection, getDoc, getDocs, setDoc, onSnapshot, serverTimestamp, writeBatch } from "./js/fb.js";
-import { SQUARES, TOTAL, MAX_PER_NAME, gridOf, accusedAt, winningLines, filledCount, isFull, shuffledLayout,
+import { SQUARES, TOTAL, MAX_PER_NAME, gridOf, accusedAt, winningLines, filledCount, hasBingo, NEED, lineSquares, shuffledLayout,
          standings, renderBoard, fmtTime, pad, el, TOP, publicRow, chargesOn, corroboration, spotChecks,
-         miniCard, herd, normName, toDate } from "./js/game.js";
+         miniCard, herd, accusedIndex, normName, toDate } from "./js/game.js";
 
 const $ = id => document.getElementById(id);
 let tt;
@@ -273,6 +281,7 @@ function renderCard() {
   if (!me) return;
   $("meLine").textContent = me.name + " · SYN " + (me.syn || "—");
   const marks = me.marks || {};
+  const onLine = new Set(lineSquares(me.layout, marks));
   const grid = $("grid");
   grid.className = "grid" + (editable() ? "" : " locked");
   grid.textContent = "";
@@ -284,13 +293,13 @@ function renderCard() {
     }
     const who = accusedAt(marks, sq);
     grid.append(el("button", {
-      type: "button", class: "cell" + (who ? " filled" : ""),
+      type: "button", class: "cell" + (who ? " filled" : "") + (onLine.has(sq) ? " win" : ""),
       "aria-label": "No. " + (sq + 1) + ": " + SQUARES[sq] + (who ? ". Accused: " + who : ". Empty"),
       onclick: () => openSheet(sq)
     }, el("div", { class: "no" }, "No. " + pad(sq + 1)), el("div", { class: "txt" }, SQUARES[sq]), el("div", { class: "who" }, who)));
   });
-  const n = filledCount(marks);
-  $("count").textContent = n + " / " + TOTAL + " filed" + (n < TOTAL ? " · " + (TOTAL - n) + " to go" : " · FULL");
+  const L = winningLines(me.layout, marks).length;
+  $("count").textContent = filledCount(marks) + " / " + TOTAL + " filed · " + Math.min(L, NEED) + " of " + NEED + " lines" + (L > NEED ? " (+" + (L - NEED) + ")" : "");
   renderStamp();
   renderClaim();
 }
@@ -301,7 +310,7 @@ function renderStamp() {
   let txt = "", cls = "stamp", small = "";
   if (me.status === "approved") { txt = "APPROVED"; cls += " ok"; small = "AT " + fmtTime(me.claimedAt); }
   else if (me.status === "claimed") { txt = "CLAIMED"; small = mePending ? "SENDING…" : "AT " + fmtTime(me.claimedAt); }
-  else if (isFull(me.marks)) { txt = "BINGO"; cls += " ink"; small = "CLAIM IT BELOW"; }
+  else if (hasBingo(me.layout, me.marks)) { txt = "BINGO"; cls += " ink"; small = "CLAIM IT BELOW"; }
   b.hidden = !txt;
   if (!txt) { lastStamp = ""; return; }
   b.className = cls + (txt !== lastStamp ? " new" : "");
@@ -314,7 +323,7 @@ function renderStamp() {
 function renderClaim() {
   const box = $("claimBox");
   box.className = "submit"; box.textContent = "";
-  const full = isFull(me.marks);
+  const full = hasBingo(me.layout, me.marks);
   const row = standings(rows).find(r => r.id === uid);
 
   if (me.status === "approved") {
@@ -344,7 +353,7 @@ function renderClaim() {
   }
   if (!full) {
     if (me.status !== "rejected") box.append(el("div", { class: "label" }, "CLAIM"),
-      el("div", { class: "note" }, "Fill all " + TOTAL + " squares to claim. " + (TOTAL - filledCount(me.marks)) + " to go."));
+      el("div", { class: "note" }, "Complete " + NEED + " lines (across, down or diagonal, any mix) to claim. You have " + Math.min(winningLines(me.layout, me.marks).length, NEED) + "."));
     return;
   }
   const btn = el("button", { class: "btn red huge", type: "button" }, "CLAIM BINGO");
@@ -353,7 +362,7 @@ function renderClaim() {
 }
 
 async function claim() {
-  if (!me || !editable() || !isFull(me.marks)) return;
+  if (!me || !editable() || !hasBingo(me.layout, me.marks)) return;
   buzz(60);
   try {
     await commit({ status: "claimed", claimedAt: serverTimestamp() });
@@ -384,11 +393,11 @@ function setMark(val) {
   }
   const marks = { ...(me.marks || {}) };
   if (val) marks[current] = val; else delete marks[current];
-  const wasFull = isFull(me.marks);
+  const had = hasBingo(me.layout, me.marks);
   closeSheets();
   commit({ marks, filled: filledCount(marks), lines: winningLines(me.layout, marks).length })
     .catch(err => { console.error(err); toast("Change refused by the server"); });
-  if (!wasFull && isFull(marks)) { toast("BINGO! Card full. Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
+  if (!had && hasBingo(me.layout, marks)) { toast("BINGO! 2 lines. Tap CLAIM BINGO below.", 3500); buzz([60, 40, 60]); }
 }
 $("sheetForm").addEventListener("submit", e => { e.preventDefault(); setMark($("accused").value.trim()); });
 $("clearBtn").onclick = () => setMark("");
@@ -429,6 +438,7 @@ document.querySelectorAll("[data-seg]").forEach(b => b.onclick = () => {
   document.querySelectorAll("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== seg);
 });
 $("evq").addEventListener("input", () => renderEvidence());
+$("acq").addEventListener("input", () => renderAccused());
 
 function renderJudge() {
   const pend = cards.filter(p => p.status === "claimed" && p.claimedAt).sort((a, b) => toDate(a.claimedAt) - toDate(b.claimedAt));
@@ -445,15 +455,16 @@ function renderJudge() {
   if (!pend.length) q.append(el("div", { class: "empty" }, "Queue empty. New claims appear here instantly, with a chime."));
   pend.forEach((p, i) => {
     const corr = corroboration(p, cards);
-    const backed = Object.values(corr).filter(Boolean).length;
-    const checks = spotChecks(p, corr);
+    const pool = lineSquares(p.layout, p.marks || {});
+    const backed = pool.filter(sq => corr[sq]).length;
+    const checks = spotChecks(p, corr, pool);
     q.append(el("div", { class: "claim" + (i === 0 ? " first" : "") },
       el("div", { class: "hd" },
         el("div", null, el("div", { class: "nm" }, p.name),
-          el("div", { class: "meta" }, "SYN " + (p.syn || "—") + " · " + (p.filled || 0) + "/" + TOTAL + " filed")),
+          el("div", { class: "meta" }, "SYN " + (p.syn || "—") + " · " + winningLines(p.layout, p.marks || {}).length + " lines · " + (p.filled || 0) + "/" + TOTAL + " filed")),
         el("div", { class: "tm" }, fmtTime(p.claimedAt, true))),
-      el("div", { class: "backed" + (backed >= TOTAL / 2 ? " good" : "") },
-        el("b", null, backed + " / " + TOTAL), " charges backed by at least one other card"),
+      el("div", { class: "backed" + (backed >= pool.length / 2 ? " good" : "") },
+        el("b", null, backed + " / " + pool.length), " charges on the winning lines backed by at least one other card"),
       el("div", { class: "checks" }, el("div", { class: "label" }, "SPOT-CHECK IN PERSON"),
         el("ol", null, checks.map(sq => el("li", null,
           el("b", null, accusedAt(p.marks, sq)), " · No. " + pad(sq + 1) + " " + SQUARES[sq] + " · ",
@@ -479,6 +490,30 @@ function renderJudge() {
   })));
 
   renderEvidence();
+  renderAccused();
+}
+
+// Organisers: every accused person and the charges against them. Open rows stay open across live updates.
+const openPeople = new Set();
+function renderAccused() {
+  const box = $("accusedList"); box.textContent = "";
+  const qv = normName($("acq").value);
+  let people = accusedIndex(cards);
+  if (qv) people = people.filter(p => [p.name, ...p.aliases].some(n => qv.split(" ").every(w => normName(n).includes(w))));
+  if (!people.length) { box.append(el("div", { class: "empty" }, qv ? "Nobody by that name has been charged." : "Nobody charged yet.")); return; }
+  box.append(el("div", { class: "fine" }, people.length + (people.length === 1 ? " person" : " people") + " charged"));
+  people.forEach(p => {
+    const d = el("details", { class: "person", open: openPeople.has(p.name) },
+      el("summary", null,
+        el("span", { class: "pn" }, p.name),
+        el("span", { class: "pc" }, p.total + (p.total === 1 ? " charge" : " charges") + " · " + p.accusers + (p.accusers === 1 ? " accuser" : " accusers"))),
+      p.aliases.length ? el("div", { class: "fine" }, "Also written as: " + p.aliases.join(", ")) : null,
+      el("ol", { class: "offs" }, p.offences.map(o => el("li", null,
+        el("div", null, el("b", null, "No. " + pad(o.sq + 1)), " " + o.q, el("span", { class: "x" }, " ×" + o.who.length)),
+        el("div", { class: "by" }, "Charged by " + o.who.join(", "))))));
+    d.addEventListener("toggle", () => d.open ? openPeople.add(p.name) : openPeople.delete(p.name));
+    box.append(d);
+  });
 }
 
 function renderEvidence() {

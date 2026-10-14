@@ -7,7 +7,7 @@ rules_version = '2';
 //   judges/{uid}   created by entering the judge code; the code lives in secret/judge, which no
 //                  client can read: rules compare against it server-side.
 //   config/game    { open: bool }: judges open/close claims.
-// BINGO = all 24 squares filled. The claim time is the server's: a claim must write
+// BINGO = 2 completed lines (any mix of across/down/diagonal). The claim time is the server's: a claim must write
 // claimedAt == request.time, and only a judge can approve/reject, without touching claimedAt.
 service cloud.firestore {
   match /databases/{db}/documents {
@@ -29,14 +29,28 @@ service cloud.firestore {
         && d.filled is int && d.filled == d.marks.size()
         && d.lines is int;
     }
-    function fullCard(d) {
-      return d.marks.size() == 24
-        && d.marks.keys().hasAll(['0','1','2','3','4','5','6','7','8','9','10','11',
-                                  '12','13','14','15','16','17','18','19','20','21','22','23']);
+    // Square at layout position k has a name on it.
+    function on(d, k) { return string(d.layout[k]) in d.marks; }
+    // BINGO = at least 2 completed lines (5 rows, 5 columns, 2 diagonals; the free centre counts).
+    function bingo(d) {
+      return [
+        (on(d, 0) && on(d, 1) && on(d, 2) && on(d, 3) && on(d, 4)),
+        (on(d, 5) && on(d, 6) && on(d, 7) && on(d, 8) && on(d, 9)),
+        (on(d, 10) && on(d, 11) && on(d, 12) && on(d, 13)),
+        (on(d, 14) && on(d, 15) && on(d, 16) && on(d, 17) && on(d, 18)),
+        (on(d, 19) && on(d, 20) && on(d, 21) && on(d, 22) && on(d, 23)),
+        (on(d, 0) && on(d, 5) && on(d, 10) && on(d, 14) && on(d, 19)),
+        (on(d, 1) && on(d, 6) && on(d, 11) && on(d, 15) && on(d, 20)),
+        (on(d, 2) && on(d, 7) && on(d, 16) && on(d, 21)),
+        (on(d, 3) && on(d, 8) && on(d, 12) && on(d, 17) && on(d, 22)),
+        (on(d, 4) && on(d, 9) && on(d, 13) && on(d, 18) && on(d, 23)),
+        (on(d, 0) && on(d, 6) && on(d, 17) && on(d, 23)),
+        (on(d, 4) && on(d, 8) && on(d, 15) && on(d, 19))
+      ].removeAll([false]).size() >= 2;
     }
     function ownerStatusOk(d) {
       return (d.status == 'playing' && d.claimedAt == null)
-        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen() && fullCard(d));
+        || (d.status == 'claimed' && d.claimedAt == request.time && gameOpen() && bingo(d));
     }
     // The public row must equal the card as it stands after this write.
     function mirrors(uid) {
